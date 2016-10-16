@@ -80,7 +80,7 @@ function check_unifont () {
   done
 
   if [[ -n "$font_source" ]]; then
-    grub-mkfont "$font_source" --output="$overlay/boot/grub/unifont.pf2"
+    "$GRUB_MKFONT_BINARY" "$font_source" --output="$overlay/boot/grub/unifont.pf2"
   else
     echo "Error: Unifont not found. Unifont is needed for Super GRUB2 Disk" >&2
     echo "to properly display non-ASCII characters. Aborting without creating an iso." >&2
