@@ -45,6 +45,12 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /bin/grub-mkrescue\
 "
 
+GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkfont\
+"
+
 if [ -e supergrub-build-config ] ; then
   source supergrub-build-config
 fi
@@ -61,6 +67,9 @@ for option in "$@"; do
     ;;
     --grub-mkrescue-binary=*)
       GRUB_MKRESCUE_BINARY=`echo "$option" | sed 's/--grub-mkrescue-binary=//'`
+    ;;
+    --grub-mkfont-binary=*)
+      GRUB_MKFONT_BINARY=`echo "$option" | sed 's/--grub-mkfont-binary=//'`
     ;;
   esac
 done
@@ -79,6 +88,16 @@ if [ ! -x "$GRUB_MKRESCUE_BINARY" ] ; then
   Aborting.
 EOF
   exit 1
+fi
+
+if [ ! -x "$GRUB_MKFONT_BINARY" ] ; then
+  cat << EOF 1>&2
+  grub-mkfont binary cannot be run.
+  Either you need to install it
+  either you need to build it from grub build scripts
+  Aborting.
+EOF
+  exit 2
 fi
 
 BOOT_ISOS_DIRECTORY="boot-isos"

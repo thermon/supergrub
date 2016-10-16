@@ -26,8 +26,9 @@ function build_sg2d () {
       -o="${SUPER_GRUB2_DISK_FILE_PREFIX}\
 _${TARGET_PLATFORM}_${sgrub_version}.iso" \
       --grub-mkrescue-binary=\
-"${GRUB_MKRESCUE_BINARY}"
-
+"${GRUB_MKRESCUE_BINARY}"\
+      --grub-mkfont-binary=\
+"${GRUB_MKFONT_BINARY}"
 }
 
 function build_sg2d_standalone () {
@@ -39,7 +40,9 @@ _standalone_\
 ${STANDALONE_FORMAT_STR}\
 _${sgrub_version}.${STANDALONE_EXTENSION}" \
     --grub-mkstandalone-binary=\
-"${GRUB_MKSTANDALONE_BINARY}"
+"${GRUB_MKSTANDALONE_BINARY}"\
+      --grub-mkfont-binary=\
+"${GRUB_MKFONT_BINARY}"
 
 }
 
@@ -52,6 +55,11 @@ function grub2_sg2d_hybrid_build () {
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
 /bin/grub-mkrescue\
+"
+  GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkfont\
 "
   build_sg2d
 
@@ -66,6 +74,11 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_I386_PC}\
 /bin/grub-mkrescue\
 "
+  GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_I386_PC}\
+/bin/grub-mkfont\
+"
   build_sg2d
 
 }
@@ -79,6 +92,11 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_X86_64_EFI}\
 /bin/grub-mkrescue\
 "
+  GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_X86_64_EFI}\
+/bin/grub-mkfont\
+"
   build_sg2d
 
   STANDALONE_FORMAT_STR="x86_64_efi"
@@ -88,6 +106,11 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_X86_64_EFI}\
 /bin/grub-mkstandalone\
+"
+  GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_X86_64_EFI}\
+/bin/grub-mkfont\
 "
   build_sg2d_standalone
 
