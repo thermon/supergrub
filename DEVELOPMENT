@@ -14,7 +14,8 @@ Never use a moving target like the master branch. Well, actually, you can use it
 Then you just run:
 ./grub-build-002-clean-and-update
 ./grub-build-003-build-all
-./grub-build-004-install-all
+./grub-build-004-make-check (optional)
+./grub-build-005-install-all
 
 
 What to do when you release a new Super Grub2 Disk version

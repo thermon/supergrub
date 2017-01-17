@@ -150,7 +150,8 @@ Then we will fetch, build grub and install grub in a custom directory (this will
 ./grub-build-001-prepare-build
 ./grub-build-002-clean-and-update
 ./grub-build-003-build-all
-./grub-build-004-install-all
+./grub-build-004-make-check (optional)
+./grub-build-005-install-all
 
 * Finally we can just build the hybrid version for SG2D:
 

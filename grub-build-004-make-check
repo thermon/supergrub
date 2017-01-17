@@ -1,0 +1,89 @@
+#!/bin/bash
+# Super Grub Disk - grub-build-004-make-check
+# Copyright (C) 2009,2010,2011,2012,2013,2014,2015  Adrian Gibanel Lopez.
+#
+# Super Grub Disk is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Super Grub Disk is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
+
+# Grub2 Build for Super Grub2 Disk - Check all built grub
+
+SG2D_DIR="$(pwd)"
+
+source grub-build-config
+
+function sg2d_grub_check () {
+
+local SG2D_BUILD_DIR="${1}"
+
+# Build Hybrid i386 pc
+cd "${SG2D_BUILD_DIR}"
+
+if make check > "${SG2D_GRUB_LOG_PREFIX}_make_check.log" 2>&1 ; then
+	echo -e -n "make check run OK on: ${SG2D_BUILD_DIR}\n"
+else
+	echo -e -n "make check had a PROBLEM on: ${SG2D_BUILD_DIR}\n" 1>&2
+	echo -e -n "You can check its log: ${SG2D_GRUB_LOG_PREFIX}_make_check.log\n" 1>&2
+	echo -e -n "Skipping to next build if applicable\n" 1>&2
+fi
+
+
+cd ..
+
+}
+
+
+# Check if build directories exists or not.
+# If anyone of them does not exist exit with an error.
+
+for n_build_dir in "${!SG2D_GRUB_BUILD_DIRS_ARR[@]}"; do
+
+	if [ ! -d "${SG2D_GRUB_BUILD_DIRS_ARR[n_build_dir]}" ] ; then
+		echo -e -n "Build all grub releases refuses to continue\n" 1>&2 ;
+		echo -e -n "'${SG2D_GRUB_BUILD_DIRS_ARR[n_build_dir]}' does not exist\n" 1>&2 ;
+		echo -e -n "Have you run: ./grub-build-001-prepare-build ?\n"1>&2 ;
+		echo -e -n "and: ./grub-build-002-clean-and-update ?\n"1>&2 ;
+		exit 2
+	fi
+
+done
+
+cd "${SG2D_GRUB_BUILD_PREFIX}"
+
+# Build Hybrid i386 pc
+sg2d_grub_check \
+ "${SG2D_GRUB_BUILD_HYBRID_I386_PC}"
+
+# Build Hybrid i386 efi
+sg2d_grub_check \
+ "${SG2D_GRUB_BUILD_HYBRID_I386_EFI}"
+
+# Build Hybrid x86_64 efi
+sg2d_grub_check \
+ "${SG2D_GRUB_BUILD_HYBRID_X86_64_EFI}"
+
+# Build i386 pc
+sg2d_grub_check \
+ "${SG2D_GRUB_BUILD_I386_PC}"
+
+# Build i386 efi
+sg2d_grub_check \
+ "${SG2D_GRUB_BUILD_I386_EFI}"
+
+# Build x86_64 efi
+sg2d_grub_check \
+ "${SG2D_GRUB_BUILD_X86_64_EFI}"
+
+
+
+cd "${SG2D_DIR}"
+
