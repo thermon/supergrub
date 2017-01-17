@@ -24,8 +24,9 @@ source grub-build-config
 function sg2d_grub_build () {
 
 local SG2D_BUILD_DIR="${1}"
-local PLATFORM="${2}"
-local INSTALLATION_DIR="${3}"
+local TARGET="${2}"
+local PLATFORM="${3}"
+local INSTALLATION_DIR="${4}"
 
 # Build Hybrid i386 pc
 cd "${SG2D_BUILD_DIR}"
@@ -34,6 +35,7 @@ if ./autogen.sh > "${SG2D_GRUB_LOG_PREFIX}_autogen.log" 2>&1 ; then
   if ./configure \
  --enable-grub-mkfont \
  --with-platform="${PLATFORM}" \
+ --target="${TARGET}" \
  --prefix \
  "${INSTALLATION_DIR}" \
 > "${SG2D_GRUB_LOG_PREFIX}_configure.log" 2>&1 ; then
@@ -81,6 +83,7 @@ cd "${SG2D_GRUB_BUILD_PREFIX}"
 # Build Hybrid i386 pc
 sg2d_grub_build \
  "${SG2D_GRUB_BUILD_HYBRID_I386_PC}" \
+ "i386-pe" \
  "pc" \
 "${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}"
@@ -88,6 +91,7 @@ sg2d_grub_build \
 # Build Hybrid x86_64 efi
 sg2d_grub_build \
  "${SG2D_GRUB_BUILD_HYBRID_X86_64_EFI}" \
+ "amd64-pe" \
  "efi" \
 "${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}"
@@ -95,6 +99,7 @@ sg2d_grub_build \
 # Build i386 pc
 sg2d_grub_build \
  "${SG2D_GRUB_BUILD_I386_PC}" \
+ "i386-pe" \
  "pc" \
 "${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_I386_PC}"
@@ -102,6 +107,7 @@ sg2d_grub_build \
 # Build x86_64 efi
 sg2d_grub_build \
  "${SG2D_GRUB_BUILD_X86_64_EFI}" \
+ "amd64-pe" \
  "efi" \
 "${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_X86_64_EFI}"
