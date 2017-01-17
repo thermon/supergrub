@@ -88,6 +88,14 @@ sg2d_grub_build \
 "${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}"
 
+# Build Hybrid i386 efi
+sg2d_grub_build \
+ "${SG2D_GRUB_BUILD_HYBRID_I386_EFI}" \
+ "i386-pe" \
+ "efi" \
+"${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}"
+
 # Build Hybrid x86_64 efi
 sg2d_grub_build \
  "${SG2D_GRUB_BUILD_HYBRID_X86_64_EFI}" \
@@ -103,6 +111,14 @@ sg2d_grub_build \
  "pc" \
 "${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_I386_PC}"
+
+# Build i386 efi
+sg2d_grub_build \
+ "${SG2D_GRUB_BUILD_I386_EFI}" \
+ "i386-pe" \
+ "efi" \
+"${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_I386_EFI}"
 
 # Build x86_64 efi
 sg2d_grub_build \
