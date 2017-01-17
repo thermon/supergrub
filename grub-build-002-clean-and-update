@@ -59,6 +59,8 @@ for n_build_dir in "${!SG2D_GRUB_BUILD_DIRS_ARR[@]}"; do
 	git pull
 	# Finally checkout the requested commit
 	git checkout "${GRUB2_COMMIT}"
+	# prepare the locales
+	./linguas.sh
 done
 
 
