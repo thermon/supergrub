@@ -142,7 +142,7 @@ cd  ~/gnu/sgd/supergrub2_upstream
 
 Now we are going to get Super Grub2 Disk source code.
 
-git clone https://forja.cenatic.es/anonscm/git/supergrub2/supergrub2.git
+git clone https://github.com/supergrub/supergrub.git
 
 Although a final user can use their own grub thanks to supergrub-build-config file we recommend you to build grub yourself thanks to super grub disk build script.
 
