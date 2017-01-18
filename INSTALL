@@ -127,6 +127,10 @@ And other packages:
 
 apt-get install gettext unifont xorriso mtools
 
+Additional packages (needed only if you want to run grub-build-004-make-check ):
+First step. Configure src entries on your sources.list file.
+apt-get -y build-dep grub2
+
 Now we are going to work as a normal user
 
 su myuser
