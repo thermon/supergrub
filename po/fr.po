@@ -17,159 +17,159 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: menus/main.cfg:157 menus/main.cfg:224 menus/processenable.cfg:12
+#: menus/sgd/main.cfg:157 menus/sgd/main.cfg:224 menus/sgd/processenable.cfg:12
 msgid "Press escape to return to the main menu"
 msgstr ""
 
-#: menus/main.cfg:164
+#: menus/sgd/main.cfg:164
 msgid "Detect and show boot methods"
 msgstr ""
 
-#: menus/main.cfg:172
+#: menus/sgd/main.cfg:172
 msgid "Boot manually"
 msgstr ""
 
-#: menus/main.cfg:192
+#: menus/sgd/main.cfg:192
 msgid "Extra GRUB2 functionality"
 msgstr ""
 
-#: menus/main.cfg:213
+#: menus/sgd/main.cfg:213
 #, fuzzy
 msgid "Print devices/partitions"
 msgstr "Lister les peripheriques et les partitions"
 
-#: menus/main.cfg:228
+#: menus/sgd/main.cfg:228
 msgid "Color ON/OFF"
 msgstr "Activer/desactiver la couleur"
 
-#: menus/main.cfg:238
+#: menus/sgd/main.cfg:238
 msgid "Exit"
 msgstr ""
 
-#: menus/cfgdetect.cfg:19
+#: menus/sgd/cfgdetect.cfg:19
 #, fuzzy
 msgid "(GRUB2 configuration files)"
 msgstr "Detecter tous les fichiers de configuration de GRUB2 (grub.cfg)"
 
-#: menus/cfgdetect.cfg:55 menus/cfgextract.cfg:54
+#: menus/sgd/cfgdetect.cfg:55 menus/sgd/cfgextract.cfg:54
 msgid "(No grub.cfg file detected)"
 msgstr ""
 
-#: menus/menulstdetect.cfg:19
+#: menus/sgd/menulstdetect.cfg:19
 #, fuzzy
 msgid "(GRUB legacy configuration files)"
 msgstr "Detecter tous les fichiers de configuration de GRUB2 (grub.cfg)"
 
-#: menus/menulstdetect.cfg:48
+#: menus/sgd/menulstdetect.cfg:48
 msgid "(No menu.lst file detected)"
 msgstr ""
 
-#: menus/autoiso.cfg:18
+#: menus/sgd/autoiso.cfg:18
 msgid "Bootable ISOs"
 msgstr ""
 
-#: menus/autoiso.cfg:18
+#: menus/sgd/autoiso.cfg:18
 #, fuzzy
 msgid "(in /boot-isos or /boot/boot-isos)"
 msgstr ""
 "Detecter les images de CD/DVD amorcables (dans /boot-isos ou /boot/boot-isos)"
 
-#: menus/cfgextract.cfg:19
+#: menus/sgd/cfgextract.cfg:19
 msgid "Extract entries"
 msgstr ""
 
-#: menus/cfgextract.cfg:43
+#: menus/sgd/cfgextract.cfg:43
 msgid "Entries from"
 msgstr ""
 
-#: menus/enableencrypted.cfg:18
+#: menus/sgd/enableencrypted.cfg:18
 msgid "Mount encrypted volumes"
 msgstr ""
 
-#: menus/enableencrypted.cfg:18
+#: menus/sgd/enableencrypted.cfg:18
 msgid "(LUKS and geli)"
 msgstr ""
 
-#: menus/enablelvm.cfg:18
+#: menus/sgd/enablelvm.cfg:18
 msgid "Enable GRUB2's LVM support"
 msgstr "Activer le support LVM de GRUB2"
 
-#: menus/enableraid.cfg:18
+#: menus/sgd/enableraid.cfg:18
 msgid "Enable GRUB2's RAID support"
 msgstr "Activer le support RAID de GRUB2"
 
-#: menus/enableserial.cfg:18
+#: menus/sgd/enableserial.cfg:18
 msgid "Enable serial terminal"
 msgstr "Activer le terminal serie"
 
-#: menus/grubdetect.cfg:24
+#: menus/sgd/grubdetect.cfg:24
 #, fuzzy
 msgid "(GRUB2 installation (even if mbr is overwritten))"
 msgstr "Detecter toutes les installations de GRUB2 (meme si le MBR est perdu)"
 
-#: menus/grubdetect.cfg:57
+#: menus/sgd/grubdetect.cfg:57
 msgid "(No core.img file detected)"
 msgstr ""
 
-#: menus/halt.cfg:19
+#: menus/sgd/halt.cfg:19
 msgid "Halt"
 msgstr ""
 
-#: menus/language_select.cfg:19
+#: menus/sgd/language_select.cfg:19
 msgid "Languages"
 msgstr ""
 
-#: menus/osdetect.cfg:21
+#: menus/sgd/osdetect.cfg:21
 #, fuzzy
 msgid "Operating Systems"
 msgstr "Detecter tous les systemes d'exploitation"
 
-#: menus/osdetect.cfg:375
+#: menus/sgd/osdetect.cfg:375
 msgid "Sorry, but we are booted via BIOS and can not load this OS."
 msgstr ""
 
-#: menus/osdetect.cfg:376
+#: menus/sgd/osdetect.cfg:376
 msgid "Please try booting SG2D via UEFI."
 msgstr ""
 
-#: menus/osdetect.cfg:377
+#: menus/sgd/osdetect.cfg:377
 msgid "Press escape to return to the menu"
 msgstr ""
 
-#: menus/processenable.cfg:4
+#: menus/sgd/processenable.cfg:4
 msgid "Begin processing"
 msgstr ""
 
-#: menus/processenable.cfg:6
+#: menus/sgd/processenable.cfg:6
 msgid "End processing"
 msgstr ""
 
-#: menus/processenable.cfg:12
+#: menus/sgd/processenable.cfg:12
 msgid "(or wait 5 seconds)"
 msgstr ""
 
-#: menus/reboot.cfg:19
+#: menus/sgd/reboot.cfg:19
 msgid "Reboot"
 msgstr ""
 
-#: menus/return.cfg:1
+#: menus/sgd/return.cfg:1
 msgid "Return to main menu"
 msgstr ""
 
-#: menus/searchcdrom.cfg:18 menus/searchcdrom.cfg:28
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchcdrom.cfg:28
 msgid "Search in CDROM"
 msgstr ""
 
-#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18
 #, fuzzy
 msgid "ON/OFF"
 msgstr "Activer/desactiver la couleur"
 
-#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18
 msgid "(Default: OFF)"
 msgstr ""
 
-#: menus/searchfloppy.cfg:18 menus/searchfloppy.cfg:28
+#: menus/sgd/searchfloppy.cfg:18 menus/sgd/searchfloppy.cfg:28
 msgid "Search in floppy"
 msgstr ""
 

@@ -30,7 +30,7 @@ function copy_boot_isos_directory () {
 
 function copy_copyright () {
 
-  cp AUTHORS COPYING "$overlay/boot/grub/"
+  cp AUTHORS COPYING "$overlay/boot/grub/sgd/"
 
 }
 
@@ -40,8 +40,8 @@ function generate_and_copy_mo_files () {
   for pofile in po/*.po; do
     basename=${pofile##*/}
     lang_code="${basename%.po}"
-    info_cfg="menus/sgd_locale/${lang_code}_info.cfg"
-    msgfmt "$pofile" --output-file="$overlay/boot/grub/sgd_locale/${lang_code}.mo"
+    info_cfg="menus/sgd/sgd_locale/${lang_code}_info.cfg"
+    msgfmt "$pofile" --output-file="$overlay/boot/grub/sgd/sgd_locale/${lang_code}.mo"
     if ! [[ -f "$info_cfg" ]]; then
       echo "Thank you for providing a new translation for Super GRUB2 Disk!"
       echo "Before this translation can be used in Super GRUB2 Disk we need to know what"

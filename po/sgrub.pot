@@ -17,203 +17,203 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: menus/main.cfg:157 menus/main.cfg:224 menus/processenable.cfg:12
-#: menus/processenable.cfg:28 menus/main.cfg:164 menus/main.cfg:235
+#: menus/sgd/main.cfg:157 menus/sgd/main.cfg:224 menus/sgd/processenable.cfg:12
+#: menus/sgd/processenable.cfg:28 menus/sgd/main.cfg:164 menus/sgd/main.cfg:235
 msgid "Press escape to return to the main menu"
 msgstr ""
 
-#: menus/main.cfg:164 menus/main.cfg:171
+#: menus/sgd/main.cfg:164 menus/sgd/main.cfg:171
 msgid "Detect and show boot methods"
 msgstr ""
 
-#: menus/main.cfg:172 menus/main.cfg:179
+#: menus/sgd/main.cfg:172 menus/sgd/main.cfg:179
 msgid "Boot manually"
 msgstr ""
 
-#: menus/main.cfg:192 menus/main.cfg:201
+#: menus/sgd/main.cfg:192 menus/sgd/main.cfg:201
 msgid "Extra GRUB2 functionality"
 msgstr ""
 
-#: menus/main.cfg:213 menus/main.cfg:224
+#: menus/sgd/main.cfg:213 menus/sgd/main.cfg:224
 msgid "Print devices/partitions"
 msgstr ""
 
-#: menus/main.cfg:228 menus/main.cfg:239
+#: menus/sgd/main.cfg:228 menus/sgd/main.cfg:239
 msgid "Color ON/OFF"
 msgstr ""
 
-#: menus/main.cfg:238 menus/main.cfg:249
+#: menus/sgd/main.cfg:238 menus/sgd/main.cfg:249
 msgid "Exit"
 msgstr ""
 
-#: menus/cfgdetect.cfg:19 menus/cfgdetect.cfg:21
+#: menus/sgd/cfgdetect.cfg:19 menus/sgd/cfgdetect.cfg:21
 msgid "(GRUB2 configuration files)"
 msgstr ""
 
-#: menus/cfgdetect.cfg:55 menus/cfgextract.cfg:54 menus/cfgextract.cfg:49
+#: menus/sgd/cfgdetect.cfg:55 menus/sgd/cfgextract.cfg:54 menus/sgd/cfgextract.cfg:49
 msgid "(No grub.cfg file detected)"
 msgstr ""
 
-#: menus/menulstdetect.cfg:19 menus/menulstdetect.cfg:21
+#: menus/sgd/menulstdetect.cfg:19 menus/sgd/menulstdetect.cfg:21
 msgid "(GRUB legacy configuration files)"
 msgstr ""
 
-#: menus/menulstdetect.cfg:48 menus/menulstdetect.cfg:54
+#: menus/sgd/menulstdetect.cfg:48 menus/sgd/menulstdetect.cfg:54
 msgid "(No menu.lst file detected)"
 msgstr ""
 
-#: menus/autoiso.cfg:18 menus/autoiso.cfg:17
+#: menus/sgd/autoiso.cfg:18 menus/sgd/autoiso.cfg:17
 msgid "Bootable ISOs"
 msgstr ""
 
-#: menus/autoiso.cfg:18 menus/autoiso.cfg:17
+#: menus/sgd/autoiso.cfg:18 menus/sgd/autoiso.cfg:17
 msgid "(in /boot-isos or /boot/boot-isos)"
 msgstr ""
 
-#: menus/cfgextract.cfg:19 menus/cfgextract.cfg:17
+#: menus/sgd/cfgextract.cfg:19 menus/sgd/cfgextract.cfg:17
 msgid "Extract entries"
 msgstr ""
 
-#: menus/cfgextract.cfg:43 menus/cfgextract.cfg:37
+#: menus/sgd/cfgextract.cfg:43 menus/sgd/cfgextract.cfg:37
 msgid "Entries from"
 msgstr ""
 
-#: menus/enableencrypted.cfg:18 menus/enableencrypted.cfg:17
+#: menus/sgd/enableencrypted.cfg:18 menus/sgd/enableencrypted.cfg:17
 msgid "Mount encrypted volumes"
 msgstr ""
 
-#: menus/enableencrypted.cfg:18 menus/enableencrypted.cfg:17
+#: menus/sgd/enableencrypted.cfg:18 menus/sgd/enableencrypted.cfg:17
 msgid "(LUKS and geli)"
 msgstr ""
 
-#: menus/enablelvm.cfg:18 menus/enablelvm.cfg:17
+#: menus/sgd/enablelvm.cfg:18 menus/sgd/enablelvm.cfg:17
 msgid "Enable GRUB2's LVM support"
 msgstr ""
 
-#: menus/enableraid.cfg:18 menus/enableraid.cfg:17
+#: menus/sgd/enableraid.cfg:18 menus/sgd/enableraid.cfg:17
 msgid "Enable GRUB2's RAID support"
 msgstr ""
 
-#: menus/enableserial.cfg:18 menus/enableserial.cfg:17
+#: menus/sgd/enableserial.cfg:18 menus/sgd/enableserial.cfg:17
 msgid "Enable serial terminal"
 msgstr ""
 
-#: menus/grubdetect.cfg:24 menus/grubdetect.cfg:17
+#: menus/sgd/grubdetect.cfg:24 menus/sgd/grubdetect.cfg:17
 msgid "(GRUB2 installation (even if mbr is overwritten))"
 msgstr ""
 
-#: menus/grubdetect.cfg:57 menus/grubdetect.cfg:58
+#: menus/sgd/grubdetect.cfg:57 menus/sgd/grubdetect.cfg:58
 msgid "(No core.img file detected)"
 msgstr ""
 
-#: menus/halt.cfg:19 menus/halt.cfg:17
+#: menus/sgd/halt.cfg:19 menus/sgd/halt.cfg:17
 msgid "Halt"
 msgstr ""
 
-#: menus/language_select.cfg:19 menus/language_select.cfg:17
+#: menus/sgd/language_select.cfg:19 menus/sgd/language_select.cfg:17
 msgid "Languages"
 msgstr ""
 
-#: menus/osdetect.cfg:21 menus/osdetect.cfg:17
+#: menus/sgd/osdetect.cfg:21 menus/sgd/osdetect.cfg:17
 msgid "Operating Systems"
 msgstr ""
 
-#: menus/osdetect.cfg:375
+#: menus/sgd/osdetect.cfg:375
 msgid "Sorry, but we are booted via BIOS and can not load this OS."
 msgstr ""
 
-#: menus/osdetect.cfg:376
+#: menus/sgd/osdetect.cfg:376
 msgid "Please try booting SG2D via UEFI."
 msgstr ""
 
-#: menus/osdetect.cfg:377 menus/tools.cfg:56
+#: menus/sgd/osdetect.cfg:377 menus/sgd/tools.cfg:56
 msgid "Press escape to return to the menu"
 msgstr ""
 
-#: menus/processenable.cfg:4 menus/processenable.cfg:20
+#: menus/sgd/processenable.cfg:4 menus/sgd/processenable.cfg:20
 msgid "Begin processing"
 msgstr ""
 
-#: menus/processenable.cfg:6 menus/processenable.cfg:22
+#: menus/sgd/processenable.cfg:6 menus/sgd/processenable.cfg:22
 msgid "End processing"
 msgstr ""
 
-#: menus/processenable.cfg:12 menus/processenable.cfg:28
+#: menus/sgd/processenable.cfg:12 menus/sgd/processenable.cfg:28
 msgid "(or wait 5 seconds)"
 msgstr ""
 
-#: menus/reboot.cfg:19 menus/reboot.cfg:17
+#: menus/sgd/reboot.cfg:19 menus/sgd/reboot.cfg:17
 msgid "Reboot"
 msgstr ""
 
-#: menus/return.cfg:1 menus/return.cfg:17
+#: menus/sgd/return.cfg:1 menus/sgd/return.cfg:17
 msgid "Return to main menu"
 msgstr ""
 
-#: menus/searchcdrom.cfg:18 menus/searchcdrom.cfg:28 menus/searchcdrom.cfg:17
-#: menus/searchcdrom.cfg:27
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchcdrom.cfg:28 menus/sgd/searchcdrom.cfg:17
+#: menus/sgd/searchcdrom.cfg:27
 msgid "Search in CDROM"
 msgstr ""
 
-#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18 menus/searchcdrom.cfg:17
-#: menus/searchsgd.cfg:17 menus/searchfloppy.cfg:17
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18 menus/sgd/searchcdrom.cfg:17
+#: menus/sgd/searchsgd.cfg:17 menus/sgd/searchfloppy.cfg:17
 msgid "ON/OFF"
 msgstr ""
 
-#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18 menus/searchcdrom.cfg:17
-#: menus/searchsgd.cfg:17 menus/searchfloppy.cfg:17
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18 menus/sgd/searchcdrom.cfg:17
+#: menus/sgd/searchsgd.cfg:17 menus/sgd/searchfloppy.cfg:17
 msgid "(Default: OFF)"
 msgstr ""
 
-#: menus/searchfloppy.cfg:18 menus/searchfloppy.cfg:28
-#: menus/searchfloppy.cfg:17 menus/searchfloppy.cfg:27
+#: menus/sgd/searchfloppy.cfg:18 menus/sgd/searchfloppy.cfg:28
+#: menus/sgd/searchfloppy.cfg:17 menus/sgd/searchfloppy.cfg:27
 msgid "Search in floppy"
 msgstr ""
 
-#: menus/enableraidlvm.cfg:17
+#: menus/sgd/enableraidlvm.cfg:17
 msgid "Enable GRUB2's RAID and LVM support"
 msgstr ""
 
-#: menus/tools.cfg:48
+#: menus/sgd/tools.cfg:48
 msgid "BIOS Compatibility Mode"
 msgstr ""
 
-#: menus/tools.cfg:54
+#: menus/sgd/tools.cfg:54
 msgid "Sorry, but we are booted via "
 msgstr ""
 
-#: menus/tools.cfg:54
+#: menus/sgd/tools.cfg:54
 msgid " and can not load this OS."
 msgstr ""
 
-#: menus/tools.cfg:55
+#: menus/sgd/tools.cfg:55
 msgid "Please try booting SG2D via"
 msgstr ""
 
-#: menus/diskpartchainboot.cfg:17
+#: menus/sgd/diskpartchainboot.cfg:17
 msgid "Disks and Partitions (Chainload)"
 msgstr ""
 
-#: menus/diskpartchainboot.cfg:23
+#: menus/sgd/diskpartchainboot.cfg:23
 msgid "Reboot SG2D in BIOS mode to Chainload disks and Partitions"
 msgstr ""
 
-#: menus/enablenative.cfg:17
+#: menus/sgd/enablenative.cfg:17
 msgid "Enable all native disk drivers"
 msgstr ""
 
-#: menus/enablenative.cfg:17
+#: menus/sgd/enablenative.cfg:17
 msgid "experimental"
 msgstr ""
 
-#: menus/searchsgd.cfg:17 menus/searchsgd.cfg:27
+#: menus/sgd/searchsgd.cfg:17 menus/sgd/searchsgd.cfg:27
 msgid "Search in Super Grub2 Disk device"
 msgstr ""
 
-#: menus/osdetect.cfg:280
+#: menus/sgd/osdetect.cfg:280
 msgid "UEFI-BOOT-REQUIRED:"
 msgstr ""
 
-#: menus/osdetect.cfg:286
+#: menus/sgd/osdetect.cfg:286
 msgid "BIOS-BOOT-REQUIRED:"
 msgstr ""

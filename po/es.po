@@ -16,152 +16,152 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: menus/main.cfg:157 menus/main.cfg:224 menus/processenable.cfg:12
+#: menus/sgd/main.cfg:157 menus/sgd/main.cfg:224 menus/sgd/processenable.cfg:12
 msgid "Press escape to return to the main menu"
 msgstr "Pulsa ESC para volver al menú principal"
 
-#: menus/main.cfg:164
+#: menus/sgd/main.cfg:164
 msgid "Detect and show boot methods"
 msgstr ""
 
-#: menus/main.cfg:172
+#: menus/sgd/main.cfg:172
 msgid "Boot manually"
 msgstr "Arranque manual"
 
-#: menus/main.cfg:192
+#: menus/sgd/main.cfg:192
 msgid "Extra GRUB2 functionality"
 msgstr "Funcionalidad extra de GRUB2"
 
-#: menus/main.cfg:213
+#: menus/sgd/main.cfg:213
 #, fuzzy
 msgid "Print devices/partitions"
 msgstr "Mostrar dispositivos/particiones"
 
-#: menus/main.cfg:228
+#: menus/sgd/main.cfg:228
 msgid "Color ON/OFF"
 msgstr "Color SI/NO"
 
-#: menus/main.cfg:238
+#: menus/sgd/main.cfg:238
 msgid "Exit"
 msgstr "Salir"
 
-#: menus/cfgdetect.cfg:19
+#: menus/sgd/cfgdetect.cfg:19
 msgid "(GRUB2 configuration files)"
 msgstr "(Archivos de configuración de GRUB2)"
 
-#: menus/cfgdetect.cfg:55 menus/cfgextract.cfg:54
+#: menus/sgd/cfgdetect.cfg:55 menus/sgd/cfgextract.cfg:54
 msgid "(No grub.cfg file detected)"
 msgstr "Ningun fichero grub.cfg detectado"
 
-#: menus/menulstdetect.cfg:19
+#: menus/sgd/menulstdetect.cfg:19
 msgid "(GRUB legacy configuration files)"
 msgstr "(Archivos de configuración GRUB antiguo)"
 
-#: menus/menulstdetect.cfg:48
+#: menus/sgd/menulstdetect.cfg:48
 msgid "(No menu.lst file detected)"
 msgstr "Ningun fichero menu.lst detectado"
 
-#: menus/autoiso.cfg:18
+#: menus/sgd/autoiso.cfg:18
 msgid "Bootable ISOs"
 msgstr "ISOs arrancables"
 
-#: menus/autoiso.cfg:18
+#: menus/sgd/autoiso.cfg:18
 msgid "(in /boot-isos or /boot/boot-isos)"
 msgstr "(en /boot-isos y /boot/boot-isos/)"
 
-#: menus/cfgextract.cfg:19
+#: menus/sgd/cfgextract.cfg:19
 msgid "Extract entries"
 msgstr "Extraer entradas"
 
-#: menus/cfgextract.cfg:43
+#: menus/sgd/cfgextract.cfg:43
 msgid "Entries from"
 msgstr "Entradas de"
 
-#: menus/enableencrypted.cfg:18
+#: menus/sgd/enableencrypted.cfg:18
 msgid "Mount encrypted volumes"
 msgstr "Montar volumenes encriptados"
 
-#: menus/enableencrypted.cfg:18
+#: menus/sgd/enableencrypted.cfg:18
 msgid "(LUKS and geli)"
 msgstr "(LUKS y geli)"
 
-#: menus/enablelvm.cfg:18
+#: menus/sgd/enablelvm.cfg:18
 msgid "Enable GRUB2's LVM support"
 msgstr "Activa soporte LVM de GRUB2"
 
-#: menus/enableraid.cfg:18
+#: menus/sgd/enableraid.cfg:18
 msgid "Enable GRUB2's RAID support"
 msgstr "Activa soporte RAID de GRUB2"
 
-#: menus/enableserial.cfg:18
+#: menus/sgd/enableserial.cfg:18
 msgid "Enable serial terminal"
 msgstr "Activa terminal serie"
 
-#: menus/grubdetect.cfg:24
+#: menus/sgd/grubdetect.cfg:24
 msgid "(GRUB2 installation (even if mbr is overwritten))"
 msgstr "(Instalación de GRUB2 (aunque mbr este sobreescrito))"
 
-#: menus/grubdetect.cfg:57
+#: menus/sgd/grubdetect.cfg:57
 msgid "(No core.img file detected)"
 msgstr "(Ningun fichero core.img detectado)"
 
-#: menus/halt.cfg:19
+#: menus/sgd/halt.cfg:19
 msgid "Halt"
 msgstr "Apagar"
 
-#: menus/language_select.cfg:19
+#: menus/sgd/language_select.cfg:19
 msgid "Languages"
 msgstr "Idiomas"
 
-#: menus/osdetect.cfg:21
+#: menus/sgd/osdetect.cfg:21
 msgid "Operating Systems"
 msgstr "Sistemas Operativos"
 
-#: menus/osdetect.cfg:375
+#: menus/sgd/osdetect.cfg:375
 msgid "Sorry, but we are booted via BIOS and can not load this OS."
 msgstr "Lo sentimos, pero se ha arrancado via BIOS y no podemos cargar este SO"
 
-#: menus/osdetect.cfg:376
+#: menus/sgd/osdetect.cfg:376
 msgid "Please try booting SG2D via UEFI."
 msgstr ""
 
-#: menus/osdetect.cfg:377
+#: menus/sgd/osdetect.cfg:377
 msgid "Press escape to return to the menu"
 msgstr "Pulsa ESC para volver al menú"
 
-#: menus/processenable.cfg:4
+#: menus/sgd/processenable.cfg:4
 msgid "Begin processing"
 msgstr "Inicio del proceso"
 
-#: menus/processenable.cfg:6
+#: menus/sgd/processenable.cfg:6
 msgid "End processing"
 msgstr "Fin del proceso"
 
-#: menus/processenable.cfg:12
+#: menus/sgd/processenable.cfg:12
 msgid "(or wait 5 seconds)"
 msgstr "(o espera 5 segundos)"
 
-#: menus/reboot.cfg:19
+#: menus/sgd/reboot.cfg:19
 msgid "Reboot"
 msgstr "Reiniciar"
 
-#: menus/return.cfg:1
+#: menus/sgd/return.cfg:1
 msgid "Return to main menu"
 msgstr "Volver al menú principal"
 
-#: menus/searchcdrom.cfg:18 menus/searchcdrom.cfg:28
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchcdrom.cfg:28
 msgid "Search in CDROM"
 msgstr "Busqueda en CDROM"
 
-#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18
 msgid "ON/OFF"
 msgstr "SI(ON)/NO(OFF)"
 
-#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18
 msgid "(Default: OFF)"
 msgstr "Por defecto: NO(OFF)"
 
-#: menus/searchfloppy.cfg:18 menus/searchfloppy.cfg:28
+#: menus/sgd/searchfloppy.cfg:18 menus/sgd/searchfloppy.cfg:28
 msgid "Search in floppy"
 msgstr "Busqueda en disquete"
 

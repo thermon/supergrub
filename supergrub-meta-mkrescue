@@ -176,7 +176,7 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 
 
 # Needed for getting SG2D version
-source menus/version.cfg
+source menus/sgd/version.cfg
 
 source grub-build-config
 

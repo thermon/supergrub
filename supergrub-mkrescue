@@ -75,7 +75,7 @@ for option in "$@"; do
 done
 
 # Get the version number for this Super GRUB2 Disk release
-source menus/version.cfg
+source menus/sgd/version.cfg
 # Get common library for supergrub-mk commands
 source supergrub-mkcommon
 
