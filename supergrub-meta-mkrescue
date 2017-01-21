@@ -20,10 +20,11 @@ SUPER_GRUB2_DISK_FILE_PREFIX="super_grub2_disk"
 SGD2_SOURCE_DIR="$(pwd)"
 SG2D_DIR="${SGD2_SOURCE_DIR}"
 
+
 function build_sg2d () {
 
   ./supergrub-mkrescue \
-      -o="${SUPER_GRUB2_DISK_FILE_PREFIX}\
+      -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
 _${TARGET_PLATFORM}_${sgrub_version}.iso" \
       --grub-mkrescue-binary=\
 "${GRUB_MKRESCUE_BINARY}"\
@@ -35,7 +36,7 @@ function build_sg2d_standalone () {
 
   ./supergrub-mkstandalone  \
     -O=${STANDALONE_FORMAT} \
-    -o="${SUPER_GRUB2_DISK_FILE_PREFIX}\
+    -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
 _standalone_\
 ${STANDALONE_FORMAT_STR}\
 _${sgrub_version}.${STANDALONE_EXTENSION}" \
@@ -179,6 +180,13 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 source menus/sgd/version.cfg
 
 source grub-build-config
+
+SG2D_RELEASE_DIR="${SGD2_SOURCE_DIR}/releases/${sgrub_version}"
+SG2D_ISO_RELEASE_DIR="${SG2D_RELEASE_DIR}/super_grub2_disk_${sgrub_version}"
+
+if [ ! -d "${SG2D_ISO_RELEASE_DIR}" ] ; then
+  mkdir --parents "${SG2D_ISO_RELEASE_DIR}"
+fi
 
 grub2_sg2d_hybrid_build
 

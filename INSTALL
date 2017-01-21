@@ -174,6 +174,7 @@ which their filename might vary depending on the current Super Grub2 Disk versio
 
 ./supergrub-meta-mkrescue
 
+In this case the files will be found at releases/ directory.
 
 Alternative Super Grub2 Disk Build
 ====================================
