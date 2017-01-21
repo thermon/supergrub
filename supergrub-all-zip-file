@@ -1,0 +1,54 @@
+#!/bin/bash
+# Super Grub Disk - supergrub-all-zip-file
+# Copyright (C) 2017  Adrian Gibanel Lopez.
+#
+# Super Grub Disk is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Super Grub Disk is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
+
+SUPER_GRUB2_DISK_FILE_PREFIX="super_grub2_disk"
+
+SGD2_SOURCE_DIR="$(pwd)"
+SG2D_DIR="${SGD2_SOURCE_DIR}"
+
+
+function build_allzipfile () {
+
+  local OLD_BUILD_ALLZIPFILE_DIR="$(pwd)"
+  local ZIP_FILENAME="${SUPER_GRUB2_DISK_FILE_PREFIX}\
+_${sgrub_version}.zip"
+  cd "${SG2D_RELEASE_DIR}"
+  zip -r "${SG2D_RELEASE_DIR}/${ZIP_FILENAME}" "$(basename ${SG2D_ISO_RELEASE_DIR})"
+
+  md5sum "${ZIP_FILENAME}" > "${ZIP_FILENAME}".md5
+  sha1sum "${ZIP_FILENAME}" > "${ZIP_FILENAME}".sha1
+  sha256sum "${ZIP_FILENAME}" > "${ZIP_FILENAME}".sha256
+
+  cd "${OLD_BUILD_ALLZIPFILE_DIR}"
+
+}
+
+
+# Needed for getting SG2D version
+source menus/sgd/version.cfg
+
+source grub-build-config
+
+SG2D_RELEASE_DIR="${SGD2_SOURCE_DIR}/releases/${sgrub_version}"
+SG2D_ISO_RELEASE_DIR="${SG2D_RELEASE_DIR}/super_grub2_disk_${sgrub_version}"
+
+if [ ! -d "${SG2D_ISO_RELEASE_DIR}" ] ; then
+  mkdir --parents "${SG2D_ISO_RELEASE_DIR}"
+fi
+
+build_allzipfile
+
