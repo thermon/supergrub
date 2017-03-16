@@ -108,7 +108,7 @@ if [[ "x$CUSTOM_ISO_FILENAME" != x ]] ; then
   ISO_FILENAME="${CUSTOM_ISO_FILENAME}"
 fi
 
-default_options="--output=${ISO_FILENAME} $overlay"
+default_options="--themes='' --output=${ISO_FILENAME} $overlay"
 
 
 
