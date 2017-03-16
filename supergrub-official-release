@@ -18,4 +18,5 @@
 ./supergrub-meta-mkrescue
 ./supergrub-sourcecode
 ./supergrub-all-zip-file
+./supergrub-checksums-in-one-file
 

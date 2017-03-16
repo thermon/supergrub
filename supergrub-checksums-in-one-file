@@ -1,0 +1,58 @@
+#!/bin/bash
+# Super Grub Disk - supergrub-checksums-in-one-file
+# Copyright (C) 2017  Adrian Gibanel Lopez.
+#
+# Super Grub Disk is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Super Grub Disk is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
+
+# This script is meant to be run after you have previously run these scripts:
+# ./supergrub-meta-mkrescue
+# ./supergrub-sourcecode
+# ./supergrub-all-zip-file
+
+
+SUPER_GRUB2_DISK_FILE_PREFIX="super_grub2_disk"
+
+SGD2_SOURCE_DIR="$(pwd)"
+SG2D_DIR="${SGD2_SOURCE_DIR}"
+
+
+function checksums_to_one_file () {
+
+  local OLD_BUILD_ALLZIPFILE_DIR="$(pwd)"
+  local ZIP_FILENAME="${SUPER_GRUB2_DISK_FILE_PREFIX}\
+_${sgrub_version}.zip"
+  cd "${SG2D_RELEASE_DIR}"
+
+  find -type f -iname '*.md5' -print0 | sort -z | xargs -0 cat > MD5SUMS
+  find -type f -iname '*.sha1' -print0 | sort -z | xargs -0 cat > SHA1SUMS
+  find -type f -iname '*.sha256' -print0 | sort -z | xargs -0 cat > SHA256SUMS
+
+  cd "${OLD_BUILD_ALLZIPFILE_DIR}"
+
+}
+
+
+# Needed for getting SG2D version
+source menus/sgd/version.cfg
+
+source grub-build-config
+
+# Get common library for supergrub-mk commands
+source supergrub-mkcommon
+
+SG2D_RELEASE_DIR="${SGD2_SOURCE_DIR}/releases/${sgrub_version}"
+SG2D_ISO_RELEASE_DIR="${SG2D_RELEASE_DIR}/super_grub2_disk_${sgrub_version}"
+
+checksums_to_one_file
+
