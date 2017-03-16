@@ -29,9 +29,7 @@ _${sgrub_version}.zip"
   cd "${SG2D_RELEASE_DIR}"
   zip -r "${SG2D_RELEASE_DIR}/${ZIP_FILENAME}" "$(basename ${SG2D_ISO_RELEASE_DIR})"
 
-  md5sum "${ZIP_FILENAME}" > "${ZIP_FILENAME}".md5
-  sha1sum "${ZIP_FILENAME}" > "${ZIP_FILENAME}".sha1
-  sha256sum "${ZIP_FILENAME}" > "${ZIP_FILENAME}".sha256
+  generate_filename_hashes "${ZIP_FILENAME}"
 
   cd "${OLD_BUILD_ALLZIPFILE_DIR}"
 
@@ -42,6 +40,9 @@ _${sgrub_version}.zip"
 source menus/sgd/version.cfg
 
 source grub-build-config
+
+# Get common library for supergrub-mk commands
+source supergrub-mkcommon
 
 SG2D_RELEASE_DIR="${SGD2_SOURCE_DIR}/releases/${sgrub_version}"
 SG2D_ISO_RELEASE_DIR="${SG2D_RELEASE_DIR}/super_grub2_disk_${sgrub_version}"

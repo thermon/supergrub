@@ -23,20 +23,11 @@ SG2D_DIR="${SGD2_SOURCE_DIR}"
 
 function build_sourcecode () {
 
-  local OLD_BUILD_SOURCECODE_DIR="$(pwd)"
-
   SOURCE_CODE_FILENAME="${SUPER_GRUB2_DISK_FILE_PREFIX}\
 _${sgrub_version}_source_code.tar.gz"
   git archive $(git rev-parse --abbrev-ref HEAD) | gzip -c > "${SG2D_ISO_RELEASE_DIR}/${SOURCE_CODE_FILENAME}"
 
-  cd "${SG2D_ISO_RELEASE_DIR}"
-
-  md5sum "${SOURCE_CODE_FILENAME}" > "${SOURCE_CODE_FILENAME}".md5
-  sha1sum "${SOURCE_CODE_FILENAME}" > "${SOURCE_CODE_FILENAME}".sha1
-  sha256sum "${SOURCE_CODE_FILENAME}" > "${SOURCE_CODE_FILENAME}".sha256
-
-  cd "${OLD_BUILD_SOURCECODE_DIR}"
-
+  generate_filename_hashes "${SG2D_ISO_RELEASE_DIR}/${SOURCE_CODE_FILENAME}"
 
 }
 
@@ -45,6 +36,9 @@ _${sgrub_version}_source_code.tar.gz"
 source menus/sgd/version.cfg
 
 source grub-build-config
+
+# Get common library for supergrub-mk commands
+source supergrub-mkcommon
 
 SG2D_RELEASE_DIR="${SGD2_SOURCE_DIR}/releases/${sgrub_version}"
 SG2D_ISO_RELEASE_DIR="${SG2D_RELEASE_DIR}/super_grub2_disk_${sgrub_version}"

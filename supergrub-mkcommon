@@ -88,3 +88,19 @@ function check_unifont () {
   fi
 
 }
+
+function generate_filename_hashes ()  {
+  local ISO_FILENAME="$1"
+  local TMP_PRE_CHECKSUMS_DIR="$(pwd)"
+  local SHORT_ISO_FILENAME="$(basename ${ISO_FILENAME})"
+  local ISO_FILENAME_DIR="$(dirname ${ISO_FILENAME})"
+
+  cd "${ISO_FILENAME_DIR}"
+
+  md5sum ${SHORT_ISO_FILENAME} > ${SHORT_ISO_FILENAME}.md5
+  sha1sum ${SHORT_ISO_FILENAME} > ${SHORT_ISO_FILENAME}.sha1
+  sha256sum ${SHORT_ISO_FILENAME} > ${SHORT_ISO_FILENAME}.sha256
+
+  cd "${TMP_PRE_CHECKSUMS_DIR}"
+
+}
