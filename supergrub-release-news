@@ -1,0 +1,88 @@
+#!/bin/bash
+# Super Grub Disk - supergrub-release-news
+# Copyright (C) 2017  Adrian Gibanel Lopez.
+#
+# Super Grub Disk is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Super Grub Disk is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
+
+# This script is meant to be run after you have previously run these scripts:
+# ./supergrub-meta-mkrescue
+# ./supergrub-sourcecode
+# ./supergrub-all-zip-file
+# ./supergrub-checksums-in-one-file
+
+
+SUPER_GRUB2_DISK_FILE_PREFIX="super_grub2_disk"
+
+SGD2_SOURCE_DIR="$(pwd)"
+SG2D_DIR="${SGD2_SOURCE_DIR}"
+
+function generate_downloads_news () {
+  local DOWNLOADS_OUTPUT="news-releases/downloads.${sgrub_version}.html"
+
+  cp news-templates/downloads.html "${DOWNLOADS_OUTPUT}"
+
+  sed \
+   -i \
+   -e \
+   's~SOURCEFORGE_BASE_URL~https://sourceforge.net/projects/supergrub2/files~g' \
+   "${DOWNLOADS_OUTPUT}"
+
+  sed \
+   -i \
+   -e \
+   's~SG2D_VERSION~'"${sgrub_version}"'~g' \
+   "${DOWNLOADS_OUTPUT}"
+
+cat << EOF >> "${DOWNLOADS_OUTPUT}"
+
+<h4>MD5SUMS</h4>
+<pre>
+EOF
+cat "${SG2D_RELEASE_DIR}/MD5SUMS" >> "${DOWNLOADS_OUTPUT}"
+cat << EOF >> "${DOWNLOADS_OUTPUT}"
+</pre>
+<h4>SHA1SUMS</h4>
+<pre>
+EOF
+cat "${SG2D_RELEASE_DIR}/SHA1SUMS" >> "${DOWNLOADS_OUTPUT}"
+cat << EOF >> "${DOWNLOADS_OUTPUT}"
+</pre>
+<h4>SHA256SUMS</h4>
+<pre>
+EOF
+cat "${SG2D_RELEASE_DIR}/SHA256SUMS" >> "${DOWNLOADS_OUTPUT}"
+cat << EOF >> "${DOWNLOADS_OUTPUT}"
+</pre>
+EOF
+
+
+}
+
+
+# Needed for getting SG2D version
+source menus/sgd/version.cfg
+
+source grub-build-config
+
+# Get common library for supergrub-mk commands
+source supergrub-mkcommon
+
+SG2D_NEWS_RELEASE_DIR="${SGD2_SOURCE_DIR}/news-releases"
+
+if [ ! -d "${SG2D_NEWS_RELEASE_DIR}" ] ; then
+  mkdir --parents "${SG2D_NEWS_RELEASE_DIR}"
+fi
+
+generate_downloads_news
+
