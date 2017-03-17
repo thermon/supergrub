@@ -1,0 +1,103 @@
+#!/bin/bash
+# Super Grub Disk - supergrub-release-changes
+# Copyright (C) 2017  Adrian Gibanel Lopez.
+#
+# Super Grub Disk is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Super Grub Disk is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
+
+# This script is meant to be run after you have previously run these scripts:
+# ./supergrub-meta-mkrescue
+# ./supergrub-sourcecode
+# ./supergrub-all-zip-file
+# ./supergrub-checksums-in-one-file
+
+
+SUPER_GRUB2_DISK_FILE_PREFIX="super_grub2_disk"
+
+SGD2_SOURCE_DIR="$(pwd)"
+SG2D_DIR="${SGD2_SOURCE_DIR}"
+
+function generate_changes_news () {
+  local CHANGES_OUTPUT="news-releases/changes.${sgrub_version}.html"
+
+  if [ -e "${CHANGES_OUTPUT}" ] ; then
+    rm "${CHANGES_OUTPUT}"
+  fi
+
+  cat << EOF >> "${CHANGES_OUTPUT}"
+  <h3>Changes since ${OLDER_SG2D_VERSION} version:</h3>
+  <ul>
+EOF
+
+
+  git shortlog "${OLDER_SG2D_VERSION}""..""${sgrub_version}" \
+  | tail -n +2 \
+  | head -n -1 \
+  | \
+  while read -r nline
+  do
+
+  cat << EOF >> "${CHANGES_OUTPUT}"
+  <li>
+  ${nline}
+  </li>
+EOF
+
+  done
+
+
+  cat << EOF >> "${CHANGES_OUTPUT}"
+  </ul>
+EOF
+
+
+}
+
+usage() {
+cat <<EOF
+
+  $0 older_version
+  Copyright Adrian Gibanel Lopez
+  Licensed under the GNU PUBLIC LICENSE 3.0
+
+  Usage: $0 older_version
+  Example: $0 2.02s7
+
+EOF
+
+}
+
+OLDER_SG2D_VERSION="$1"
+if [[ "x$OLDER_SG2D_VERSION" == x ]] ; then
+  usage
+  exit 1
+fi
+
+
+# Needed for getting SG2D version
+source menus/sgd/version.cfg
+
+source grub-build-config
+
+# Get common library for supergrub-mk commands
+source supergrub-mkcommon
+
+SG2D_NEWS_RELEASE_DIR="${SGD2_SOURCE_DIR}/news-releases"
+
+if [ ! -d "${SG2D_NEWS_RELEASE_DIR}" ] ; then
+  mkdir --parents "${SG2D_NEWS_RELEASE_DIR}"
+fi
+
+
+generate_changes_news
+
