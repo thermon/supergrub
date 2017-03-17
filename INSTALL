@@ -161,7 +161,7 @@ Then we will fetch, build grub and install grub in a custom directory (this will
 
 ./supergrub-mkrescue
 
-If everything went well and you did not miss any of the former steps you will get, among others, these files:
+If everything went well and you did not miss any of the former steps you will get inside releases directory, among others, these files:
 
 super_grub2_disk_hybrid_2.00s1-beta6.iso
 super_grub2_disk_hybrid_2.00s1-beta6.iso.md5
@@ -175,6 +175,17 @@ which their filename might vary depending on the current Super Grub2 Disk versio
 ./supergrub-meta-mkrescue
 
 In this case the files will be found at releases/ directory.
+
+* Finally the Super Grub2 Disk release team once grub has been fetch, built and installed uses:
+
+./supergrub-official-release
+and
+./supergrub-release-changes 2.02s7
+where 2.02s7 is the previous version (git tag) to the current one you are releasing.
+
+Useful files for helping with the html release piece of news will be found at:
+news-releases
+directory.
 
 Alternative Super Grub2 Disk Build
 ====================================
