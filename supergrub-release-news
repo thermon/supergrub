@@ -78,6 +78,7 @@ source grub-build-config
 # Get common library for supergrub-mk commands
 source supergrub-mkcommon
 
+SG2D_RELEASE_DIR="${SGD2_SOURCE_DIR}/releases/${sgrub_version}"
 SG2D_NEWS_RELEASE_DIR="${SGD2_SOURCE_DIR}/news-releases"
 
 if [ ! -d "${SG2D_NEWS_RELEASE_DIR}" ] ; then
