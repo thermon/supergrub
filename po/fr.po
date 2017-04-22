@@ -104,8 +104,8 @@ msgstr "Activer le terminal serie"
 
 #: menus/sgd/grubdetect.cfg:24
 #, fuzzy
-msgid "(GRUB2 installation (even if mbr is overwritten))"
-msgstr "Detecter toutes les installations de GRUB2 (meme si le MBR est perdu)"
+msgid "(GRUB2 installation)"
+msgstr "Detecter toutes les installations de GRUB2"
 
 #: menus/sgd/grubdetect.cfg:57
 msgid "(No core.img file detected)"

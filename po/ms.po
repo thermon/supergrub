@@ -103,8 +103,8 @@ msgstr "Aktifkan terminal siri"
 
 #: menus/sgd/grubdetect.cfg:24
 #, fuzzy
-msgid "(GRUB2 installation (even if mbr is overwritten))"
-msgstr "Mengesan mana-mana pemasangan GRUB2 (walaupun MBR telah ditulis ganti)"
+msgid "(GRUB2 installation)"
+msgstr "Mengesan mana-mana pemasangan GRUB2"
 
 #: menus/sgd/grubdetect.cfg:57
 msgid "(No core.img file detected)"

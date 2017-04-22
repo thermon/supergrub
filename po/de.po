@@ -104,8 +104,8 @@ msgstr "Serielles Terminal aktivieren"
 
 #: menus/sgd/grubdetect.cfg:24
 #, fuzzy
-msgid "(GRUB2 installation (even if mbr is overwritten))"
-msgstr "GRUB2 Installationen finden (auch bei ueberschriebenem mbr)"
+msgid "(GRUB2 installation)"
+msgstr "GRUB2 Installationen finden"
 
 #: menus/sgd/grubdetect.cfg:57
 msgid "(No core.img file detected)"

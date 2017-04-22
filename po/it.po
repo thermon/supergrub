@@ -105,8 +105,8 @@ msgstr "Abilita il terminale seriale"
 
 #: menus/sgd/grubdetect.cfg:24
 #, fuzzy
-msgid "(GRUB2 installation (even if mbr is overwritten))"
-msgstr "Cerca installazioni di GRUB2 (anche se il MBR è stato sovrascritto)"
+msgid "(GRUB2 installation)"
+msgstr "Cerca installazioni di GRUB2"
 
 #: menus/sgd/grubdetect.cfg:57
 msgid "(No core.img file detected)"

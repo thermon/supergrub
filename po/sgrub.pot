@@ -99,7 +99,7 @@ msgid "Enable serial terminal"
 msgstr ""
 
 #: menus/sgd/grubdetect.cfg:24 menus/sgd/grubdetect.cfg:17
-msgid "(GRUB2 installation (even if mbr is overwritten))"
+msgid "(GRUB2 installation)"
 msgstr ""
 
 #: menus/sgd/grubdetect.cfg:57 menus/sgd/grubdetect.cfg:58

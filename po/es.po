@@ -98,8 +98,8 @@ msgid "Enable serial terminal"
 msgstr "Activa terminal serie"
 
 #: menus/sgd/grubdetect.cfg:24
-msgid "(GRUB2 installation (even if mbr is overwritten))"
-msgstr "(Instalación de GRUB2 (aunque mbr este sobreescrito))"
+msgid "(GRUB2 installation)"
+msgstr "(Instalación de GRUB2)"
 
 #: menus/sgd/grubdetect.cfg:57
 msgid "(No core.img file detected)"
