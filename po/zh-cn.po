@@ -98,8 +98,8 @@ msgid "Enable serial terminal"
 msgstr "启用串口终端"
 
 #: menus/grubdetect.cfg:24
-msgid "(GRUB2 installation (even if mbr is overwritten))"
-msgstr "（GRUB2 安装（即使 mbr 被覆盖））"
+msgid "(GRUB2 installation)"
+msgstr "（GRUB2 安装）"
 
 #: menus/grubdetect.cfg:57
 msgid "(No core.img file detected)"
