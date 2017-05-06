@@ -1,0 +1,161 @@
+# Spanish translation for Super GRUB2 Disk.
+# Copyright (C) 2017  Adrian Gibanel Lopez
+# This file is distributed under the same license as the Super GRUB2 Disk package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Super GRUB2 Disk 2.02s9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-06 16:36+0000\n"
+"PO-Revision-Date: 2017-05-06 18:23-0200\n"
+"Last-Translator: tavallinenvirtanen7 <adrian15sgd@gmail.com>\n"
+"Language-Team: Finnish <adrian15sgd@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: menus/sgd/main.cfg:164 menus/sgd/main.cfg:235
+#: menus/sgd/processenable.cfg:28
+msgid "Press escape to return to the main menu"
+msgstr "Paina ESC palataksesi päävalikkoon"
+
+#: menus/sgd/main.cfg:171
+msgid "Detect and show boot methods"
+msgstr "Tunnista ja näytä käynnistysmenetelmät"
+
+#: menus/sgd/main.cfg:179
+msgid "Boot manually"
+msgstr "Valitse manuaalisesti"
+
+#: menus/sgd/main.cfg:201
+msgid "Extra GRUB2 functionality"
+msgstr "Extra GRUB2 toiminnot"
+
+#: menus/sgd/main.cfg:224
+msgid "Print devices/partitions"
+msgstr "Näytä levyt/osiot"
+
+#: menus/sgd/main.cfg:239
+msgid "Color ON/OFF"
+msgstr "Värit PÄÄLLÄ/POIS"
+
+#: menus/sgd/main.cfg:249
+msgid "Exit"
+msgstr "Poistu"
+
+#: menus/sgd/cfgdetect.cfg:21
+msgid "(GRUB2 configuration files)"
+msgstr "(Grub2:n asetustiedostot)"
+
+#: menus/sgd/cfgdetect.cfg:55 menus/sgd/cfgextract.cfg:49
+msgid "(No grub.cfg file detected)"
+msgstr ""
+
+#: menus/sgd/menulstdetect.cfg:21
+msgid "(GRUB legacy configuration files)"
+msgstr "(GRUB 1:n (legacy) asetustiedostot)"
+
+#: menus/sgd/menulstdetect.cfg:54
+msgid "(No menu.lst file detected)"
+msgstr ""
+
+#: menus/sgd/autoiso.cfg:17
+msgid "Bootable ISOs"
+msgstr "Käynnistyvät ISO-tiedostot"
+
+#: menus/sgd/autoiso.cfg:17
+msgid "(in /boot-isos or /boot/boot-isos)"
+msgstr ""
+
+#: menus/sgd/cfgextract.cfg:17
+msgid "Extract entries"
+msgstr ""
+
+#: menus/sgd/cfgextract.cfg:37
+msgid "Entries from"
+msgstr ""
+
+#: menus/sgd/enableencrypted.cfg:17
+msgid "Mount encrypted volumes"
+msgstr "Mounttaa salatut levyt"
+
+#: menus/sgd/enableencrypted.cfg:17
+msgid "(LUKS and geli)"
+msgstr "(LUKS ja geli)"
+
+#: menus/sgd/enablelvm.cfg:17
+msgid "Enable GRUB2's LVM support"
+msgstr "Ota käyttöön GRUB2:n  LVM-tuki"
+
+#: menus/sgd/enableraid.cfg:17
+msgid "Enable GRUB2's RAID support"
+msgstr "Ota käyttöön GRUB2:n RAID-tuki"
+
+#: menus/sgd/enableserial.cfg:17
+msgid "Enable serial terminal"
+msgstr "Ota käyttöön sarjanumero pääte"
+
+#: menus/sgd/grubdetect.cfg:17
+msgid "(GRUB2 installation)"
+msgstr ""
+
+#: menus/sgd/grubdetect.cfg:58
+msgid "(No core.img file detected)"
+msgstr ""
+
+#: menus/sgd/halt.cfg:17
+msgid "Halt"
+msgstr "Sammuta"
+
+#: menus/sgd/language_select.cfg:17
+msgid "Languages"
+msgstr "Kielet"
+
+#: menus/sgd/osdetect.cfg:17
+msgid "Operating Systems"
+msgstr "Etsi käyttöjärjestelmät"
+
+#: menus/sgd/osdetect.cfg:280
+msgid "UEFI-BOOT-REQUIRED:"
+msgstr ""
+
+#: menus/sgd/osdetect.cfg:286
+msgid "BIOS-BOOT-REQUIRED:"
+msgstr ""
+
+#: menus/sgd/processenable.cfg:20
+msgid "Begin processing"
+msgstr ""
+
+#: menus/sgd/processenable.cfg:22
+msgid "End processing"
+msgstr ""
+
+#: menus/sgd/processenable.cfg:28
+msgid "(or wait 5 seconds)"
+msgstr ""
+
+#: menus/sgd/reboot.cfg:17
+msgid "Reboot"
+msgstr "Käynnistä uudestaan"
+
+#: menus/sgd/return.cfg:17
+msgid "Return to main menu"
+msgstr "Takaisin päävalikkoon"
+
+#: menus/sgd/searchcdrom.cfg:17 menus/sgd/searchcdrom.cfg:27
+msgid "Search in CDROM"
+msgstr "Etsi CD-asema"
+
+#: menus/sgd/searchcdrom.cfg:17 menus/sgd/searchfloppy.cfg:17
+msgid "ON/OFF"
+msgstr "PÄÄLLÄ/POIS"
+
+#: menus/sgd/searchcdrom.cfg:17 menus/sgd/searchfloppy.cfg:17
+msgid "(Oletus: POIS)"
+msgstr ""
+
+#: menus/sgd/searchfloppy.cfg:17 menus/sgd/searchfloppy.cfg:27
+msgid "Search in floppy"
+msgstr ""
