@@ -1,0 +1,166 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-14 02:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: menus/main.cfg:157 menus/main.cfg:224 menus/processenable.cfg:12
+msgid "Press escape to return to the main menu"
+msgstr "按 ESC 键返回主菜单"
+
+#: menus/main.cfg:164
+msgid "Detect and show boot methods"
+msgstr "探测并显示引导方式"
+
+#: menus/main.cfg:172
+msgid "Boot manually"
+msgstr "手工引导"
+
+#: menus/main.cfg:192
+msgid "Extra GRUB2 functionality"
+msgstr "附加的 GRUB2 功能"
+
+#: menus/main.cfg:213
+msgid "Print devices/partitions"
+msgstr "列出设备／分区"
+
+#: menus/main.cfg:228
+msgid "Color ON/OFF"
+msgstr "颜色 开／关"
+
+#: menus/main.cfg:238
+msgid "Exit"
+msgstr "退出"
+
+#: menus/cfgdetect.cfg:19
+msgid "(GRUB2 configuration files)"
+msgstr "（GRUB2 配置文件）"
+
+#: menus/cfgdetect.cfg:55 menus/cfgextract.cfg:54
+msgid "(No grub.cfg file detected)"
+msgstr "（没有探测到 grub.cfg 文件）"
+
+#: menus/menulstdetect.cfg:19
+msgid "(GRUB legacy configuration files)"
+msgstr "（GRUB legacy 配置文件）"
+
+#: menus/menulstdetect.cfg:48
+msgid "(No menu.lst file detected)"
+msgstr "（没有探测到 menu.lst）"
+
+#: menus/autoiso.cfg:18
+msgid "Bootable ISOs"
+msgstr "可引导的 ISO"
+
+#: menus/autoiso.cfg:18
+msgid "(in /boot-isos or /boot/boot-isos)"
+msgstr "（在 /boot-isos 或 /boot/boot-isos）"
+
+#: menus/cfgextract.cfg:19
+msgid "Extract entries"
+msgstr ""
+
+#: menus/cfgextract.cfg:43
+msgid "Entries from"
+msgstr ""
+
+#: menus/enableencrypted.cfg:18
+msgid "Mount encrypted volumes"
+msgstr "挂在加密卷"
+
+#: menus/enableencrypted.cfg:18
+msgid "(LUKS and geli)"
+msgstr ""
+
+#: menus/enablelvm.cfg:18
+msgid "Enable GRUB2's LVM support"
+msgstr "启用 GRUB2 的 LVM 支持"
+
+#: menus/enableraid.cfg:18
+msgid "Enable GRUB2's RAID support"
+msgstr "启用 GRUB2 的 RAID 支持"
+
+#: menus/enableserial.cfg:18
+msgid "Enable serial terminal"
+msgstr "启用串口终端"
+
+#: menus/grubdetect.cfg:24
+msgid "(GRUB2 installation (even if mbr is overwritten))"
+msgstr "（GRUB2 安装（即使 mbr 被覆盖））"
+
+#: menus/grubdetect.cfg:57
+msgid "(No core.img file detected)"
+msgstr "（没有探测到 core.img）"
+
+#: menus/halt.cfg:19
+msgid "Halt"
+msgstr "关机"
+
+#: menus/language_select.cfg:19
+msgid "Languages"
+msgstr "语言"
+
+#: menus/osdetect.cfg:21
+msgid "Operating Systems"
+msgstr "操作系统"
+
+#: menus/osdetect.cfg:375
+msgid "Sorry, but we are booted via BIOS and can not load this OS."
+msgstr "对不起，通过 BIOS 引导的 GRUB 无法加载这个系统"
+
+#: menus/osdetect.cfg:376
+msgid "Please try booting SG2D via UEFI."
+msgstr "请尝试通过 UEFI 引导 GRUB"
+
+#: menus/osdetect.cfg:377
+msgid "Press escape to return to the menu"
+msgstr "按会车键以返回菜单"
+
+#: menus/processenable.cfg:4
+msgid "Begin processing"
+msgstr "开始处理"
+
+#: menus/processenable.cfg:6
+msgid "End processing"
+msgstr "处理结束"
+
+#: menus/processenable.cfg:12
+msgid "(or wait 5 seconds)"
+msgstr "（或者等待 5 秒钟）"
+
+#: menus/reboot.cfg:19
+msgid "Reboot"
+msgstr "重新启动"
+
+#: menus/return.cfg:1
+msgid "Return to main menu"
+msgstr "返回主菜单"
+
+#: menus/searchcdrom.cfg:18 menus/searchcdrom.cfg:28
+msgid "Search in CDROM"
+msgstr "在 CDROM 中搜索"
+
+#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18
+msgid "ON/OFF"
+msgstr "开／关"
+
+#: menus/searchcdrom.cfg:18 menus/searchfloppy.cfg:18
+msgid "(Default: OFF)"
+msgstr "（默认：关）"
+
+#: menus/searchfloppy.cfg:18 menus/searchfloppy.cfg:28
+msgid "Search in floppy"
+msgstr "在软盘中搜索"
