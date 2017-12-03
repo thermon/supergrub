@@ -109,11 +109,9 @@ ISO_FILENAME="super_grub2_disk_standalone_${sgrub_version}.iso"
 
 if [[ "x$CUSTOM_ISO_FILENAME" != x ]] ; then
   ISO_FILENAME="${CUSTOM_ISO_FILENAME}"
-else
-  ISO_FILENAME="$(pwd)/./${CUSTOM_ISO_FILENAME}"
 fi
 
-default_options="--output=${ISO_FILENAME} ."
+default_options="--output=${ISO_FILENAME} ${overlay}"
 
 
 if [[ "x$CUSTOM_FORMAT" != x ]] ; then
@@ -126,10 +124,7 @@ copy_copyright
 generate_and_copy_mo_files
 check_unifont
 
-cd "${overlay}"
 "${GRUB_MKSTANDALONE_BINARY}" $default_options
-cd "${SG2D_DIR}"
-
 rm -r "$overlay"
 
 generate_filename_hashes "${ISO_FILENAME}"
