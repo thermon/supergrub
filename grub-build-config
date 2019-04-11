@@ -24,7 +24,7 @@ if [ -z "${SG2D_DIR}" ] ; then
 fi
 
 GIT_REPO="git://git.savannah.gnu.org/grub.git"
-GRUB2_COMMIT="grub-2.02"
+GRUB2_COMMIT="grub-2.04-rc1"
 
 SG2D_GRUB_BUILD_PREFIX="${SG2D_DIR}/sg2d_grub_builds"
 SG2D_GRUB_BUILD_HYBRID_I386_PC="hybrid_i386_pc"
