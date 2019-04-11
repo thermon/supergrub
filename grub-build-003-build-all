@@ -30,8 +30,8 @@ local INSTALLATION_DIR="${4}"
 
 # Build Hybrid i386 pc
 cd "${SG2D_BUILD_DIR}"
-if ./autogen.sh > "${SG2D_GRUB_LOG_PREFIX}_autogen.log" 2>&1 ; then
-  echo -e -n "autogen.sh run OK on: ${SG2D_BUILD_DIR}\n"
+if ./bootstrap > "${SG2D_GRUB_LOG_PREFIX}_bootstrap.log" 2>&1 ; then
+  echo -e -n "bootstrap run OK on: ${SG2D_BUILD_DIR}\n"
   if ./configure \
  --enable-grub-mkfont \
  --with-platform="${PLATFORM}" \
@@ -53,8 +53,8 @@ if ./autogen.sh > "${SG2D_GRUB_LOG_PREFIX}_autogen.log" 2>&1 ; then
 	echo -e -n "Skipping to next build if applicable\n" 1>&2
   fi
 else
-	echo -e -n "autogen.sh had a PROBLEM on: ${SG2D_BUILD_DIR}\n" 1>&2
-	echo -e -n "You can check its log: ${SG2D_GRUB_LOG_PREFIX}_autogen.log\n" 1>&2
+	echo -e -n "bootstrap had a PROBLEM on: ${SG2D_BUILD_DIR}\n" 1>&2
+	echo -e -n "You can check its log: ${SG2D_GRUB_LOG_PREFIX}_bootstrap.log\n" 1>&2
 	echo -e -n "Skipping to next build if applicable\n" 1>&2
 fi
 
