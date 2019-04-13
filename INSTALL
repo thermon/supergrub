@@ -183,6 +183,7 @@ In this case the files will be found at releases/ directory.
 ./grub-build-003-build-all
 ./grub-build-005-install-all
 ./supergrub-official-release
+git tag -a newversion -m "newversion"
 
 and
 
