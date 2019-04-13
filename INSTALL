@@ -176,10 +176,16 @@ which their filename might vary depending on the current Super Grub2 Disk versio
 
 In this case the files will be found at releases/ directory.
 
-* Finally the Super Grub2 Disk release team once grub has been fetch, built and installed uses:
+* Super Grub2 Disk release team usual procedure:
 
+./grub-build-001-prepare-build
+./grub-build-002-clean-and-update
+./grub-build-003-build-all
+./grub-build-005-install-all
 ./supergrub-official-release
+
 and
+
 ./supergrub-release-changes 2.02s7
 where 2.02s7 is the previous version (git tag) to the current one you are releasing.
 
