@@ -1,0 +1,177 @@
+# German translation for Super GRUB2 Disk.
+# Copyright (C) 2009,2010,2011,2012 Adrian Gibanel Lopez, Jordan Edward Uggla
+# This file is distributed under the same license as the Super GRUB2 Disk package.
+# Jordan Edward Uggla <jordan.uggla@gmail.com>, 2012.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Super GRUB2 Disk 2.0s1~beta1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-14 02:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Jan Blank <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: menus/sgd/main.cfg:157 menus/sgd/main.cfg:224 menus/sgd/processenable.cfg:12
+msgid "Press escape to return to the main menu"
+msgstr "메인메뉴로 돌아가기"
+
+#: menus/sgd/main.cfg:164
+msgid "Detect and show boot methods"
+msgstr "부팅가능한 방법을 자동 검색"
+
+#: menus/sgd/main.cfg:172
+msgid "Boot manually"
+msgstr ""
+
+#: menus/sgd/main.cfg:192
+msgid "Extra GRUB2 functionality"
+msgstr "부트로더 확장 기능"
+
+#: menus/sgd/main.cfg:213
+#, fuzzy
+msgid "Print devices/partitions"
+msgstr "파티션/디바이스 정보확인"
+
+#: menus/sgd/main.cfg:228
+msgid "Color ON/OFF"
+msgstr "컬러모드 ON/OFF"
+
+#: menus/sgd/main.cfg:238
+msgid "Exit"
+msgstr "나가기"
+
+#: menus/sgd/cfgdetect.cfg:19
+#, fuzzy
+msgid "(GRUB2 configuration files)"
+msgstr "GRUB2 설정파일 (grub.cfg)"
+
+#: menus/sgd/cfgdetect.cfg:55 menus/sgd/cfgextract.cfg:54
+msgid "(No grub.cfg file detected)"
+msgstr "grub.cfg 를 찾을 수 없음."
+
+#: menus/sgd/menulstdetect.cfg:19
+#, fuzzy
+msgid "(GRUB legacy configuration files)"
+msgstr "이전버전의 GRUB 설정 파일 (grub.cfg)"
+
+#: menus/sgd/menulstdetect.cfg:48
+msgid "(No menu.lst file detected)"
+msgstr "검색된 부팅메뉴 없음."
+
+#: menus/sgd/autoiso.cfg:18
+msgid "Bootable ISOs"
+msgstr "부팅가능한 ISO 이미지들"
+
+#: menus/sgd/autoiso.cfg:18
+#, fuzzy
+msgid "(in /boot-isos or /boot/boot-isos)"
+msgstr ""
+"부팅 ISO (in /boot-isos oder /boot/boot-isos)"
+
+#: menus/sgd/cfgextract.cfg:19
+msgid "Extract entries"
+msgstr ""
+
+#: menus/sgd/cfgextract.cfg:43
+msgid "Entries from"
+msgstr ""
+
+#: menus/sgd/enableencrypted.cfg:18
+msgid "Mount encrypted volumes"
+msgstr ""
+
+#: menus/sgd/enableencrypted.cfg:18
+msgid "(LUKS and geli)"
+msgstr ""
+
+#: menus/sgd/enablelvm.cfg:18
+msgid "Enable GRUB2's LVM support"
+msgstr ""
+
+#: menus/sgd/enableraid.cfg:18
+msgid "Enable GRUB2's RAID support"
+msgstr ""
+
+#: menus/sgd/enableserial.cfg:18
+msgid "Enable serial terminal"
+msgstr ""
+
+#: menus/sgd/grubdetect.cfg:24
+#, fuzzy
+msgid "(GRUB2 installation)"
+msgstr "GRUB2 설치하기"
+
+#: menus/sgd/grubdetect.cfg:57
+msgid "(No core.img file detected)"
+msgstr ""
+
+#: menus/sgd/halt.cfg:19
+msgid "Halt"
+msgstr ""
+
+#: menus/sgd/language_select.cfg:19
+msgid "Languages"
+msgstr "언어"
+
+#: menus/sgd/osdetect.cfg:21
+#, fuzzy
+msgid "Operating Systems"
+msgstr "운영체제"
+
+#: menus/sgd/osdetect.cfg:375
+msgid "Sorry, but we are booted via BIOS and can not load this OS."
+msgstr "이 운영체제로 부팅할 수 없습니다."
+
+#: menus/sgd/osdetect.cfg:376
+msgid "Please try booting SG2D via UEFI."
+msgstr "UEFI 모드로 부팅하세요"
+
+#: menus/sgd/osdetect.cfg:377
+msgid "Press escape to return to the menu"
+msgstr "ESC 키를 누르면 메뉴로 돌아갑니다."
+
+#: menus/sgd/processenable.cfg:4
+msgid "Begin processing"
+msgstr "분석 작업을 시작합니다."
+
+#: menus/sgd/processenable.cfg:6
+msgid "End processing"
+msgstr "분석 작업을 종료합니다."
+
+#: menus/sgd/processenable.cfg:12
+msgid "(or wait 5 seconds)"
+msgstr ""
+
+#: menus/sgd/reboot.cfg:19
+msgid "Reboot"
+msgstr "재 시작"
+
+#: menus/sgd/return.cfg:1
+msgid "Return to main menu"
+msgstr "메뉴로 돌아가기"
+
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchcdrom.cfg:28
+msgid "Search in CDROM"
+msgstr "CDROM 검색"
+
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18
+#, fuzzy
+msgid "ON/OFF"
+msgstr "ON/OFF"
+
+#: menus/sgd/searchcdrom.cfg:18 menus/sgd/searchfloppy.cfg:18
+msgid "(Default: OFF)"
+msgstr ""
+
+#: menus/sgd/searchfloppy.cfg:18 menus/sgd/searchfloppy.cfg:28
+msgid "Search in floppy"
+msgstr ""
+
+#~ msgid "Change language"
+#~ msgstr "언어 변경"
