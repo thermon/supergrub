@@ -1,17 +1,16 @@
-# German translation for Super GRUB2 Disk.
-# Copyright (C) 2009,2010,2011,2012 Adrian Gibanel Lopez, Jordan Edward Uggla
+# Korean translation for Super GRUB2 Disk.
+# Copyright (C) 2019 Adrian Gibanel Lopez, Kevin Kim
 # This file is distributed under the same license as the Super GRUB2 Disk package.
-# Jordan Edward Uggla <jordan.uggla@gmail.com>, 2012.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Super GRUB2 Disk 2.0s1~beta1\n"
+"Project-Id-Version: Super GRUB2 Disk 2.04s1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-14 02:43+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Jan Blank <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2017-05-06 16:36+0000\n"
+"PO-Revision-Date: 2019-07-06 18:23-0200\n"
+"Last-Translator: Kevin Kim <hckim@invesume.com>\n"
+"Language-Team: Korean <hckim@invesume.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
