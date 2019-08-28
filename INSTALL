@@ -132,6 +132,16 @@ Additional packages (needed only if you want to run grub-build-004-make-check ):
 You also need to configure src entries on your sources.list file and then run:
 apt-get -y build-dep grub2
 
+Additional Debian Buster packages for secure boot (amd64):
+grub-efi-amd64-signed
+
+Now i386 architecture is added with:
+dpkg --add-architecture i386
+apt-get update
+
+Additional Debian Buster packages for secure boot (i386):
+grub-efi-ia32-signed
+
 Now we are going to work as a normal user
 
 su - myuser
