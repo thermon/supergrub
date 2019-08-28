@@ -125,7 +125,7 @@ apt-get install git
 
 And other packages:
 
-apt-get install gettext unifont xorriso mtools zip
+apt-get install gettext unifont xorriso mtools zip rsync
 
 Additional packages (needed only if you want to run grub-build-004-make-check ): TODO.
 
