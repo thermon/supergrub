@@ -20,21 +20,21 @@ mtools (Till it's fixed in Debian. Check Debian bug number: 774910 ).
 Chroot
 ======
 
-Although not strictly need you are encouraged to use a chroot for both Grub2 and Super Grub2 Disk build. We will use a Debian Jessie chroot.
+Although not strictly need you are encouraged to use a chroot for both Grub2 and Super Grub2 Disk build. We will use a Debian Buster chroot.
 
-Please check: Super Grub2 Disk Jessie Chroot in order to learn how to setup your Super Grub2 Disk Jessie chroot. 
+Please check: Super Grub2 Disk Buster Chroot in order to learn how to setup your Super Grub2 Disk Buster chroot. 
 
-Super Grub2 Disk Jessie Chroot (Optional)
+Super Grub2 Disk Buster Chroot (Optional)
 ==========================================
 Introduction
 
-First of all you need to know that this is simply a Debian Jessie Chroot. It's a amd64 chroot.
+First of all you need to know that this is simply a Debian Buster Chroot. It's a amd64 chroot.
 
-The base OS that we are using is another Debian Jessie. If you are not using a Debian based OS like Ubuntu you might need to use cdebootstrap instead of debootstrap.
+The base OS that we are using is another Debian Buster. If you are not using a Debian based OS like Ubuntu you might need to use cdebootstrap instead of debootstrap.
 
 Chroot in this example is going to be installed in:
 
-/mnt/ssd/sgd_chroot_jessie_amd64
+/mnt/ssd/sgd_chroot_buster_amd64
 
 Please adapt to your needs.
 First setup
@@ -42,31 +42,31 @@ First setup
 So we cd to the parent directory of the directoy where our chroot will be created. And we invoke debootstrap
 
 cd /mnt/ssd/
-mkdir sgd_chroot_jessie_amd64
-debootstrap --arch amd64 jessie sgd_chroot_jessie_amd64 http://http.debian.net/debian/
+mkdir sgd_chroot_buster_amd64
+debootstrap --arch amd64 buster sgd_chroot_buster_amd64 http://http.debian.net/debian/
 
 Then we need to prepare our fstab to take care of mounting some auxiliar folders for the chroot so that it works ok. You can opt to mount them manually if you are not fancing of fstab doing it automatically. Please type all the command as root user
 
 cat << EOF | sudo tee -a /etc/fstab
-proc /mnt/ssd/sgd_chroot_jessie_amd64/proc proc defaults 0 0
-sysfs /mnt/ssd/sgd_chroot_jessie_amd64/sys sysfs defaults 0 0
+proc /mnt/ssd/sgd_chroot_buster_amd64/proc proc defaults 0 0
+sysfs /mnt/ssd/sgd_chroot_buster_amd64/sys sysfs defaults 0 0
 EOF
 
 I personally also add the home directory because I found it easier to work with from my main system. Be aware that you can delete all your files if you don't umount it before deleting the whole chroot.
 
 cat << EOF | sudo tee -a /etc/fstab
-/home /mnt/ssd/sgd_chroot_jessie_amd64/home ext4 bind 0 0
+/home /mnt/ssd/sgd_chroot_buster_amd64/home ext4 bind 0 0
 EOF
 
 Then you need to mount all these mounts with:
 
 mount -a
 
-Custom your Jessie Chroot
+Custom your Buster Chroot
 
 In order to enter into the Chroot you need to do:
 
-chroot /mnt/ssd/sgd_chroot_jessie_amd64/ /bin/bash
+chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
 
 Once inside the chroot:
 
@@ -110,12 +110,12 @@ If I am inside the chroot and I want to work as my new normal user I can run:
 su myuser
 
 
-Super Grub2 Disk Jessie Chroot Build
+Super Grub2 Disk Buster Chroot Build
 ====================================
 
-As explained in Super Grub2 Disk Jessie Chroot you need to enter in the chroot thanks to:
+As explained in Super Grub2 Disk Buster Chroot you need to enter in the chroot thanks to:
 
-chroot /mnt/ssd/sgd_chroot_jessie_amd64/ /bin/bash
+chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
 
 Alternatively you might decide not to do it.
 
@@ -199,7 +199,7 @@ Alternative Super Grub2 Disk Build
 
 This alternative build let's you use your system own grub installation instead of Super Grub2 Disk one.
 
-Just use the same instructions as: "Super Grub2 Disk Jessie Chroot Build" section however:
+Just use the same instructions as: "Super Grub2 Disk Buster Chroot Build" section however:
 
 * Do not run grub-build-* commands
 * Rename supergrub-build-config.example file to supergrub-build-config .
