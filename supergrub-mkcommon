@@ -138,7 +138,7 @@ function generate_secureboot_efi_img () {
 
   # Return if this is not an actual efi platform
   if [ "${EFI_PLATFORMS}" == "none" ] ; then
-    retun 0;
+    return 0;
   fi
 
   efi_img_contents=$(mktemp -d)
