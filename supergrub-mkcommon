@@ -150,8 +150,8 @@ function generate_secureboot_efi_img () {
   mkdir -p ${efi_img_contents}-cfg
   cat >"${efi_img_contents}-cfg/grub.cfg" <<EOF
 search --set=root --file /${SGD2_UUID_FILE}
-set prefix=(\\\$root)/boot/grub
-configfile (\\\$root)/boot/grub/grub.cfg
+set prefix=(\$root)/boot/grub
+configfile (\$root)/boot/grub/grub.cfg
 EOF
 
 
@@ -167,16 +167,16 @@ EOF
   size=0
   for file in ${efi_img_contents}/EFI/boot/*.efi \
     ${efi_img_contents}-cfg/grub.cfg; do
-    size=\$((\$size + \$(stat -c %s "\$file")))
+    size=$(($size + $(stat -c %s "$file")))
   done
 
   # directories: EFI EFI/boot boot boot/grub
-  size=\$((\$size + 4096 * 4))
+  size=$(($size + 4096 * 4))
 
-  blocks=\$(((\$size / 1024 + 55) / 32 * 32 ))
+  blocks=$((($size / 1024 + 55) / 32 * 32 ))
 
   rm -f ${efi_img_contents}/boot/grub/efi.img
-  mkfs.msdos -C "${efi_img_contents}/boot/grub/efi.img" \$blocks >/dev/null
+  mkfs.msdos -C "${efi_img_contents}/boot/grub/efi.img" $blocks >/dev/null
   mmd -i "${efi_img_contents}/boot/grub/efi.img" ::EFI
   mmd -i "${efi_img_contents}/boot/grub/efi.img" ::EFI/boot
   mcopy -o -i "${efi_img_contents}/boot/grub/efi.img" ${efi_img_contents}/EFI/boot/*.efi \
