@@ -134,6 +134,7 @@ apt-get -y build-dep grub2
 
 Additional Debian Buster packages for secure boot (amd64):
 grub-efi-amd64-signed
+aptitude
 
 Now i386 architecture is added with:
 dpkg --add-architecture i386
