@@ -147,11 +147,50 @@ function generate_secureboot_efi_img () {
     cp secureboot-binaries/gcd${nefiplatform}.efi.signed "${efi_img_contents}/EFI/boot/grub${nefiplatform}.efi"
     cp secureboot-binaries/shim${nefiplatform}.efi.signed "${efi_img_contents}/EFI/boot/boot${nefiplatform}.efi"
   done
-  cat >"${efi_img_contents}/EFI/boot/grub/grub.cfg" <<EOF
+  mkdir -p ${efi_img_contents}-cfg
+  cat >"${efi_img_contents}-cfg/grub.cfg" <<EOF
 search --set=root --file /${SGD2_UUID_FILE}
 set prefix=(\\\$root)/boot/grub
 configfile (\\\$root)/boot/grub/grub.cfg
 EOF
+
+
+  # The code below is adapted from tools/boot/jessie/boot-x86
+  # in debian-cd
+
+  # Stuff the EFI boot files into a FAT filesystem, making it as
+  # small as possible.  24KiB headroom seems to be enough;
+  # (x+31)/32*32 rounds up to multiple of 32.
+  # This is the same as in efi-image, but we need to redo it here in
+  # the case of a multi-arch amd64/i386 image
+
+  size=0
+  for file in ${efi_img_contents}/EFI/boot/*.efi \
+    ${efi_img_contents}-cfg/grub.cfg; do
+    size=\$((\$size + \$(stat -c %s "\$file")))
+  done
+
+  # directories: EFI EFI/boot boot boot/grub
+  size=\$((\$size + 4096 * 4))
+
+  blocks=\$(((\$size / 1024 + 55) / 32 * 32 ))
+
+  rm -f ${efi_img_contents}/boot/grub/efi.img
+  mkfs.msdos -C "${efi_img_contents}/boot/grub/efi.img" \$blocks >/dev/null
+  mmd -i "${efi_img_contents}/boot/grub/efi.img" ::EFI
+  mmd -i "${efi_img_contents}/boot/grub/efi.img" ::EFI/boot
+  mcopy -o -i "${efi_img_contents}/boot/grub/efi.img" ${efi_img_contents}/EFI/boot/*.efi \
+    "::EFI/boot"
+
+  mmd -i "${efi_img_contents}/boot/grub/efi.img" ::boot
+  mmd -i "${efi_img_contents}/boot/grub/efi.img" ::boot/grub
+  mcopy -o -i "${efi_img_contents}/boot/grub/efi.img" ${efi_img_contents}-cfg/grub.cfg \
+    "::boot/grub"
+
+  cp "${efi_img_contents}/boot/grub/efi.img" "${overlay}/efi.img"
+
+  rm -rf "${efi_img_contents}"
+  rm -rf "${efi_img_contents}"-cfg
 
 }
 
