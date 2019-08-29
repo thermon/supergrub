@@ -71,6 +71,9 @@ for option in "$@"; do
     --grub-mkfont-binary=*)
       GRUB_MKFONT_BINARY=`echo "$option" | sed 's/--grub-mkfont-binary=//'`
     ;;
+    --efi-platforms=*)
+      EFI_PLATFORMS=`echo "$option" | sed 's/--efi-platforms=//'`
+    ;;
   esac
 done
 
@@ -117,6 +120,8 @@ copy_boot_isos_directory
 copy_copyright
 generate_and_copy_mo_files
 check_unifont
+generate_SG2D_UUID_FILE
+generate_secureboot_efi_img
 
 "$GRUB_MKRESCUE_BINARY" $default_options
 rm -r "$overlay"

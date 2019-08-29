@@ -29,7 +29,9 @@ _${TARGET_PLATFORM}_${sgrub_version}.iso" \
       --grub-mkrescue-binary=\
 "${GRUB_MKRESCUE_BINARY}"\
       --grub-mkfont-binary=\
-"${GRUB_MKFONT_BINARY}"
+"${GRUB_MKFONT_BINARY}"\
+      --efi-platforms=\
+"${EFI_PLATFORMS}"
 }
 
 function build_sg2d_standalone () {
@@ -52,6 +54,7 @@ function grub2_sg2d_hybrid_build () {
 
   # Super Grub2 Disk - Hybrid build
   TARGET_PLATFORM="hybrid"
+  EFI_PLATFORMS="x64 ia32"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
@@ -70,6 +73,7 @@ function grub2_sg2d_i386_pc_build () {
 
   # Super Grub2 Disk - i386 - pc build
   TARGET_PLATFORM="i386_pc"
+  EFI_PLATFORMS="none"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_I386_PC}\
@@ -88,6 +92,7 @@ function grub2_sg2d_x86_64_efi_build () {
 
   # Super Grub2 Disk - x86_64 - efi build
   TARGET_PLATFORM="x86_64_efi"
+  EFI_PLATFORMS="x64"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_X86_64_EFI}\
@@ -121,6 +126,7 @@ function grub2_sg2d_i386_efi_build () {
 
   # Super Grub2 Disk - i386 - efi build
   TARGET_PLATFORM="i386_efi"
+  EFI_PLATFORMS="ia32"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_I386_EFI}\

@@ -104,3 +104,54 @@ function generate_filename_hashes ()  {
   cd "${TMP_PRE_CHECKSUMS_DIR}"
 
 }
+
+function generate_SG2D_UUID_FILE () {
+
+  LIVEID_DIR_PREFIX="LIVEID"
+
+  SG2D_UUID_SEED="\
+${ISO_FILENAME}\
+-\
+${GRUB_MKRESCUE_BINARY}\
+-\
+${GRUB_MKFONT_BINARY}\
+-\
+${EFI_PLATFORMS}\
+"
+
+  SG2D_UUID=$(echo -n "${SG2D_UUID_SEED}" | md5sum | tr 'a-z' 'A-Z')
+
+  SG2D_UUID_DIR1="$(echo ${SG2D_UUID} | cut -c1-8)"
+  SG2D_UUID_DIR2="$(echo ${SG2D_UUID} | cut -c9-16)"
+  SG2D_UUID_DIR3="$(echo ${SG2D_UUID} | cut -c17-24)"
+  SG2D_UUID_FILE4="$(echo ${SG2D_UUID} | cut -c25-32)"
+
+  SG2D_UUID_DIR="${LIVEID_DIR_PREFIX}/${SG2D_UUID_DIR1}"'/'"${SG2D_UUID_DIR2}"'/'"${SG2D_UUID_DIR3}"
+  SGD2_UUID_FILE="${SG2D_UUID_DIR}"'/'"${SG2D_UUID_FILE4}"
+
+  mkdir -p "$overlay/${SG2D_UUID_DIR}/"
+  touch "$overlay/${SGD2_UUID_FILE}"
+
+}
+
+function generate_secureboot_efi_img () {
+
+  # Return if this is not an actual efi platform
+  if [ "${EFI_PLATFORMS}" == "none" ] ; then
+    retun 0;
+  fi
+
+  efi_img_contents=$(mktemp -d)
+  mkdir -p "${efi_img_contents}/EFI/boot/grub"
+  for nefiplatform in ${EFI_PLATFORMS} ; do
+    cp secureboot-binaries/gcd${nefiplatform}.efi.signed "${efi_img_contents}/EFI/boot/grub${nefiplatform}.efi"
+    cp secureboot-binaries/shim${nefiplatform}.efi.signed "${efi_img_contents}/EFI/boot/boot${nefiplatform}.efi"
+  done
+  cat >"${efi_img_contents}/EFI/boot/grub/grub.cfg" <<EOF
+search --set=root --file /${SGD2_UUID_FILE}
+set prefix=(\\\$root)/boot/grub
+configfile (\\\$root)/boot/grub/grub.cfg
+EOF
+
+}
+
