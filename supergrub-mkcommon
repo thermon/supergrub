@@ -142,7 +142,7 @@ function generate_secureboot_efi_img () {
   fi
 
   efi_img_contents=$(mktemp -d)
-  mkdir -p "${efi_img_contents}/EFI/boot/grub"
+  mkdir -p "${efi_img_contents}/EFI/boot"
   for nefiplatform in ${EFI_PLATFORMS} ; do
     cp secureboot-binaries/gcd${nefiplatform}.efi.signed "${efi_img_contents}/EFI/boot/grub${nefiplatform}.efi"
     cp secureboot-binaries/shim${nefiplatform}.efi.signed "${efi_img_contents}/EFI/boot/boot${nefiplatform}.efi"
@@ -176,7 +176,8 @@ EOF
   blocks=$((($size / 1024 + 55) / 32 * 32 ))
 
   rm -f ${efi_img_contents}/boot/grub/efi.img
-  mkfs.msdos -C "${efi_img_contents}/boot/grub/efi.img" $blocks >/dev/null
+  mkdir -p "${efi_img_contents}/boot/grub"
+  /sbin/mkfs.msdos -C "${efi_img_contents}/boot/grub/efi.img" $blocks >/dev/null
   mmd -i "${efi_img_contents}/boot/grub/efi.img" ::EFI
   mmd -i "${efi_img_contents}/boot/grub/efi.img" ::EFI/boot
   mcopy -o -i "${efi_img_contents}/boot/grub/efi.img" ${efi_img_contents}/EFI/boot/*.efi \
