@@ -167,7 +167,7 @@ Lodetach ()
 
   if [ "${ATTEMPT}" -gt 3 ]
   then
-    Echo_error "Failed to detach loop device '${DEVICE}'."
+    echo "Failed to detach loop device (${DEVICE})."
     exit 1
   fi
 
