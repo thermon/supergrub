@@ -122,6 +122,7 @@ generate_and_copy_mo_files
 check_unifont
 generate_SG2D_UUID_FILE
 generate_secureboot_efi_img
+copy_secureboot_external_efis
 
 "$GRUB_MKRESCUE_BINARY" $default_options
 rm -r "$overlay"

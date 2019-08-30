@@ -195,3 +195,28 @@ EOF
 
 }
 
+function copy_secureboot_external_efis () {
+
+  # Return if this is not an actual efi platform
+  if [ "${EFI_PLATFORMS}" == "none" ] ; then
+    return 0;
+  fi
+
+  PRE_LOOP_DIR="$(pwd)"
+  for nefiplatform in ${EFI_PLATFORMS} ; do
+    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendors
+    for nvendor in * ; do
+      if [ -e "${nvendor}/shim${nefiplatform}.efi" ] ; then
+        if [ ! -d "${overlay}/EFI/${nvendor}" ] ; then
+          mkdir -p "${overlay}/EFI/${nvendor}"
+        fi
+        cp "${nvendor}/shim${nefiplatform}.efi" "${overlay}/EFI/${nvendor}"
+        cp "${nvendor}/grub${nefiplatform}.efi" "${overlay}/EFI/${nvendor}"
+      fi
+    done
+  done
+
+  cd "${PRE_LOOP_DIR}"
+
+
+}
