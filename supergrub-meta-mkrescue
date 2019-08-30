@@ -57,7 +57,9 @@ _${TARGET_PLATFORM}_secureboot_usb_${sgrub_version}.img" \
       --grub-mkfont-binary=\
 "${GRUB_MKFONT_BINARY}"\
       --userid="$(id -u)" \
-      --groupid="$(id -g)"
+      --groupid="$(id -g)" \
+      --efi-platforms=\
+"${EFI_PLATFORMS}"
 }
 
 
