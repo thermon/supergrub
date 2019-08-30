@@ -122,6 +122,7 @@ default_options="--themes='' --output=${ISO_FILENAME} $overlay"
 
 
 init_overlay_dir
+generate_SG2D_UUID_FILE
 copy_boot_isos_directory
 copy_copyright
 generate_and_copy_mo_files

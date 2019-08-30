@@ -134,6 +134,20 @@ ${EFI_PLATFORMS}\
 
 }
 
+function get_vendor_grub_cfg_content () {
+  nvendor=$1
+
+  cat <<EOF
+set sb_vendor=$nvendor
+export sb_vendor
+search --set=root --file /${SGD2_UUID_FILE}
+set prefix=(\$root)/boot/grub
+configfile (\$root)/boot/grub/grub.cfg
+EOF
+
+}
+
+
 function copy_secureboot_default_efis () {
 
   # Return if this is not an actual efi platform
@@ -180,6 +194,7 @@ function copy_secureboot_external_efis () {
         fi
         cp "${nvendor}/shim${nefiplatform}.efi" "${overlay}/EFI/${nvendor}"
         cp "${nvendor}/grub${nefiplatform}.efi" "${overlay}/EFI/${nvendor}"
+        get_vendor_grub_cfg_content "${nvendor}" > "${overlay}/EFI/${nvendor}/grub.cfg"
       fi
     done
   done
