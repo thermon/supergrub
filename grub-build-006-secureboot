@@ -21,7 +21,7 @@
 # Grub2 Build for Super Grub2 Disk - Prepare build dir
 
 SG2D_DIR="$(pwd)"
-TMP_SECUREBOOT_DOWNLOAD_DIR="${SG2D_DIR}/tmp_secureboot_download"
+TMP_SECUREBOOT_DOWNLOAD_DIR=$(mktemp -d)
 SECUREBOOT_BINARIES_DIR="${SG2D_DIR}/secureboot-binaries"
 
 # aptitude check
