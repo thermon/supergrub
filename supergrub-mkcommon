@@ -222,7 +222,7 @@ function generate_usb_image () {
   DU_DIM="$(du -ms ${overlay} | cut -f1)"
   REAL_DIM="$(expr ${DU_DIM} + ${DU_DIM} \* 3 / 100 + 1)"
   dd if=/dev/zero of=${ISO_FILENAME} bs=1024k count=0 seek=${REAL_DIM}
-  FREELO="$(/sbin/losetup} -f)"
+  FREELO="$(/sbin/losetup -f)"
   echo "!!! The following error/warning messages can be ignored !!!"
   Losetup $FREELO ${ISO_FILENAME} 0
   /sbin/parted -s ${FREELO} mklabel msdos
