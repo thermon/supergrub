@@ -221,6 +221,11 @@ function generate_usb_image () {
   # Step 1: Prepare the disk
   DU_DIM="$(du -ms ${overlay} | cut -f1)"
   REAL_DIM="$(expr ${DU_DIM} + ${DU_DIM} \* 3 / 100 + 1)"
+  MINIMAL_DIM="33" # Minimal FAT32 size is about 32 megabytes
+  # Make sure the minimal size is 33 megabytes
+  if [ ${MINIMAL_DIM} -gt ${REAL_DIM} ] ; then
+    REAL_DIM=${MINIMAL_DIM}
+  fi
   dd if=/dev/zero of=${ISO_FILENAME} bs=1024k count=0 seek=${REAL_DIM}
   echo "!!! The following error/warning messages can be ignored !!!"
   /sbin/parted -s ${ISO_FILENAME} mklabel msdos
