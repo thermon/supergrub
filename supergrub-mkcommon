@@ -222,17 +222,15 @@ function generate_usb_image () {
   DU_DIM="$(du -ms ${overlay} | cut -f1)"
   REAL_DIM="$(expr ${DU_DIM} + ${DU_DIM} \* 3 / 100 + 1)"
   dd if=/dev/zero of=${ISO_FILENAME} bs=1024k count=0 seek=${REAL_DIM}
-  FREELO="$(/sbin/losetup -f)"
   echo "!!! The following error/warning messages can be ignored !!!"
-  Losetup $FREELO ${ISO_FILENAME} 0
-  /sbin/parted -s ${FREELO} mklabel msdos
-  /sbin/parted -a optimal -s ${FREELO} mkpart primary\
+  /sbin/parted -s ${ISO_FILENAME} mklabel msdos
+  /sbin/parted -a optimal -s ${ISO_FILENAME} mkpart primary\
       fat32 0% 100%
-  /sbin/parted -s ${FREELO} set 1 boot on
-  /sbin/parted -s ${FREELO} set 1 lba off
-  Lodetach ${FREELO}
+  /sbin/parted -s ${ISO_FILENAME} set 1 boot on
+  /sbin/parted -s ${ISO_FILENAME} set 1 lba off
 
   # Step 2: Prepare the filesystem
+  FREELO="$(/sbin/losetup -f)"
   Losetup $FREELO ${ISO_FILENAME} 1
   mkfs.vfat -F 32 -n "SG2DSB" ${FREELO}
 
