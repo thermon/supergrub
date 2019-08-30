@@ -134,6 +134,35 @@ ${EFI_PLATFORMS}\
 
 }
 
+function copy_secureboot_default_efis () {
+
+  # Return if this is not an actual efi platform
+  if [ "${EFI_PLATFORMS}" == "none" ] ; then
+    return 0;
+  fi
+
+  PRE_LOOP_DIR="$(pwd)"
+  for nefiplatform in ${EFI_PLATFORMS} ; do
+    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendors
+    for nvendor in debian ; do
+      if [ -e "${nvendor}/shim${nefiplatform}.efi" ] ; then
+        if [ ! -d "${overlay}/EFI/Boot" ] ; then
+          mkdir -p "${overlay}/EFI/Boot"
+        fi
+        cp "${nvendor}/shim${nefiplatform}.efi" "${overlay}/EFI/Boot/boot${nefiplatform}.efi"
+        cp "${nvendor}/grub${nefiplatform}.efi" "${overlay}/EFI/Boot/grub${nefiplatform}.efi"
+      else
+        echo "You don't have a debian secure-boot binary!"
+        echo "This is not going to boot!"
+      fi
+    done
+  done
+
+  cd "${PRE_LOOP_DIR}"
+
+
+}
+
 function copy_secureboot_external_efis () {
 
   # Return if this is not an actual efi platform
