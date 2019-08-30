@@ -22,7 +22,7 @@
 
 SG2D_DIR="$(pwd)"
 TMP_SECUREBOOT_DOWNLOAD_DIR=$(mktemp -d)
-SECUREBOOT_BINARIES_DIR="${SG2D_DIR}/secureboot-binaries"
+SG2D_SECUREBOOT_BINARIES_DIR="${SG2D_DIR}/secureboot-binaries"
 
 # aptitude check
 
@@ -49,10 +49,10 @@ fi
 source grub-build-config
 
 # Empty secureboot binaries
-if [ -d "${SECUREBOOT_BINARIES_DIR}" ] ; then
-	rm -rf "${SECUREBOOT_BINARIES_DIR}"
+if [ -d "${SG2D_SECUREBOOT_BINARIES_DIR}" ] ; then
+	rm -rf "${SG2D_SECUREBOOT_BINARIES_DIR}"
 fi
-mkdir "${SECUREBOOT_BINARIES_DIR}"
+mkdir "${SG2D_SECUREBOOT_BINARIES_DIR}"
 
 
 
@@ -84,11 +84,11 @@ done
 cd "${PRE_DOWNLOAD_DIR}"
 
 for nfile in ./usr/lib/grub/i386-efi-signed/gcdia32.efi.signed ./usr/lib/grub/x86_64-efi-signed/gcdx64.efi.signed ./usr/lib/shim/shimx64.efi.signed ./usr/lib/shim/shimia32.efi.signed ; do
-	if cp -a "${TMP_SECUREBOOT_DOWNLOAD_DIR}"/${nfile} "${SECUREBOOT_BINARIES_DIR}/" ; then
+	if cp -a "${TMP_SECUREBOOT_DOWNLOAD_DIR}"/${nfile} "${SG2D_SECUREBOOT_BINARIES_DIR}/" ; then
 		:
 	else
 		echo -e -n "Something went wrong when running:\n"
-		echo -e -n "cp -a '${TMP_SECUREBOOT_DOWNLOAD_DIR}/${nfile}' '${SECUREBOOT_BINARIES_DIR}/'\n"
+		echo -e -n "cp -a '${TMP_SECUREBOOT_DOWNLOAD_DIR}/${nfile}' '${SG2D_SECUREBOOT_BINARIES_DIR}/'\n"
 		echo -e -n "Aborting\n"
 		exit 4
 	fi
