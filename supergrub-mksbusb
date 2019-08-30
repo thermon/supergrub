@@ -126,8 +126,8 @@ check_unifont
 copy_secureboot_external_efis
 
 generate_usb_image
-chown ${USERID}:${GROUPID} ${ISO_FILENAME}
 
 rm -r "$overlay"
 
 generate_filename_hashes "${ISO_FILENAME}"
+chown ${USERID}:${GROUPID} ${ISO_FILENAME}*
