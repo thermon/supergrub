@@ -47,6 +47,17 @@ _${sgrub_version}.${STANDALONE_EXTENSION}" \
 
 }
 
+function build_sg2d_sb_usb () {
+
+  ./supergrub-mksbusb \
+      -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
+_${TARGET_PLATFORM}_${sgrub_version}_secureboot_usb.img" \
+      --grub-mkrescue-binary=\
+"${GRUB_MKRESCUE_BINARY}"\
+      --grub-mkfont-binary=\
+"${GRUB_MKFONT_BINARY}"
+}
+
 
 function grub2_sg2d_hybrid_build () {
 
@@ -149,6 +160,25 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
   build_sg2d_standalone
 }
 
+function grub2_sg2d_sb_hybrid_build () {
+
+  # Super Grub2 Disk - Secure Boot Hybrid build for USB
+  TARGET_PLATFORM="hybrid"
+  EFI_PLATFORMS="x64 ia32"
+  GRUB_MKRESCUE_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkrescue\
+"
+  GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkfont\
+"
+  build_sg2d_sb_usb
+
+}
+
 #function grub2_sg2d_coreboot_build () {
 #
 #  # Super Grub2 Disk - coreboot build
@@ -195,6 +225,8 @@ grub2_sg2d_x86_64_efi_build
 grub2_sg2d_i386_pc_build
 
 grub2_sg2d_i386_efi_build
+
+grub2_sg2d_sb_hybrid_build
 
 #grub2_sg2d_coreboot_build
 
