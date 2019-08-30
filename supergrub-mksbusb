@@ -119,7 +119,7 @@ generate_and_copy_mo_files
 check_unifont
 copy_secureboot_external_efis
 
-"$GRUB_MKRESCUE_BINARY" $default_options
+generate_usb_image
 rm -r "$overlay"
 
 generate_filename_hashes "${ISO_FILENAME}"
