@@ -71,6 +71,12 @@ for option in "$@"; do
     --grub-mkfont-binary=*)
       GRUB_MKFONT_BINARY=`echo "$option" | sed 's/--grub-mkfont-binary=//'`
     ;;
+    --userid=*)
+      USERID=`echo "$option" | sed 's/--userid=//'`
+    ;;
+    --groupid=*)
+      GROUPID=`echo "$option" | sed 's/--groupid=//'`
+    ;;
   esac
 done
 
@@ -120,6 +126,8 @@ check_unifont
 copy_secureboot_external_efis
 
 generate_usb_image
+chown ${USERID}:${GROUPID} ${ISO_FILENAME}
+
 rm -r "$overlay"
 
 generate_filename_hashes "${ISO_FILENAME}"

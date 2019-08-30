@@ -49,13 +49,15 @@ _${sgrub_version}.${STANDALONE_EXTENSION}" \
 
 function build_sg2d_sb_usb () {
 
-  ./supergrub-mksbusb \
+  sudo ./supergrub-mksbusb \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
 _${TARGET_PLATFORM}_${sgrub_version}_secureboot_usb.img" \
       --grub-mkrescue-binary=\
 "${GRUB_MKRESCUE_BINARY}"\
       --grub-mkfont-binary=\
-"${GRUB_MKFONT_BINARY}"
+"${GRUB_MKFONT_BINARY}"\
+      --userid="$(id -u)" \
+      --groupid="$(id -g)"
 }
 
 
