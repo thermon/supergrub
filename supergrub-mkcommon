@@ -231,36 +231,6 @@ Lodetach ()
   /sbin/losetup -d "${DEVICE}" || Lodetach "${DEVICE}" "$(expr ${ATTEMPT} + 1)"
 }
 
-Losetup ()
-{
-  DEVICE="${1}"
-  FILE="${2}"
-  PARTITION="${3:-1}"
-
-  /sbin/losetup --read-only --partscan "${DEVICE}" "${FILE}"
-  FDISK_OUT="$(/sbin/fdisk -l -u ${DEVICE} 2>&1)"
-  Lodetach "${DEVICE}"
-
-  LOOPDEVICE="$(echo ${DEVICE}p${PARTITION})"
-
-  if [ "${PARTITION}" = "0" ]
-  then
-    echo "Mounting ${DEVICE} with offset 0"
-
-    /sbin/losetup --partscan "${DEVICE}" "${FILE}"
-  else
-    START_SECTORS="$(echo "$FDISK_OUT" | sed -ne "s|^$LOOPDEVICE[ *]*\([0-9]*\).*|\1|p")"
-    END_SECTORS="$(echo "$FDISK_OUT" | sed -ne "s|^$LOOPDEVICE[ *]*\([0-9]*\)[ ]*\([0-9]*\).*|\2|p")"
-    TOTAL_SECTORS=$((${END_SECTORS} - ${START_SECTORS} + 1))
-    OFFSET="$(expr ${START_SECTORS} '*' 512)"
-    SIZELIMIT="$(expr ${TOTAL_SECTORS} '*' 512)"
-
-    echo "Mounting ${DEVICE} with offset: ${OFFSET} and sizelimit: ${SIZELIMIT}"
-
-    /sbin/losetup --partscan --offset "${OFFSET}" --sizelimit ${SIZELIMIT} "${DEVICE}" "${FILE}"
-  fi
-}
-
 function generate_usb_image () {
 
   # Many code was adapted from binary_hdd and losetup.sh from live-build package
@@ -294,11 +264,10 @@ function generate_usb_image () {
     mkpart primary fat32 ${PART2_START}mib ${PART2_END}mib
 
   # Step 2: Prepare the isos filesystem
-  FREELO="$(/sbin/losetup -f)"
-  Losetup $FREELO ${ISO_FILENAME} 2
-  mkfs.vfat -F 32 -n "SG2DISOS" ${FREELO}
+  FREELO="$(losetup --show -f -P ${ISO_FILENAME})"
+  mkfs.vfat -F 32 -n "SG2DISOS" ${FREELO}p2
   SG2D_USB_TMP_MOUNT=$(mktemp -d)
-  mount ${FREELO} ${SG2D_USB_TMP_MOUNT}
+  mount ${FREELO}p2 ${SG2D_USB_TMP_MOUNT}
   mkdir -p ${SG2D_USB_TMP_MOUNT}/BOOTISOS
   cat << EOF > ${SG2D_USB_TMP_MOUNT}/BOOTISOS/README.TXT
 1) Put here your GNU/Linux distribution isos based on:
@@ -318,13 +287,12 @@ EOF
   Lodetach ${FREELO}
 
   # Step 3: Prepare the filesystem
-  FREELO="$(/sbin/losetup -f)"
-  Losetup $FREELO ${ISO_FILENAME} 1
-  mkfs.vfat -F 32 -n "SG2DBOOT" ${FREELO}
+  FREELO="$(losetup --show -f -P ${ISO_FILENAME})"
+  mkfs.vfat -F 32 -n "SG2DBOOT" ${FREELO}p1
 
   # Step 4: Copy data
   SG2D_USB_TMP_MOUNT=$(mktemp -d)
-  mount ${FREELO} ${SG2D_USB_TMP_MOUNT}
+  mount ${FREELO}p1 ${SG2D_USB_TMP_MOUNT}
   cp -T -r ${overlay}/ ${SG2D_USB_TMP_MOUNT}
 
   # Step 5: Umount filesystem and detach device
