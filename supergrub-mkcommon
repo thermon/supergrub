@@ -245,16 +245,19 @@ Losetup ()
 
   if [ "${PARTITION}" = "0" ]
   then
-    echo "Mounting %s with offset 0 (${DEVICE})"
+    echo "Mounting ${DEVICE} with offset 0"
 
     /sbin/losetup --partscan "${DEVICE}" "${FILE}"
   else
-    SECTORS="$(echo "$FDISK_OUT" | sed -ne "s|^$LOOPDEVICE[ *]*\([0-9]*\).*|\1|p")"
-    OFFSET="$(expr ${SECTORS} '*' 512)"
+    START_SECTORS="$(echo "$FDISK_OUT" | sed -ne "s|^$LOOPDEVICE[ *]*\([0-9]*\).*|\1|p")"
+    END_SECTORS="$(echo "$FDISK_OUT" | sed -ne "s|^$LOOPDEVICE[ *]*\([0-9]*\)[ ]*\([0-9]*\).*|\2|p")"
+    TOTAL_SECTORS=$((${END_SECTORS} - ${START_SECTORS} + 1))
+    OFFSET="$(expr ${START_SECTORS} '*' 512)"
+    SIZELIMIT="$(expr ${TOTAL_SECTORS} '*' 512)"
 
-    echo "Mounting %s with offset %s (${DEVICE}) (${OFFSET})"
+    echo "Mounting ${DEVICE} with offset: ${OFFSET} and sizelimit: ${SIZELIMIT}"
 
-    /sbin/losetup --partscan -o "${OFFSET}" "${DEVICE}" "${FILE}"
+    /sbin/losetup --partscan --offset "${OFFSET}" --sizelimit ${SIZELIMIT} "${DEVICE}" "${FILE}"
   fi
 }
 
@@ -264,31 +267,67 @@ function generate_usb_image () {
 
   # Step 1: Prepare the disk
   DU_DIM="$(du -ms ${overlay} | cut -f1)"
-  REAL_DIM="$(expr ${DU_DIM} + ${DU_DIM} \* 3 / 100 + 1)"
-  MINIMAL_DIM="33" # Minimal FAT32 size is about 32 megabytes
-  # Make sure the minimal size is 33 megabytes
-  if [ ${MINIMAL_DIM} -gt ${REAL_DIM} ] ; then
-    REAL_DIM=${MINIMAL_DIM}
+  PART1_REAL_DIM="$(expr ${DU_DIM} + ${DU_DIM} \* 3 / 100 + 1)"
+  PART1_MINIMAL_DIM="33" # Minimal FAT32 size is about 32 megabytes
+  # We want two of thems for iso partition
+  # Make sure the minimal size is 256 megabytes
+  # else gparted cannot resize such small partitions
+  # We finally used 265 megabytes
+  PART2_MINIMAL_DIM="265"
+  PART2_REAL_DIM=${PART2_MINIMAL_DIM} # No need currently for specific space
+  if [ ${PART1_MINIMAL_DIM} -gt ${PART1_REAL_DIM} ] ; then
+    PART1_REAL_DIM=${PART1_MINIMAL_DIM}
   fi
+  PART1_START=2 # We start at 2 megabyte
+  PART1_END=$((${PART1_START} + ${PART1_REAL_DIM}))
+  REAL_DIM=$((${PART1_REAL_DIM} + ${PART2_REAL_DIM})) # Add both partitions
+  REAL_DIM=$((${REAL_DIM} + 5)) # Add 5 extra megabytes just in case
+  PART2_START=$((${PART1_END} + 1)) # One megabyte after first partition ending
+  PART2_END=$((${PART2_START} + ${PART2_REAL_DIM})) # Fill requested space
   dd if=/dev/zero of=${ISO_FILENAME} bs=1024k count=0 seek=${REAL_DIM}
   echo "!!! The following error/warning messages can be ignored !!!"
-  /sbin/parted -s ${ISO_FILENAME} mklabel msdos
-  /sbin/parted -a optimal -s ${ISO_FILENAME} mkpart primary\
-      fat32 0% 100%
-  /sbin/parted -s ${ISO_FILENAME} set 1 boot on
-  /sbin/parted -s ${ISO_FILENAME} set 1 lba off
+  /sbin/parted --script -- ${ISO_FILENAME} \
+    mklabel msdos \
+    mkpart primary fat32 ${PART1_START}mib ${PART1_END}mib \
+    set 1 boot on \
+    set 1 lba off \
+    mkpart primary fat32 ${PART2_START}mib ${PART2_END}mib
 
-  # Step 2: Prepare the filesystem
+  # Step 2: Prepare the isos filesystem
+  FREELO="$(/sbin/losetup -f)"
+  Losetup $FREELO ${ISO_FILENAME} 2
+  mkfs.vfat -F 32 -n "SG2DISOS" ${FREELO}
+  SG2D_USB_TMP_MOUNT=$(mktemp -d)
+  mount ${FREELO} ${SG2D_USB_TMP_MOUNT}
+  mkdir -p ${SG2D_USB_TMP_MOUNT}/BOOTISOS
+  cat << EOF > ${SG2D_USB_TMP_MOUNT}/BOOTISOS/README.TXT
+1) Put here your GNU/Linux distribution isos based on:
+loopback.cfg
+and Super Grub2 Disk will find them and offer you to boot them.
+
+More information at:
+https://www.supergrubdisk.org/wiki/Loopback.cfg
+
+2) You can use gparted or another tool to extend this second partition
+to fill your usb device.
+You will have to unmount or extract in a saffer manner the device
+before running gparted (or similar tool).
+EOF
+  umount ${SG2D_USB_TMP_MOUNT}
+  rmdir ${SG2D_USB_TMP_MOUNT}
+  Lodetach ${FREELO}
+
+  # Step 3: Prepare the filesystem
   FREELO="$(/sbin/losetup -f)"
   Losetup $FREELO ${ISO_FILENAME} 1
-  mkfs.vfat -F 32 -n "SG2DSB" ${FREELO}
+  mkfs.vfat -F 32 -n "SG2DBOOT" ${FREELO}
 
-  # Step 3: Copy data
+  # Step 4: Copy data
   SG2D_USB_TMP_MOUNT=$(mktemp -d)
   mount ${FREELO} ${SG2D_USB_TMP_MOUNT}
   cp -T -r ${overlay}/ ${SG2D_USB_TMP_MOUNT}
 
-  # Step 4: Umount filesystem and detach device
+  # Step 5: Umount filesystem and detach device
   umount ${SG2D_USB_TMP_MOUNT}
   rmdir ${SG2D_USB_TMP_MOUNT}
   Lodetach ${FREELO}
