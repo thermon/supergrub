@@ -29,8 +29,8 @@ cat <<EOF
   Usage: $0 [-o=FILENAME]
   Example: $0 -o=myrescatux.img
 
-  Usage: $0 [-o=FILENAME] [--grub-mkrescue-binary=/path/to/grub-mkrescue]
-  Example: $0 -o=myrescatux.img --grub-mkrescue-binary=/usr/local/bin/grub-mkrescue
+  Usage: $0 [-o=FILENAME] [--grub-install-binary=/path/to/grub-install]
+  Example: $0 -o=myrescatux.img --grub-install-binary=/usr/local/bin/grub-install
 
 EOF
 
@@ -39,10 +39,10 @@ EOF
 SG2D_DIR="$(pwd)"
 source grub-build-config
 
-GRUB_MKRESCUE_BINARY="\
+GRUB_INSTALL_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
-/bin/grub-mkrescue\
+/bin/grub-install\
 "
 
 GRUB_MKFONT_BINARY="\
@@ -65,8 +65,8 @@ for option in "$@"; do
     -o=*)
       CUSTOM_ISO_FILENAME=`echo "$option" | sed 's/-o=//'`
     ;;
-    --grub-mkrescue-binary=*)
-      GRUB_MKRESCUE_BINARY=`echo "$option" | sed 's/--grub-mkrescue-binary=//'`
+    --grub-install-binary=*)
+      GRUB_INSTALL_BINARY=`echo "$option" | sed 's/--grub-install-binary=//'`
     ;;
     --grub-mkfont-binary=*)
       GRUB_MKFONT_BINARY=`echo "$option" | sed 's/--grub-mkfont-binary=//'`
@@ -89,9 +89,9 @@ source menus/sgd/version.cfg
 source supergrub-mkcommon
 
 
-if [ ! -x "$GRUB_MKRESCUE_BINARY" ] ; then
+if [ ! -x "$GRUB_INSTALL_BINARY" ] ; then
   cat << EOF 1>&2
-  grub-mkrescue binary cannot be run.
+  grub-install binary cannot be run.
   Either you need to install it
   either you need to build it from grub build scripts
   Aborting.
@@ -117,7 +117,6 @@ if [[ "x$CUSTOM_ISO_FILENAME" != x ]] ; then
   ISO_FILENAME="${CUSTOM_ISO_FILENAME}"
 fi
 
-default_options="--themes='' --output=${ISO_FILENAME} $overlay"
 
 
 

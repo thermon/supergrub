@@ -290,12 +290,29 @@ EOF
   FREELO="$(losetup --show -f -P ${ISO_FILENAME})"
   mkfs.vfat -F 32 -n "SG2DBOOT" ${FREELO}p1
 
-  # Step 4: Copy data
+  # Step 4: Mount boot partition
   SG2D_USB_TMP_MOUNT=$(mktemp -d)
   mount ${FREELO}p1 ${SG2D_USB_TMP_MOUNT}
+
+  # Step 5: Install hybrid Grub
+  mkdir -p ${overlay}/EFI
+  mkdir -p ${overlay}/boot/grub
+  cat > ${overlay}/boot/grub/device.map <<EOF
+(hd0)   ${FREELO}
+EOF
+
+  # Force the flush
+  umount ${SG2D_USB_TMP_MOUNT}
+  mount ${FREELO}p1 ${SG2D_USB_TMP_MOUNT}
+
+  ${GRUB_INSTALL_BINARY} --no-floppy --target=i386-efi --no-nvram --removable --efi-directory=${SG2D_USB_TMP_MOUNT} --grub-mkdevicemap=${overlay}/boot/grub/device.map --boot-directory="${SG2D_USB_TMP_MOUNT}/boot" --themes='' ${FREELO}
+  ${GRUB_INSTALL_BINARY} --no-floppy --target=x86_64-efi --no-nvram --removable --efi-directory=${SG2D_USB_TMP_MOUNT} --grub-mkdevicemap=${overlay}/boot/grub/device.map --boot-directory="${SG2D_USB_TMP_MOUNT}/boot" --themes='' ${FREELO}
+  ${GRUB_INSTALL_BINARY} --no-floppy --target=i386-pc --grub-mkdevicemap=${overlay}/boot/grub/device.map --boot-directory="${SG2D_USB_TMP_MOUNT}/boot" --themes='' ${FREELO}
+
+  # Step 6: Copy SG2D contents
   cp -T -r ${overlay}/ ${SG2D_USB_TMP_MOUNT}
 
-  # Step 5: Umount filesystem and detach device
+  # Step 7: Umount filesystem and detach device
   umount ${SG2D_USB_TMP_MOUNT}
   rmdir ${SG2D_USB_TMP_MOUNT}
   Lodetach ${FREELO}

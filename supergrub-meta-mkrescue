@@ -52,8 +52,8 @@ function build_sg2d_sb_usb () {
   sudo ./supergrub-mksbusb \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
 _${TARGET_PLATFORM}_secureboot_usb_${sgrub_version}.img" \
-      --grub-mkrescue-binary=\
-"${GRUB_MKRESCUE_BINARY}"\
+      --grub-install-binary=\
+"${GRUB_INSTALL_BINARY}"\
       --grub-mkfont-binary=\
 "${GRUB_MKFONT_BINARY}"\
       --userid="$(id -u)" \
@@ -169,10 +169,10 @@ function grub2_sg2d_sb_hybrid_build () {
   # Super Grub2 Disk - Secure Boot Hybrid build for USB
   TARGET_PLATFORM="hybrid"
   EFI_PLATFORMS="x64 ia32"
-  GRUB_MKRESCUE_BINARY="\
+  GRUB_INSTALL_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
-/bin/grub-mkrescue\
+/sbin/grub-install\
 "
   GRUB_MKFONT_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
