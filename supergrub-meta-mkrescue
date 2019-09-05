@@ -62,6 +62,20 @@ _${TARGET_PLATFORM}_secureboot_usb_${sgrub_version}.img" \
 "${EFI_PLATFORMS}"
 }
 
+function build_sg2d_usb () {
+
+  sudo ./supergrub-mkusb \
+      -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
+_${TARGET_PLATFORM}_usb_${sgrub_version}.img" \
+      --grub-install-binary=\
+"${GRUB_INSTALL_BINARY}"\
+      --grub-mkfont-binary=\
+"${GRUB_MKFONT_BINARY}"\
+      --userid="$(id -u)" \
+      --groupid="$(id -g)" \
+      --efi-platforms=\
+"${EFI_PLATFORMS}"
+}
 
 function grub2_sg2d_hybrid_build () {
 
@@ -164,7 +178,7 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
   build_sg2d_standalone
 }
 
-function grub2_sg2d_sb_hybrid_build () {
+function grub2_sg2d_sbusb_hybrid_build () {
 
   # Super Grub2 Disk - Secure Boot Hybrid build for USB
   TARGET_PLATFORM="hybrid"
@@ -180,6 +194,25 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /bin/grub-mkfont\
 "
   build_sg2d_sb_usb
+
+}
+
+function grub2_sg2d_usb_hybrid_build () {
+
+  # Super Grub2 Disk - Secure Boot Hybrid build for USB
+  TARGET_PLATFORM="hybrid"
+  EFI_PLATFORMS="x64 ia32"
+  GRUB_INSTALL_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/sbin/grub-install\
+"
+  GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkfont\
+"
+  build_sg2d_usb
 
 }
 
@@ -230,7 +263,9 @@ grub2_sg2d_i386_pc_build
 
 grub2_sg2d_i386_efi_build
 
-grub2_sg2d_sb_hybrid_build
+grub2_sg2d_usb_hybrid_build
+
+grub2_sg2d_sbusb_hybrid_build
 
 #grub2_sg2d_coreboot_build
 
