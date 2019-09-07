@@ -268,7 +268,7 @@ grub2_sg2d_i386_efi_build
 
 grub2_sg2d_usb_hybrid_build
 
-grub2_sg2d_sbusb_hybrid_build
+#grub2_sg2d_sbusb_hybrid_build
 
 #grub2_sg2d_coreboot_build
 
