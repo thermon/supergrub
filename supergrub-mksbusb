@@ -136,4 +136,4 @@ rm -r "$overlay"
 zip "${ISO_FILENAME}".zip "${ISO_FILENAME}"
 rm "${ISO_FILENAME}"
 generate_filename_hashes "${ISO_FILENAME}.zip"
-chown ${USERID}:${GROUPID} ${ISO_FILENAME}.zip.*
+chown ${USERID}:${GROUPID} ${ISO_FILENAME}.zip*
