@@ -48,8 +48,11 @@ debootstrap --arch amd64 buster sgd_chroot_buster_amd64 http://http.debian.net/d
 Then we need to prepare our fstab to take care of mounting some auxiliar folders for the chroot so that it works ok. You can opt to mount them manually if you are not fancing of fstab doing it automatically. Please type all the command as root user
 
 cat << EOF | sudo tee -a /etc/fstab
-proc /mnt/ssd/sgd_chroot_buster_amd64/proc proc defaults 0 0
-sysfs /mnt/ssd/sgd_chroot_buster_amd64/sys sysfs defaults 0 0
+/proc   /mnt/ssd/sgd_chroot_buster_amd64/proc none bind,private 0 0
+/dev    /mnt/ssd/sgd_chroot_buster_amd64/dev none bind,private 0 0
+/sys    /mnt/ssd/sgd_chroot_buster_amd64/sys none bind,private 0 0
+/dev/pts        /mnt/ssd/sgd_chroot_buster_amd64/dev/pts none bind,private 0 0
+/dev/shm /mnt/ssd/sgd_chroot_buster_amd64/dev/shm none bind,private 0 0
 EOF
 
 I personally also add the home directory because I found it easier to work with from my main system. Be aware that you can delete all your files if you don't umount it before deleting the whole chroot.
