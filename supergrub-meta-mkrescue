@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
 
-SUPER_GRUB2_DISK_FILE_PREFIX="super_grub2_disk"
+SUPER_GRUB2_DISK_FILE_PREFIX="supergrub2"
 
 SGD2_SOURCE_DIR="$(pwd)"
 SG2D_DIR="${SGD2_SOURCE_DIR}"
@@ -25,7 +25,7 @@ function build_sg2d () {
 
   ./supergrub-mkrescue \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
-_${TARGET_PLATFORM}_${sgrub_version}.iso" \
+-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.iso" \
       --grub-mkrescue-binary=\
 "${GRUB_MKRESCUE_BINARY}"\
       --grub-mkfont-binary=\
@@ -37,9 +37,7 @@ function build_sg2d_standalone () {
   ./supergrub-mkstandalone  \
     -O=${STANDALONE_FORMAT} \
     -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
-_standalone_\
-${STANDALONE_FORMAT_STR}\
-_${sgrub_version}.${STANDALONE_EXTENSION}" \
+-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.EFI" \
     --grub-mkstandalone-binary=\
 "${GRUB_MKSTANDALONE_BINARY}"\
       --grub-mkfont-binary=\
@@ -51,7 +49,7 @@ function build_sg2d_sb_usb () {
 
   sudo ./supergrub-mksbusb \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
-_${TARGET_PLATFORM}_secureboot_usb_${sgrub_version}.img" \
+-secureboot-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.img" \
       --grub-install-binary=\
 "${GRUB_INSTALL_BINARY}"\
       --grub-mkfont-binary=\
@@ -66,7 +64,7 @@ function build_sg2d_usb () {
 
   sudo ./supergrub-mkusb \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
-_${TARGET_PLATFORM}_usb_${sgrub_version}.img" \
+-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.img" \
       --grub-install-binary=\
 "${GRUB_INSTALL_BINARY}"\
       --grub-mkfont-binary=\
@@ -80,7 +78,8 @@ _${TARGET_PLATFORM}_usb_${sgrub_version}.img" \
 function grub2_sg2d_hybrid_build () {
 
   # Super Grub2 Disk - Hybrid build
-  TARGET_PLATFORM="hybrid"
+  TARGET_DEVICE="CD"
+  TARGET_PLATFORM="multiarch"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
@@ -98,6 +97,7 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 function grub2_sg2d_i386_pc_build () {
 
   # Super Grub2 Disk - i386 - pc build
+  TARGET_DEVICE="CD"
   TARGET_PLATFORM="i386_pc"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
@@ -116,6 +116,7 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 function grub2_sg2d_x86_64_efi_build () {
 
   # Super Grub2 Disk - x86_64 - efi build
+  TARGET_DEVICE="CD"
   TARGET_PLATFORM="x86_64_efi"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
@@ -129,9 +130,9 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 "
   build_sg2d
 
-  STANDALONE_FORMAT_STR="x86_64_efi"
+  TARGET_DEVICE="STANDALONE"
+  TARGET_PLATFORM="x86_64_efi"
   STANDALONE_FORMAT="x86_64-efi"
-  STANDALONE_EXTENSION="EFI"
   GRUB_MKSTANDALONE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_X86_64_EFI}\
@@ -149,6 +150,7 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 function grub2_sg2d_i386_efi_build () {
 
   # Super Grub2 Disk - i386 - efi build
+  TARGET_DEVICE="CD"
   TARGET_PLATFORM="i386_efi"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
@@ -161,10 +163,9 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /bin/grub-mkfont\
 "
   build_sg2d
-
-  STANDALONE_FORMAT_STR="i386_efi"
+  TARGET_DEVICE="STANDALONE"
+  TARGET_PLATFORM="i386_efi"
   STANDALONE_FORMAT="i386-efi"
-  STANDALONE_EXTENSION="EFI"
   GRUB_MKSTANDALONE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_I386_EFI}\
@@ -181,7 +182,8 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 function grub2_sg2d_sbusb_hybrid_build () {
 
   # Super Grub2 Disk - Secure Boot Hybrid build for USB
-  TARGET_PLATFORM="hybrid"
+  TARGET_PLATFORM="multiarch"
+  TARGET_DEVICE="USB"
   EFI_PLATFORMS="x64 ia32"
   GRUB_INSTALL_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
@@ -199,8 +201,9 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 
 function grub2_sg2d_usb_hybrid_build () {
 
-  # Super Grub2 Disk - Secure Boot Hybrid build for USB
-  TARGET_PLATFORM="hybrid"
+  # Super Grub2 Disk - Hybrid build for USB
+  TARGET_PLATFORM="multiarch"
+  TARGET_DEVICE="USB"
   EFI_PLATFORMS="x64 ia32"
   GRUB_INSTALL_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
