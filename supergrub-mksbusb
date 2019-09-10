@@ -129,7 +129,7 @@ check_unifont
 copy_secureboot_default_efis
 copy_secureboot_external_efis
 
-generate_usb_image
+generate_usb_image_mbr
 
 rm -r "$overlay"
 

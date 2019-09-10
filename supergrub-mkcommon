@@ -231,12 +231,39 @@ Lodetach ()
   /sbin/losetup -d "${DEVICE}" || Lodetach "${DEVICE}" "$(expr ${ATTEMPT} + 1)"
 }
 
+function generate_usb_image_mbr () {
+
+  generate_usb_image mbr
+
+}
+
+function generate_usb_image_gpt () {
+
+  generate_usb_image gpt
+
+}
+
 function generate_usb_image () {
 
+  MODE="$1"
+
+
   # Many code was adapted from binary_hdd and losetup.sh from live-build package
+  if [ "${MODE}" == "gpt" ] ; then
+    PART0_NUMBER=1
+    PART1_NUMBER=2
+    PART2_NUMBER=3
+  else # mbr
+    PART0_NUMBER=0 # Not actually used
+    PART1_NUMBER=1
+    PART2_NUMBER=2
+  fi
+
 
   # Step 1: Prepare the disk
   DU_DIM="$(du -ms ${overlay} | cut -f1)"
+  PART0_START=1
+  PART0_END=2
   PART1_REAL_DIM="$(expr ${DU_DIM} + ${DU_DIM} \* 3 / 100 + 1)"
   PART1_MINIMAL_DIM="33" # Minimal FAT32 size is about 32 megabytes
   # We want two of thems for iso partition
@@ -248,7 +275,7 @@ function generate_usb_image () {
   if [ ${PART1_MINIMAL_DIM} -gt ${PART1_REAL_DIM} ] ; then
     PART1_REAL_DIM=${PART1_MINIMAL_DIM}
   fi
-  PART1_START=2 # We start at 2 megabyte
+  PART1_START=3 # We start at 2 megabyte
   PART1_END=$((${PART1_START} + ${PART1_REAL_DIM}))
   REAL_DIM=$((${PART1_REAL_DIM} + ${PART2_REAL_DIM})) # Add both partitions
   REAL_DIM=$((${REAL_DIM} + 5)) # Add 5 extra megabytes just in case
@@ -256,18 +283,28 @@ function generate_usb_image () {
   PART2_END=$((${PART2_START} + ${PART2_REAL_DIM})) # Fill requested space
   dd if=/dev/zero of=${ISO_FILENAME} bs=1024k count=0 seek=${REAL_DIM}
   echo "!!! The following error/warning messages can be ignored !!!"
-  /sbin/parted --script -- ${ISO_FILENAME} \
-    mklabel msdos \
-    mkpart primary fat32 ${PART1_START}mib ${PART1_END}mib \
-    set 1 boot on \
-    set 1 lba off \
-    mkpart primary fat32 ${PART2_START}mib ${PART2_END}mib
+  if [ "${MODE}" == "gpt" ] ; then
+    /sbin/parted --script -- ${ISO_FILENAME} \
+      mklabel gpt \
+      mkpart primary ${PART0_START}mib ${PART0_END}mib \
+      set ${PART0_NUMBER} bios_grub on \
+      mkpart primary fat32 ${PART1_START}mib ${PART1_END}mib \
+      set ${PART1_NUMBER} boot on \
+      mkpart primary fat32 ${PART2_START}mib ${PART2_END}mib
+  else
+    /sbin/parted --script -- ${ISO_FILENAME} \
+      mklabel msdos \
+      mkpart primary fat32 ${PART1_START}mib ${PART1_END}mib \
+      set ${PART1_NUMBER} boot on \
+      set ${PART1_NUMBER} lba off \
+      mkpart primary fat32 ${PART2_START}mib ${PART2_END}mib
+  fi
 
   # Step 2: Prepare the isos filesystem
   FREELO="$(losetup --show -f -P ${ISO_FILENAME})"
-  mkfs.vfat -F 32 -n "SG2DISOS" ${FREELO}p2
+  mkfs.vfat -F 32 -n "SG2DISOS" ${FREELO}p${PART2_NUMBER}
   SG2D_USB_TMP_MOUNT=$(mktemp -d)
-  mount ${FREELO}p2 ${SG2D_USB_TMP_MOUNT}
+  mount ${FREELO}p${PART2_NUMBER} ${SG2D_USB_TMP_MOUNT}
   mkdir -p ${SG2D_USB_TMP_MOUNT}/BOOTISOS
   cat << EOF > ${SG2D_USB_TMP_MOUNT}/BOOTISOS/README.TXT
 1) Put here your GNU/Linux distribution isos based on:
@@ -288,11 +325,11 @@ EOF
 
   # Step 3: Prepare the filesystem
   FREELO="$(losetup --show -f -P ${ISO_FILENAME})"
-  mkfs.vfat -F 32 -n "SG2DBOOT" ${FREELO}p1
+  mkfs.vfat -F 32 -n "SG2DBOOT" ${FREELO}p${PART1_NUMBER}
 
   # Step 4: Mount boot partition
   SG2D_USB_TMP_MOUNT=$(mktemp -d)
-  mount ${FREELO}p1 ${SG2D_USB_TMP_MOUNT}
+  mount ${FREELO}p${PART1_NUMBER} ${SG2D_USB_TMP_MOUNT}
 
   # Step 5: Install hybrid Grub
   mkdir -p ${overlay}/EFI
@@ -303,7 +340,7 @@ EOF
 
   # Force the flush
   umount ${SG2D_USB_TMP_MOUNT}
-  mount ${FREELO}p1 ${SG2D_USB_TMP_MOUNT}
+  mount ${FREELO}p${PART1_NUMBER} ${SG2D_USB_TMP_MOUNT}
 
   ${GRUB_INSTALL_BINARY} --no-floppy --target=i386-efi --no-nvram --removable --efi-directory=${SG2D_USB_TMP_MOUNT} --grub-mkdevicemap=${overlay}/boot/grub/device.map --boot-directory="${SG2D_USB_TMP_MOUNT}/boot" --themes='' ${FREELO}
   ${GRUB_INSTALL_BINARY} --no-floppy --target=x86_64-efi --no-nvram --removable --efi-directory=${SG2D_USB_TMP_MOUNT} --grub-mkdevicemap=${overlay}/boot/grub/device.map --boot-directory="${SG2D_USB_TMP_MOUNT}/boot" --themes='' ${FREELO}
