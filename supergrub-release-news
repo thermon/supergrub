@@ -86,4 +86,3 @@ if [ ! -d "${SG2D_NEWS_RELEASE_DIR}" ] ; then
 fi
 
 generate_downloads_news
-

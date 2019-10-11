@@ -52,4 +52,3 @@ if [ ! -d "${SG2D_ISO_RELEASE_DIR}" ] ; then
 fi
 
 build_allzipfile
-

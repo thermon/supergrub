@@ -55,4 +55,3 @@ SG2D_RELEASE_DIR="${SGD2_SOURCE_DIR}/releases/${sgrub_version}"
 SG2D_ISO_RELEASE_DIR="${SG2D_RELEASE_DIR}/super_grub2_disk_${sgrub_version}"
 
 checksums_to_one_file
-

@@ -73,33 +73,33 @@ chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
 
 Once inside the chroot:
 
-    I add my usual user (which happens to be 1000 UID so that's ok with home files)
+  I add my usual user (which happens to be 1000 UID so that's ok with home files)
 
 adduser myuser
 
-    I setup a password for it.
+  I setup a password for it.
 
 passwd myuser
 
-    I make sure that resolv.conf has a working nameserver
+  I make sure that resolv.conf has a working nameserver
 
 nano /etc/resolv.conf
 
-    I install sudo package
+  I install sudo package
 
 apt-get install sudo
 
-    I setup sudo so that my normal user has sudo permissions
+  I setup sudo so that my normal user has sudo permissions
 
 sudoedit /etc/sudoers
 myuser  ALL=(ALL:ALL) ALL
 
-    I modify the chroot name so that I am aware of it
+  I modify the chroot name so that I am aware of it
 
 nano /etc/debian_chroot
 I write: SG2D_CHROOT inside it
 
-    Take rid of perl warning messages:
+  Take rid of perl warning messages:
 
 apt-get install debconf
 apt-get install locales
@@ -210,4 +210,3 @@ Just use the same instructions as: "Super Grub2 Disk Buster Chroot Build" sectio
 * Edit supergrub-build-config to suit your grub installation if needed.
 * Just use supergrub-mkrescue command which might build an x86, amd64_efi, hybrid (or another platform) depending your installed system grub.
 * Do not use supergrub-meta-mkrescue because it does not work with your sytem grub.
-
