@@ -29,11 +29,11 @@ local SG2D_BUILD_DIR="${1}"
 cd "${SG2D_BUILD_DIR}"
 
 if make check > "${SG2D_GRUB_LOG_PREFIX}_make_check.log" 2>&1 ; then
-	echo -e -n "make check run OK on: ${SG2D_BUILD_DIR}\n"
+        echo -e -n "make check run OK on: ${SG2D_BUILD_DIR}\n"
 else
-	echo -e -n "make check had a PROBLEM on: ${SG2D_BUILD_DIR}\n" 1>&2
-	echo -e -n "You can check its log: ${SG2D_GRUB_LOG_PREFIX}_make_check.log\n" 1>&2
-	echo -e -n "Skipping to next build if applicable\n" 1>&2
+        echo -e -n "make check had a PROBLEM on: ${SG2D_BUILD_DIR}\n" 1>&2
+        echo -e -n "You can check its log: ${SG2D_GRUB_LOG_PREFIX}_make_check.log\n" 1>&2
+        echo -e -n "Skipping to next build if applicable\n" 1>&2
 fi
 
 
@@ -47,13 +47,13 @@ cd ..
 
 for n_build_dir in "${!SG2D_GRUB_BUILD_DIRS_ARR[@]}"; do
 
-	if [ ! -d "${SG2D_GRUB_BUILD_DIRS_ARR[n_build_dir]}" ] ; then
-		echo -e -n "Build all grub releases refuses to continue\n" 1>&2 ;
-		echo -e -n "'${SG2D_GRUB_BUILD_DIRS_ARR[n_build_dir]}' does not exist\n" 1>&2 ;
-		echo -e -n "Have you run: ./grub-build-001-prepare-build ?\n"1>&2 ;
-		echo -e -n "and: ./grub-build-002-clean-and-update ?\n"1>&2 ;
-		exit 2
-	fi
+        if [ ! -d "${SG2D_GRUB_BUILD_DIRS_ARR[n_build_dir]}" ] ; then
+                echo -e -n "Build all grub releases refuses to continue\n" 1>&2 ;
+                echo -e -n "'${SG2D_GRUB_BUILD_DIRS_ARR[n_build_dir]}' does not exist\n" 1>&2 ;
+                echo -e -n "Have you run: ./grub-build-001-prepare-build ?\n"1>&2 ;
+                echo -e -n "and: ./grub-build-002-clean-and-update ?\n"1>&2 ;
+                exit 2
+        fi
 
 done
 
@@ -61,29 +61,28 @@ cd "${SG2D_GRUB_BUILD_PREFIX}"
 
 # Build Hybrid i386 pc
 sg2d_grub_check \
- "${SG2D_GRUB_BUILD_HYBRID_I386_PC}"
+  "${SG2D_GRUB_BUILD_HYBRID_I386_PC}"
 
 # Build Hybrid i386 efi
 sg2d_grub_check \
- "${SG2D_GRUB_BUILD_HYBRID_I386_EFI}"
+  "${SG2D_GRUB_BUILD_HYBRID_I386_EFI}"
 
 # Build Hybrid x86_64 efi
 sg2d_grub_check \
- "${SG2D_GRUB_BUILD_HYBRID_X86_64_EFI}"
+  "${SG2D_GRUB_BUILD_HYBRID_X86_64_EFI}"
 
 # Build i386 pc
 sg2d_grub_check \
- "${SG2D_GRUB_BUILD_I386_PC}"
+  "${SG2D_GRUB_BUILD_I386_PC}"
 
 # Build i386 efi
 sg2d_grub_check \
- "${SG2D_GRUB_BUILD_I386_EFI}"
+  "${SG2D_GRUB_BUILD_I386_EFI}"
 
 # Build x86_64 efi
 sg2d_grub_check \
- "${SG2D_GRUB_BUILD_X86_64_EFI}"
+  "${SG2D_GRUB_BUILD_X86_64_EFI}"
 
 
 
 cd "${SG2D_DIR}"
-

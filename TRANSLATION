@@ -18,8 +18,8 @@ where there is no text between the quotes after msgstr then it means that that n
 
 Another thing to look for is an entry like this:
 
-#, fuzzy 
-msgid "Detect any GRUB legacy configuration file (menu.lst)" 
+#, fuzzy
+msgid "Detect any GRUB legacy configuration file (menu.lst)"
 msgstr "Detecta cualquier archivo de configuracion GRUB2 (grub.cfg)"
 
 Where there is a comment "#, fuzzy" before the entry. A "fuzzy" translation like this means that the string still needs to be translated, but there is a similar string already from a different part of the code which *has* been translated. In this case, the string "Detect any GRUB2 configuration file (grub.cfg)" was in another part of the code and was translated into Spanish as "Detecta cualquier archivo de configuracion GRUB2 (grub.cfg)". Since the strings are very similar (one about GRUB2, the other about GRUB legacy), it offers the existing translation as an option. In this case it isn't quite right,  and the proper translation for "Detect any GRUB legacy configuration file (menu.lst)" would probably be "Detecta cualquier archivo de configuracion GRUB legacy (menu.lst)". After changing the string, or confirming that the guessed translation works for the new string as well, you'll need to remove the "#, fuzzy" as fuzzy translations are not used by Super GRUB2 Disk (instead the string will fall back to the original English).

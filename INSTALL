@@ -7,7 +7,7 @@ For more advanced instructions you can check: DEVELOPMENT file.
 Requirements
 ================
 
-Super GRUB2 Disk tends to depend heavily on the latest features of GRUB2, so using it with older versions of GRUB2 is very likely to fail. Currently Super GRUB2 Disk requires GRUB 2.02 (as opposed to GRUB 1.99, which is GRUB2, but is not GRUB 2.0). Newer versions of GRUB2 than 2.02 will probably work with this version of Super GRUB2 Disk's scripts, but I can't make any guarantees about the future. 
+Super GRUB2 Disk tends to depend heavily on the latest features of GRUB2, so using it with older versions of GRUB2 is very likely to fail. Currently Super GRUB2 Disk requires GRUB 2.02 (as opposed to GRUB 1.99, which is GRUB2, but is not GRUB 2.0). Newer versions of GRUB2 than 2.02 will probably work with this version of Super GRUB2 Disk's scripts, but I can't make any guarantees about the future.
 
 Also needed:
 
@@ -22,7 +22,7 @@ Chroot
 
 Although not strictly need you are encouraged to use a chroot for both Grub2 and Super Grub2 Disk build. We will use a Debian Buster chroot.
 
-Please check: Super Grub2 Disk Buster Chroot in order to learn how to setup your Super Grub2 Disk Buster chroot. 
+Please check: Super Grub2 Disk Buster Chroot in order to learn how to setup your Super Grub2 Disk Buster chroot.
 
 Super Grub2 Disk Buster Chroot (Optional)
 ==========================================
@@ -73,33 +73,33 @@ chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
 
 Once inside the chroot:
 
-    I add my usual user (which happens to be 1000 UID so that's ok with home files) 
+  I add my usual user (which happens to be 1000 UID so that's ok with home files)
 
 adduser myuser
 
-    I setup a password for it. 
+  I setup a password for it.
 
 passwd myuser
 
-    I make sure that resolv.conf has a working nameserver 
+  I make sure that resolv.conf has a working nameserver
 
 nano /etc/resolv.conf
 
-    I install sudo package 
+  I install sudo package
 
 apt-get install sudo
 
-    I setup sudo so that my normal user has sudo permissions 
+  I setup sudo so that my normal user has sudo permissions
 
 sudoedit /etc/sudoers
 myuser  ALL=(ALL:ALL) ALL
 
-    I modify the chroot name so that I am aware of it 
+  I modify the chroot name so that I am aware of it
 
 nano /etc/debian_chroot
 I write: SG2D_CHROOT inside it
 
-    Take rid of perl warning messages: 
+  Take rid of perl warning messages:
 
 apt-get install debconf
 apt-get install locales
@@ -172,7 +172,7 @@ super_grub2_disk_hybrid_2.00s1-beta6.iso.md5
 super_grub2_disk_hybrid_2.00s1-beta6.iso.sha1
 super_grub2_disk_hybrid_2.00s1-beta6.iso.sha256
 
-which their filename might vary depending on the current Super Grub2 Disk version. 
+which their filename might vary depending on the current Super Grub2 Disk version.
 
 * Or we can build all the SG2D releases thanks to:
 
@@ -210,4 +210,3 @@ Just use the same instructions as: "Super Grub2 Disk Buster Chroot Build" sectio
 * Edit supergrub-build-config to suit your grub installation if needed.
 * Just use supergrub-mkrescue command which might build an x86, amd64_efi, hybrid (or another platform) depending your installed system grub.
 * Do not use supergrub-meta-mkrescue because it does not work with your sytem grub.
-

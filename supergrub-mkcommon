@@ -73,8 +73,8 @@ function check_unifont () {
   for ext in pcf pcf.gz bdf bdf.gz ttf ttf.gz; do
     for dir in . /usr/src /usr/share/fonts/X11/misc /usr/share/fonts/unifont; do
       if test -f "$dir/unifont.$ext"; then
-	font_source="$dir/unifont.$ext"
-	break 2
+        font_source="$dir/unifont.$ext"
+        break 2
       fi
     done
   done
