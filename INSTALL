@@ -210,3 +210,28 @@ Just use the same instructions as: "Super Grub2 Disk Buster Chroot Build" sectio
 * Edit supergrub-build-config to suit your grub installation if needed.
 * Just use supergrub-mkrescue command which might build an x86, amd64_efi, hybrid (or another platform) depending your installed system grub.
 * Do not use supergrub-meta-mkrescue because it does not work with your sytem grub.
+
+DOCKER - Automatic build
+========================
+
+0. You need to have docker installed and your user needs to be able to create docker instances.
+These instructions are for Ubuntu 22.04 but they should work similar in other GNU/Linux distributions.
+
+https://linuxconfig.org/how-to-install-docker-on-ubuntu-22-04
+
+```
+sudo apt update
+sudo apt install docker.io
+sudo systemctl start docker.service
+sudo systemctl enable docker.service
+sudo docker version
+sudo docker info
+sudo usermod -aG docker yourlinuxusername
+```
+
+Reboot so that changes are taken into account.
+
+1. Just use the automatic builder
+
+docker build --tag supergrub-automatic-builder . --build-arg PREVIOUS_VERSION=2.04s1 -f automatic-builder.Dockerfile
+docker run -it --privileged -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw supergrub-automatic-builder:latest
