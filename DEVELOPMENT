@@ -81,7 +81,7 @@ docker build --tag supergrub-manual-builder . -f manual-builder.Dockerfile
 
 2. Then we use it to run stuff inside of it.
 
-docker run -it -v $(pwd):/supergrub2 supergrub-manual-builder:latest
+docker run -it -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw supergrub-manual-builder:latest
 
 3. Save your current work.
 
@@ -105,9 +105,15 @@ sha256:bf28c6efaa1595dfde6571a7e257c80c03fa3276fcb698d827f67541e6cbc504
 
 4. Now you can run more stuff inside of it again
 
-docker run -it -v $(pwd):/supergrub2 supergrub-manual-builder:latest
+docker run -it -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw supergrub-manual-builder:latest
 
 Do not run `docker build` again because you will lose your changes.
+
+5. Usual git stuff inside Docker image
+
+# Use a local-only branch for docker development minimal changes
+cd /supergrub2-build
+git pull origin
 
 
 
