@@ -17,7 +17,9 @@ RUN apt-get -y update && \
                        unifont \
                        mtools \
                        zip \
-                       rsync
+                       rsync \
+
+update-alternatives --install /usr/bin/python python /usr/bin/python3
 
 RUN apt-get -y build-dep grub2
 
