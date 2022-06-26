@@ -18,6 +18,7 @@ RUN apt-get -y update && \
                        mtools \
                        zip \
                        rsync \
+                       udev
 
 update-alternatives --install /usr/bin/python python /usr/bin/python3
 
