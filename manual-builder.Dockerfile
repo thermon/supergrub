@@ -8,6 +8,7 @@ RUN apt-get -y update && \
                        xorriso \
                        git
 
+RUN echo "sgdbuilder ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sgdbuilder-sudo
 RUN useradd -u 1004 sgdbuilder
 ADD --chown=1004:1004 . /supergrub2-repo
 RUN mkdir /supergrub2-build
