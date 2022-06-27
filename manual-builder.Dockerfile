@@ -18,9 +18,10 @@ RUN apt-get -y update && \
                        mtools \
                        zip \
                        rsync \
-                       udev
+                       udev \
+                       python3
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 RUN apt-get -y build-dep grub2
 
