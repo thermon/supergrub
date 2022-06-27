@@ -20,7 +20,7 @@ RUN apt-get -y update && \
                        rsync \
                        udev
 
-update-alternatives --install /usr/bin/python python /usr/bin/python3
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3
 
 RUN apt-get -y build-dep grub2
 
