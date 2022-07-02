@@ -302,16 +302,6 @@ function generate_usb_image () {
 
   # Step 2: Prepare the isos filesystem
   FREELO="$(losetup --show -f -P ${ISO_FILENAME})"
-
-  PARTITIONS=$(lsblk --raw --output "MAJ:MIN" --noheadings ${FREELO} | tail -n +2 | tac)
-  COUNTER=1
-  for i in $PARTITIONS; do
-    MAJ=$(echo $i | cut -d: -f1)
-    MIN=$(echo $i | cut -d: -f2)
-    if [ ! -e "${FREELO}p${COUNTER}" ]; then mknod ${FREELO}p${COUNTER} b $MAJ $MIN; fi
-    COUNTER=$((COUNTER + 1))
-  done
-
   mkfs.vfat -F 32 -n "SG2DISOS" ${FREELO}p${PART2_NUMBER}
   SG2D_USB_TMP_MOUNT=$(mktemp -d)
   mount ${FREELO}p${PART2_NUMBER} ${SG2D_USB_TMP_MOUNT}
