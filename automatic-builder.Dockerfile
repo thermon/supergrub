@@ -1,7 +1,5 @@
 FROM debian:11.3
 
-ARG PREVIOUS_VERSION="2.04s1"
-
 ENV TZ=Etc/UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
