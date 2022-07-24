@@ -18,3 +18,4 @@ tmp_grub2_clone_dir
 releases
 news-releases
 secureboot-binaries
+secureboot.d/sha256s
