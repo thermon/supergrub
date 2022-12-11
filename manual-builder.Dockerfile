@@ -19,7 +19,8 @@ RUN apt-get -y update && \
                        zip \
                        rsync \
                        udev \
-                       python3
+                       python3 \
+                       wget
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
