@@ -126,6 +126,7 @@ copy_boot_isos_directory
 copy_copyright
 generate_and_copy_mo_files
 check_unifont
+download_secureboot_efis
 copy_secureboot_default_efis
 copy_secureboot_external_efis
 

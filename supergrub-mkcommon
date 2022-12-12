@@ -148,6 +148,41 @@ EOF
 
 }
 
+function download_secureboot_efis () {
+
+  if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor" ] ; then
+    mkdir -p "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor"
+  fi
+
+  # TODO: Skip downloading a vendor if all of the sha256sum files matches the binary files.
+
+  PRE_DOWNLOAD_DIR="$(pwd)"
+
+  cd "${SG2D_SECUREBOOT_DOWNLOAD_DIR}"
+  for nefiplatform in ${SG2D_SECUREBOOT_EFI_PLATFORMS} ; do
+    if [ -d "${nefiplatform}" ] ; then
+      cd "${nefiplatform}"
+        for nvendor in * ; do
+          cd "${nvendor}"
+          if [ -x "download-${nefiplatform}-${nvendor}" ] ; then
+            if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}" ] ; then
+              mkdir -p "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}"
+            fi
+            export SHIM_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/shim${nefiplatform}.efi"
+            export GRUB_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/grub${nefiplatform}.efi"
+            export SHIM_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/shim${nefiplatform}-sourcecode.tar.gz"
+            export GRUB_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/grub${nefiplatform}-sourcecode.tar.gz"
+            ./"download-${nefiplatform}-${nvendor}"
+          fi
+          cd ..
+        done
+      cd ..
+    fi
+  done
+
+  cd "${PRE_DOWNLOAD_DIR}"
+
+}
 
 function copy_secureboot_default_efis () {
 
