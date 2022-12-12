@@ -194,7 +194,7 @@ function copy_secureboot_default_efis () {
   PRE_LOOP_DIR="$(pwd)"
   for nefiplatform in ${EFI_PLATFORMS} ; do
     cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendor
-    for nvendor in debian ; do
+    for nvendor in ${SG2D_SECUREBOOT_DEFAULT_VENDOR} ; do
       if [ -e "${nvendor}/shim${nefiplatform}.efi" ] ; then
         if [ ! -d "${overlay}/EFI/Boot" ] ; then
           mkdir -p "${overlay}/EFI/Boot"
@@ -202,7 +202,7 @@ function copy_secureboot_default_efis () {
         cp "${nvendor}/shim${nefiplatform}.efi" "${overlay}/EFI/Boot/boot${nefiplatform}.efi"
         cp "${nvendor}/grub${nefiplatform}.efi" "${overlay}/EFI/Boot/grub${nefiplatform}.efi"
       else
-        echo "You don't have a debian secure-boot binary!"
+        echo "You don't have a ${SG2D_SECUREBOOT_DEFAULT_VENDOR} secure-boot binary!"
         echo "This is not going to boot!"
       fi
     done
