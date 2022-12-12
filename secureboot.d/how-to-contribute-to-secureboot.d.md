@@ -5,6 +5,9 @@
     - ubuntu
     - fedora.
 
+The vendor example should match the EFI directory where it saves their files.
+If Fedora saves their files in /boot/efi/fedora/grub.cfg do not create 'Fedora' instead.
+
 - EFI Platforms
  - The EFI Platforms depend on the CPU architecture.
  - EFI platforms examples:
@@ -19,6 +22,21 @@ secureboot.d/efiplatform/vendor/download-efiplatform-vendor
 # Where to save your files in Super Grub2 Disk source code (Debian)
 ```
 secureboot.d/x64/debian/download-x64-debian
+```
+
+# Where to save your description (Generic)
+```
+secureboot.d/efiplatform/vendor/description
+```
+# Where to save your files in Super Grub2 Disk source code (Fedora)
+```
+secureboot.d/x64/fedora/description
+```
+
+# What it's inside description
+It should have a **single line** which should describe all of the systems that the shim can boot to:
+```
+RedHat/Fedora
 ```
 
 # What about download-efiplatform-vendor script?
