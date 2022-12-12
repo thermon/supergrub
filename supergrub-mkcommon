@@ -168,10 +168,10 @@ function download_secureboot_efis () {
             if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}" ] ; then
               mkdir -p "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}"
             fi
-            export SHIM_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/shim${nefiplatform}.efi"
-            export GRUB_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/grub${nefiplatform}.efi"
-            export SHIM_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/shim${nefiplatform}-sourcecode.tar.gz"
-            export GRUB_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendors/${nvendor}/grub${nefiplatform}-sourcecode.tar.gz"
+            export SHIM_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/shim${nefiplatform}.efi"
+            export GRUB_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}.efi"
+            export SHIM_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/shim${nefiplatform}-sourcecode.tar.gz"
+            export GRUB_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}-sourcecode.tar.gz"
             ./"download-${nefiplatform}-${nvendor}"
           fi
           cd ..
@@ -193,7 +193,7 @@ function copy_secureboot_default_efis () {
 
   PRE_LOOP_DIR="$(pwd)"
   for nefiplatform in ${EFI_PLATFORMS} ; do
-    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendors
+    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendor
     for nvendor in debian ; do
       if [ -e "${nvendor}/shim${nefiplatform}.efi" ] ; then
         if [ ! -d "${overlay}/EFI/Boot" ] ; then
@@ -222,7 +222,7 @@ function copy_secureboot_external_efis () {
 
   PRE_LOOP_DIR="$(pwd)"
   for nefiplatform in ${EFI_PLATFORMS} ; do
-    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendors
+    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendor
     for nvendor in * ; do
       if [ -e "${nvendor}/shim${nefiplatform}.efi" ] ; then
         if [ ! -d "${overlay}/EFI/${nvendor}" ] ; then
