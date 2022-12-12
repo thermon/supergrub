@@ -29,6 +29,21 @@ _${sgrub_version}_source_code.tar.gz"
 
   generate_filename_hashes "${SG2D_ISO_RELEASE_DIR}/${SOURCE_CODE_FILENAME}"
 
+  PRE_LOOP_DIR="$(pwd)"
+  for nefiplatform in ${EFI_PLATFORMS} ; do
+    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendors
+    for nvendor in * ; do
+      if [ -e "${nvendor}/shim${nefiplatform}-sourcecode.tar.gz" ] ; then
+        cp "${nvendor}/shim${nefiplatform}-sourcecode.tar.gz" "${SG2D_ISO_RELEASE_DIR}"
+        cp "${nvendor}/grub${nefiplatform}-sourcecode.tar.gz" "${SG2D_ISO_RELEASE_DIR}"
+        generate_filename_hashes "${SG2D_ISO_RELEASE_DIR}/shim${nefiplatform}-sourcecode.tar.gz"
+        generate_filename_hashes "${SG2D_ISO_RELEASE_DIR}/grub${nefiplatform}-sourcecode.tar.gz"
+      fi
+    done
+  done
+
+  cd "${PRE_LOOP_DIR}"
+
 }
 
 
