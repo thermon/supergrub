@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Check secureboot.d/how-to-contribute-to-secureboot.d.md on how this script works
+# and how to contribute with other vendors
+
+# Environment variables:
+#
+# SHIM_FULLPATH_BINARY
+# GRUB_FULLPATH_BINARY
+# SHIM_FULLPATH_SOURCE_CODE_TAR_GZ
+# GRUB_FULLPATH_SOURCE_CODE_TAR_GZ
+
+# Definitions
+SB_VENDOR="debian"
+SB_EFI_PLATFORM="ia32"
+CURRENT_DIRECTORY="$(pwd)"
+DOWNLOAD_TMP_DIR="${CURRENT_DIRECTORY}-${SB_VENDOR}-${SB_EFI_PLATFORM}-tmp"
+
+if [ ! -d "${DOWNLOAD_TMP_DIR}" ] ; then
+  mkdir "${DOWNLOAD_TMP_DIR}"
+fi
+
+# Signed SHIM Binary download
+cd ${DOWNLOAD_TMP_DIR}
+mkdir 'shim-download'
+cd 'shim-download'
+wget -q 'https://snapshot.debian.org/archive/debian/20210713T032850Z/pool/main/s/shim-signed/shim-signed_1.38%2B15.4-7_i386.deb'
+dpkg-deb -x shim-signed_1.38+15.4-7_i386.deb ./
+
+# Signed SHIM Binary final copy
+cp usr/lib/shim/shim${SB_EFI_PLATFORM}.efi.signed ${SHIM_FULLPATH_BINARY}
+
+# Signed GRUB Binary download
+cd ${DOWNLOAD_TMP_DIR}
+mkdir 'grub-download'
+cd 'grub-download'
+wget -q 'https://snapshot.debian.org/archive/debian/20220814T034728Z/pool/main/g/grub-efi-ia32-signed/grub-efi-ia32-signed_1%2B2.06%2B3~deb11u1_i386.deb'
+dpkg-deb -x grub-efi-ia32-signed_1+2.06+3~deb11u1_i386.deb ./
+
+# Signed GRUB Binary final copy
+cp usr/lib/grub/i386-efi-signed/grub${SB_EFI_PLATFORM}.efi.signed ${GRUB_FULLPATH_BINARY}
+
+# Signed SHIM Source code download
+cd ${DOWNLOAD_TMP_DIR}
+mkdir 'shim-src-download'
+cd 'shim-src-download'
+wget -q 'https://snapshot.debian.org/archive/debian/20210713T032850Z/pool/main/s/shim-signed/shim-signed_1.38.tar.xz'
+wget -q 'https://snapshot.debian.org/archive/debian/20210713T032850Z/pool/main/s/shim-signed/shim-signed_1.38.dsc'
+
+wget -q 'https://snapshot.debian.org/archive/debian/20210712T151030Z/pool/main/s/shim/shim_15.4-7.debian.tar.xz'
+wget -q 'https://snapshot.debian.org/archive/debian/20210712T151030Z/pool/main/s/shim/shim_15.4-7.dsc'
+
+wget -q 'https://snapshot.debian.org/archive/debian/20210712T204518Z/pool/main/s/shim/shim_15.4-7~deb10u1.debian.tar.xz'
+wget -q 'https://snapshot.debian.org/archive/debian/20210712T204518Z/pool/main/s/shim/shim_15.4-7~deb10u1.dsc'
+
+wget -q 'https://snapshot.debian.org/archive/debian/20210417T203747Z/pool/main/s/shim/shim_15.4.orig.tar.bz2'
+
+# Signed SHIM Source code final copy
+cd ${DOWNLOAD_TMP_DIR}
+tar czf "${SB_VENDOR}-${SB_EFI_PLATFORM}-shim-sourcecode.tar.gz" 'shim-src-download'
+cp "${SB_VENDOR}-${SB_EFI_PLATFORM}-shim-sourcecode.tar.gz" "${SHIM_FULLPATH_SOURCE_CODE_TAR_GZ}"
+
+# Signed GRUB Source code download
+cd ${DOWNLOAD_TMP_DIR}
+mkdir 'grub-src-download'
+cd 'grub-src-download'
+
+wget -q 'https://snapshot.debian.org/archive/debian/20220813T214310Z/pool/main/g/grub-efi-ia32-signed/grub-efi-ia32-signed_1%2B2.06%2B3~deb11u1.tar.xz'
+wget -q 'https://snapshot.debian.org/archive/debian/20220813T214310Z/pool/main/g/grub-efi-ia32-signed/grub-efi-ia32-signed_1%2B2.06%2B3~deb11u1.dsc'
+
+wget -q 'https://snapshot.debian.org/archive/debian/20220807T030023Z/pool/main/g/grub2/grub2_2.06-3~deb11u1.debian.tar.xz'
+wget -q 'https://snapshot.debian.org/archive/debian/20220807T030023Z/pool/main/g/grub2/grub2_2.06-3~deb11u1.dsc'
+
+wget -q 'https://snapshot.debian.org/archive/debian/20211128T160803Z/pool/main/g/grub2/grub2_2.06.orig.tar.xz'
+
+# Signed GRUB Source code final copy
+cd ${DOWNLOAD_TMP_DIR}
+tar czf "${SB_VENDOR}-${SB_EFI_PLATFORM}-grub-sourcecode.tar.gz" 'grub-src-download'
+cp "${SB_VENDOR}-${SB_EFI_PLATFORM}-grub-sourcecode.tar.gz" "${GRUB_FULLPATH_SOURCE_CODE_TAR_GZ}"
+
+# Make sure to download temporary directory
+rm -rf ${DOWNLOAD_TMP_DIR}
+
+# Make sure to come back to the original directory
+cd ${CURRENT_DIRECTORY}
