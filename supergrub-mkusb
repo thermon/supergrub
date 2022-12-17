@@ -127,7 +127,8 @@ copy_copyright
 generate_and_copy_mo_files
 check_unifont
 
-generate_usb_image_mbr
+SECUREBOOTIMAGE="no"
+generate_usb_image_mbr ${SECUREBOOTIMAGE}
 
 rm -r "$overlay"
 

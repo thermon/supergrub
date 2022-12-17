@@ -269,19 +269,22 @@ Lodetach ()
 
 function generate_usb_image_mbr () {
 
-  generate_usb_image mbr
+  SECUREBOOTIMAGE="$1"
+  generate_usb_image mbr ${SECUREBOOTIMAGE}
 
 }
 
 function generate_usb_image_gpt () {
 
-  generate_usb_image gpt
+  SECUREBOOTIMAGE="$1"
+  generate_usb_image gpt ${SECUREBOOTIMAGE}
 
 }
 
 function generate_usb_image () {
 
   MODE="$1"
+  SECUREBOOTIMAGE="$2"
 
 
   # Many code was adapted from binary_hdd and losetup.sh from live-build package
@@ -295,13 +298,27 @@ function generate_usb_image () {
     PART2_NUMBER=2
   fi
 
+  if [ "${SECUREBOOTIMAGE}" == "yes" ] ; then
+    # Make sure we have a lot of size for many Secure Boot images
+    # and also make sure that final image size is less than 512 MB
+    # Apparently you only get 476 MB when you buy a 512 MB usb
+    # Let's remove 10 MB from there
+    # And let's remove 265 MB from the SG2DISOS partition.
+    # 466 - 265 = 201
+    # If adding SecureBoot support for a vendor is adding 2.5 MB
+    # It means that with 201 MB we can add about 80 of them
+    # Good enough number of SecureBoot vendors for now.
+    PART1_MINIMAL_DIM="201"
+  else # Non secureboot image
+    PART1_MINIMAL_DIM="33" # Minimal FAT32 size is about 32 megabytes
+  fi
 
   # Step 1: Prepare the disk
   DU_DIM="$(du -ms ${overlay} | cut -f1)"
   PART0_START=1
   PART0_END=2
   PART1_REAL_DIM="$(expr ${DU_DIM} + ${DU_DIM} \* 3 / 100 + 1)"
-  PART1_MINIMAL_DIM="33" # Minimal FAT32 size is about 32 megabytes
+
   # We want two of thems for iso partition
   # Make sure the minimal size is 256 megabytes
   # else gparted cannot resize such small partitions

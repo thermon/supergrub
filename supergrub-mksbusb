@@ -130,7 +130,8 @@ download_secureboot_efis
 copy_secureboot_default_efis
 copy_secureboot_external_efis
 
-generate_usb_image_mbr
+SECUREBOOTIMAGE="yes"
+generate_usb_image_mbr ${SECUREBOOTIMAGE}
 
 rm -r "$overlay"
 
