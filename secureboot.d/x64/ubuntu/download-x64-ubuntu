@@ -35,7 +35,9 @@ cd ${DOWNLOAD_TMP_DIR}
 mkdir 'grub-download'
 cd 'grub-download'
 wget -q 'http://de.archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub-efi-amd64-signed_1.182~22.04.1+2.06-2ubuntu10_amd64.deb'
-dpkg-deb -x grub-efi-amd64-signed_1.182~22.04.1+2.06-2ubuntu10_amd64.deb ./
+ar x grub-efi-amd64-signed_1.182~22.04.1+2.06-2ubuntu10_amd64.deb
+zstd -d data.tar.zst -o data.tar
+tar xf data.tar
 
 # Signed GRUB Binary final copy
 cp usr/lib/grub/x86_64-efi-signed/grub${SB_EFI_PLATFORM}.efi.signed ${GRUB_FULLPATH_BINARY}
