@@ -240,6 +240,84 @@ function copy_secureboot_external_efis () {
 
 }
 
+function secureboot_cfg_top () {
+cat << EOF
+# Super Grub Disk - secureboot.cfg
+# Copyright (C) 2022  Adrian Gibanel Lopez.
+#
+# Super Grub Disk is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Super Grub Disk is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
+
+set option_title="("\$sb_vendor") "\$"Change SecureBoot vendor"
+
+function run_option {
+EOF
+}
+
+function secureboot_cfg_bottom () {
+cat << EOF
+}
+EOF
+}
+
+function generate_secureboot_menus () {
+
+  PRE_LOOP_DIR="$(pwd)"
+
+  for nefiplatform in ${EFI_PLATFORMS} ; do
+cat << EOF
+  menuentry "\${topbootmenu_prefix_str}EFI Platform: ${nefiplatform}\${topbootmenu_postfix_str}" {
+    sleep 1
+  }
+EOF
+    cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendor
+    for nvendor in * ; do
+      if [ -e "${nvendor}/shim${nefiplatform}.efi" ] ; then
+cat << EOF
+    menuentry "\${finaloption_tab_str}${nvendor} (${nefiplatform})" {
+      chainloader (\$sg2d_dev_name)/efi/${nvendor}/shim${nefiplatform}.efi
+    }
+EOF
+      fi
+    done
+  done
+
+  cd "${PRE_LOOP_DIR}"
+
+
+}
+
+function generate_secureboot_cfg () {
+
+  secureboot_cfg_top
+  generate_secureboot_menus
+  secureboot_cfg_bottom
+
+}
+
+function build_secureboot_cfg () {
+
+  # Return if this is not an actual efi platform
+  if [ "${EFI_PLATFORMS}" == "none" ] ; then
+    return 0;
+  fi
+
+  generate_secureboot_cfg > "$overlay/boot/grub/sgd/secureboot.cfg"
+
+  cd "${PRE_LOOP_DIR}"
+
+}
+
 Lodetach ()
 {
   DEVICE="${1}"

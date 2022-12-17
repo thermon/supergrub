@@ -129,6 +129,7 @@ check_unifont
 download_secureboot_efis
 copy_secureboot_default_efis
 copy_secureboot_external_efis
+build_secureboot_cfg
 
 SECUREBOOTIMAGE="yes"
 generate_usb_image_mbr ${SECUREBOOTIMAGE}
