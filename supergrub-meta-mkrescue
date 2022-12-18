@@ -295,7 +295,7 @@ fi
 
 grub2_sg2d_hybrid_build
 
-grub2_sg2d_sbhybrid_build
+#grub2_sg2d_sbhybrid_build
 
 grub2_sg2d_x86_64_efi_build
 
