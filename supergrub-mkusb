@@ -111,7 +111,7 @@ fi
 
 BOOT_ISOS_DIRECTORY="boot-isos"
 overlay=$(mktemp -d)
-ISO_FILENAME="supergrub2-${sgrub_version}-multiarch-USB.img"
+ISO_FILENAME="supergrub2-classic-${sgrub_version}-multiarch-USB.img"
 
 if [[ "x$CUSTOM_ISO_FILENAME" != x ]] ; then
   ISO_FILENAME="${CUSTOM_ISO_FILENAME}"
