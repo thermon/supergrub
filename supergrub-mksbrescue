@@ -1,0 +1,129 @@
+#!/bin/bash -e
+
+# Super Grub Disk - supergrub-mkrescue
+# Copyright (C) 2009,2010,2011,2012,2013,2014,2015  Adrian Gibanel Lopez.
+#
+# Super Grub Disk is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Super Grub Disk is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Super Grub Disk.  If not, see <http://www.gnu.org/licenses/>.
+
+usage() {
+cat <<EOF
+
+  $0 -o=output.iso
+  Copyright Adrian Gibanel Lopez
+  Licensed under the GNU PUBLIC LICENSE 3.0
+
+  CREATE CALL
+  ===========
+
+  Usage: $0 [-o=FILENAME]
+  Example: $0 -o=myrescatux.iso
+
+  Usage: $0 [-o=FILENAME] [--grub-mkrescue-binary=/path/to/grub-mkrescue]
+  Example: $0 -o=myrescatux.iso --grub-mkrescue-binary=/usr/local/bin/grub-mkrescue
+
+EOF
+
+}
+
+SG2D_DIR="$(pwd)"
+source grub-build-config
+
+GRUB_MKRESCUE_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkrescue\
+"
+
+GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkfont\
+"
+
+if [ -e supergrub-build-config ] ; then
+  source supergrub-build-config
+fi
+
+# Check the arguments.
+for option in "$@"; do
+  case "$option" in
+    -h | --help)
+      usage
+      exit 0
+    ;;
+    -o=*)
+      CUSTOM_ISO_FILENAME=`echo "$option" | sed 's/-o=//'`
+    ;;
+    --grub-mkrescue-binary=*)
+      GRUB_MKRESCUE_BINARY=`echo "$option" | sed 's/--grub-mkrescue-binary=//'`
+    ;;
+    --grub-mkfont-binary=*)
+      GRUB_MKFONT_BINARY=`echo "$option" | sed 's/--grub-mkfont-binary=//'`
+    ;;
+  esac
+done
+
+# Get the version number for this Super GRUB2 Disk release
+source menus/sgd/version.cfg
+# Get common library for supergrub-mk commands
+source supergrub-mkcommon
+
+
+if [ ! -x "$GRUB_MKRESCUE_BINARY" ] ; then
+  cat << EOF 1>&2
+  grub-mkrescue binary cannot be run.
+  Either you need to install it
+  either you need to build it from grub build scripts
+  Aborting.
+EOF
+  exit 1
+fi
+
+if [ ! -x "$GRUB_MKFONT_BINARY" ] ; then
+  cat << EOF 1>&2
+  grub-mkfont binary cannot be run.
+  Either you need to install it
+  either you need to build it from grub build scripts
+  Aborting.
+EOF
+  exit 2
+fi
+
+BOOT_ISOS_DIRECTORY="boot-isos"
+overlay=$(mktemp -d)
+ISO_FILENAME="supergrub2-secureboot-${sgrub_version}-multiarch-CD.iso"
+
+if [[ "x$CUSTOM_ISO_FILENAME" != x ]] ; then
+  ISO_FILENAME="${CUSTOM_ISO_FILENAME}"
+fi
+
+default_options="--themes='' --output=${ISO_FILENAME} $overlay"
+
+
+
+init_overlay_dir
+copy_boot_isos_directory
+copy_copyright
+generate_and_copy_mo_files
+check_unifont
+download_secureboot_efis
+copy_secureboot_default_efis
+copy_secureboot_external_efis
+build_secureboot_cfg
+
+"$GRUB_MKRESCUE_BINARY" $default_options
+rm -r "$overlay"
+
+generate_filename_hashes "${ISO_FILENAME}"
+chown -R ${USERID}:${GROUPID} ${SG2D_SECUREBOOT_BINARIES_DIR}

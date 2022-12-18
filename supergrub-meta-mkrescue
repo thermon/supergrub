@@ -32,6 +32,17 @@ function build_sg2d () {
 "${GRUB_MKFONT_BINARY}"
 }
 
+function build_sg2d_sb () {
+
+  ./supergrub-mksbrescue \
+      -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
+-secureboot-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.iso" \
+      --grub-mkrescue-binary=\
+"${GRUB_MKRESCUE_BINARY}"\
+      --grub-mkfont-binary=\
+"${GRUB_MKFONT_BINARY}"
+}
+
 function build_sg2d_standalone () {
 
   ./supergrub-mkstandalone  \
@@ -91,6 +102,25 @@ ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /bin/grub-mkfont\
 "
   build_sg2d
+
+}
+
+function grub2_sg2d_sbhybrid_build () {
+
+  # Super Grub2 Disk - Hybrid build
+  TARGET_DEVICE="CD"
+  TARGET_PLATFORM="multiarch"
+  GRUB_MKRESCUE_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkrescue\
+"
+  GRUB_MKFONT_BINARY="\
+${SG2D_GRUB_INSTALLATION_PREFIX}\
+/${SG2D_GRUB_INSTALLATION_HYBRID}\
+/bin/grub-mkfont\
+"
+  build_sg2d_sb
 
 }
 
@@ -259,6 +289,8 @@ if [ ! -d "${SG2D_ISO_RELEASE_DIR}" ] ; then
 fi
 
 grub2_sg2d_hybrid_build
+
+grub2_sg2d_sbhybrid_build
 
 grub2_sg2d_x86_64_efi_build
 
