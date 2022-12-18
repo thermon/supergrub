@@ -311,8 +311,9 @@ EOF
     cd ${SG2D_SECUREBOOT_BINARIES_DIR}/vendor
     for nvendor in * ; do
       if [ -e "${nvendor}/shim${nefiplatform}.efi" ] ; then
+      vendor_description=$(cat ${SG2D_SECUREBOOT_DOWNLOAD_DIR}/${nefiplatform}/${nvendor}/description | head -n 1)
 cat << EOF
-    menuentry "\${finaloption_tab_str}${nvendor} (${nefiplatform})" {
+    menuentry "\${finaloption_tab_str}${vendor_description} (${nefiplatform})" {
       chainloader (\$sg2d_dev_name)/efi/${nvendor}/shim${nefiplatform}.efi
     }
 EOF
