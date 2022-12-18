@@ -148,6 +148,24 @@ EOF
 
 }
 
+function secureboot-sha256sum-check() {
+  local nefiplatform="$1"
+  local nvendor="$2"
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}.efi.sha256 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}.efi.sha256 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}-sourcecode.tar.gz.sha256 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}-sourcecode.tar.gz.sha256
+}
+
+function secureboot-sha256sum-create() {
+  local nefiplatform="$1"
+  local nvendor="$2"
+  sha256sum ${SHIM_FULLPATH_BINARY} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}.efi.sha256
+  sha256sum ${GRUB_FULLPATH_BINARY} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}.efi.sha256
+  sha256sum ${SHIM_FULLPATH_SOURCE_CODE_TAR_GZ} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}-sourcecode.tar.gz.sha256
+  sha256sum ${GRUB_FULLPATH_SOURCE_CODE_TAR_GZ} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}-sourcecode.tar.gz.sha256
+}
+
 function download_secureboot_efis () {
 
   if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor" ] ; then
@@ -165,14 +183,20 @@ function download_secureboot_efis () {
         for nvendor in * ; do
           cd "${nvendor}"
           if [ -x "download-${nefiplatform}-${nvendor}" ] ; then
-            if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}" ] ; then
-              mkdir -p "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}"
+            if [ ! secureboot-sha256sum-check ${nefiplatform} ${nvendor} ]; then
+              echo "[DOWNLOAD] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
+              if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}" ] ; then
+                mkdir -p "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}"
+              fi
+              export SHIM_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/shim${nefiplatform}.efi"
+              export GRUB_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}.efi"
+              export SHIM_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/shim${nefiplatform}-sourcecode.tar.gz"
+              export GRUB_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}-sourcecode.tar.gz"
+              ./"download-${nefiplatform}-${nvendor}"
+              secureboot-sha256sum-create ${nefiplatform} ${nvendor}
+            else
+              echo "[SKIP-DOWNLOAD] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
             fi
-            export SHIM_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/shim${nefiplatform}.efi"
-            export GRUB_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}.efi"
-            export SHIM_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/shim${nefiplatform}-sourcecode.tar.gz"
-            export GRUB_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}-sourcecode.tar.gz"
-            ./"download-${nefiplatform}-${nvendor}"
           fi
           cd ..
         done
