@@ -184,7 +184,7 @@ function download_secureboot_efis () {
           cd "${nvendor}"
           if [ -x "download-${nefiplatform}-${nvendor}" ] ; then
             if ! secureboot-sha256sum-check ${nefiplatform} ${nvendor} ; then
-              echo "[DOWNLOAD] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
+              echo "[DOWNLOAD-  START] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
               if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}" ] ; then
                 mkdir -p "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}"
               fi
@@ -192,8 +192,12 @@ function download_secureboot_efis () {
               export GRUB_FULLPATH_BINARY="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}.efi"
               export SHIM_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/shim${nefiplatform}-sourcecode.tar.gz"
               export GRUB_FULLPATH_SOURCE_CODE_TAR_GZ="${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}/grub${nefiplatform}-sourcecode.tar.gz"
-              ./"download-${nefiplatform}-${nvendor}"
-              secureboot-sha256sum-create ${nefiplatform} ${nvendor}
+              if ./"download-${nefiplatform}-${nvendor}"; then
+                echo "[DOWNLOAD-     OK] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
+                secureboot-sha256sum-create ${nefiplatform} ${nvendor}
+              else
+                echo "[DOWNLOAD-FAILURE] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
+              fi
             else
               echo "[SKIP-DOWNLOAD] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
             fi

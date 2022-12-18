@@ -61,6 +61,7 @@ We would add the execution bit to it.
     - SHIM_FULLPATH_SOURCE_CODE_TAR_GZ
     - GRUB_FULLPATH_SOURCE_CODE_TAR_GZ
 - Source code (As a tar.gz) needs to be copied there
+- Also it's advised that the script return code is 0 if everything is ok, non 0 if there was a problem (like wget not being able to download binaries).
 
 E.g. SHIM_FULLPATH_BINARY is set to `/tmp/build_sgd/secureboot-binaries/vendors/debian/shimx64.efi` and your downloaded file is: `mytmpdir/shimx64.efi.signed`.
 So it's just about doing something similar to:
