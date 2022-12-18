@@ -40,7 +40,11 @@ function build_sg2d_sb () {
       --grub-mkrescue-binary=\
 "${GRUB_MKRESCUE_BINARY}"\
       --grub-mkfont-binary=\
-"${GRUB_MKFONT_BINARY}"
+"${GRUB_MKFONT_BINARY}"\
+      --userid="$(id -u)" \
+      --groupid="$(id -g)" \
+      --efi-platforms=\
+"${EFI_PLATFORMS}"
 }
 
 function build_sg2d_standalone () {
@@ -110,6 +114,7 @@ function grub2_sg2d_sbhybrid_build () {
   # Super Grub2 Disk - Hybrid build
   TARGET_DEVICE="CD"
   TARGET_PLATFORM="multiarch"
+  EFI_PLATFORMS="${SG2D_SECUREBOOT_EFI_PLATFORMS}"
   GRUB_MKRESCUE_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
@@ -214,7 +219,7 @@ function grub2_sg2d_sbusb_hybrid_build () {
   # Super Grub2 Disk - Secure Boot Hybrid build for USB
   TARGET_PLATFORM="multiarch"
   TARGET_DEVICE="USB"
-  EFI_PLATFORMS="x64 ia32"
+  EFI_PLATFORMS="${SG2D_SECUREBOOT_EFI_PLATFORMS}"
   GRUB_INSTALL_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
@@ -234,7 +239,7 @@ function grub2_sg2d_usb_hybrid_build () {
   # Super Grub2 Disk - Hybrid build for USB
   TARGET_PLATFORM="multiarch"
   TARGET_DEVICE="USB"
-  EFI_PLATFORMS="${SG2D_SECUREBOOT_EFI_PLATFORMS}"
+  EFI_PLATFORMS="x64 ia32"
   GRUB_INSTALL_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
