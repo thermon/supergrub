@@ -183,7 +183,7 @@ function download_secureboot_efis () {
         for nvendor in * ; do
           cd "${nvendor}"
           if [ -x "download-${nefiplatform}-${nvendor}" ] ; then
-            if [ ! secureboot-sha256sum-check ${nefiplatform} ${nvendor} ]; then
+            if ! secureboot-sha256sum-check ${nefiplatform} ${nvendor} ; then
               echo "[DOWNLOAD] ${nefiplatform} ${nvendor} SecureBoot binaries and source code"
               if [ ! -d "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}" ] ; then
                 mkdir -p "${SG2D_SECUREBOOT_BINARIES_DIR}/vendor/${nvendor}"
