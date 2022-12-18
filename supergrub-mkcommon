@@ -151,10 +151,10 @@ EOF
 function secureboot-sha256sum-check() {
   local nefiplatform="$1"
   local nvendor="$2"
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}.efi.sha256 && \
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}.efi.sha256 && \
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}-sourcecode.tar.gz.sha256 && \
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}-sourcecode.tar.gz.sha256
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}.efi.sha256 > /dev/null 2>&1 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}.efi.sha256 > /dev/null 2>&1 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}-sourcecode.tar.gz.sha256 > /dev/null 2>&1 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}-sourcecode.tar.gz.sha256 > /dev/null 2>&1
 }
 
 function secureboot-sha256sum-create() {
