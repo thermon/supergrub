@@ -102,7 +102,7 @@ fi
 
 BOOT_ISOS_DIRECTORY="boot-isos"
 overlay=$(mktemp -d)
-ISO_FILENAME="supergrub2-secureboot-${sgrub_version}-multiarch-CD.iso"
+ISO_FILENAME="supergrub2-${sgrub_version}-multiarch-CD.iso"
 
 if [[ "x$CUSTOM_ISO_FILENAME" != x ]] ; then
   ISO_FILENAME="${CUSTOM_ISO_FILENAME}"

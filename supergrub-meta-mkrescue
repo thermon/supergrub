@@ -25,7 +25,7 @@ function build_sg2d () {
 
   ./supergrub-mkrescue \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
--${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.iso" \
+-classic-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.iso" \
       --grub-mkrescue-binary=\
 "${GRUB_MKRESCUE_BINARY}"\
       --grub-mkfont-binary=\
@@ -36,7 +36,7 @@ function build_sg2d_sb () {
 
   ./supergrub-mksbrescue \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
--secureboot-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.iso" \
+-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.iso" \
       --grub-mkrescue-binary=\
 "${GRUB_MKRESCUE_BINARY}"\
       --grub-mkfont-binary=\
@@ -48,7 +48,7 @@ function build_sg2d_standalone () {
   ./supergrub-mkstandalone  \
     -O=${STANDALONE_FORMAT} \
     -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
--${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.EFI" \
+-classic-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.EFI" \
     --grub-mkstandalone-binary=\
 "${GRUB_MKSTANDALONE_BINARY}"\
       --grub-mkfont-binary=\
@@ -60,7 +60,7 @@ function build_sg2d_sb_usb () {
 
   sudo ./supergrub-mksbusb \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
--secureboot-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.img" \
+-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.img" \
       --grub-install-binary=\
 "${GRUB_INSTALL_BINARY}"\
       --grub-mkfont-binary=\
@@ -75,7 +75,7 @@ function build_sg2d_usb () {
 
   sudo ./supergrub-mkusb \
       -o="${SG2D_ISO_RELEASE_DIR}/${SUPER_GRUB2_DISK_FILE_PREFIX}\
--${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.img" \
+-classic-${sgrub_version}-${TARGET_PLATFORM}-${TARGET_DEVICE}.img" \
       --grub-install-binary=\
 "${GRUB_INSTALL_BINARY}"\
       --grub-mkfont-binary=\
