@@ -151,19 +151,19 @@ EOF
 function secureboot-sha256sum-check() {
   local nefiplatform="$1"
   local nvendor="$2"
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}.efi.sha256 && \
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}.efi.sha256 && \
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}-sourcecode.tar.gz.sha256 && \
-  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}-sourcecode.tar.gz.sha256
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}.efi.sha256 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}.efi.sha256 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}-sourcecode.tar.gz.sha256 && \
+  sha256sum -c ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}-sourcecode.tar.gz.sha256
 }
 
 function secureboot-sha256sum-create() {
   local nefiplatform="$1"
   local nvendor="$2"
-  sha256sum ${SHIM_FULLPATH_BINARY} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}.efi.sha256
-  sha256sum ${GRUB_FULLPATH_BINARY} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}.efi.sha256
-  sha256sum ${SHIM_FULLPATH_SOURCE_CODE_TAR_GZ} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/shim${nefiplatform}-sourcecode.tar.gz.sha256
-  sha256sum ${GRUB_FULLPATH_SOURCE_CODE_TAR_GZ} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/grub${nefiplatform}-sourcecode.tar.gz.sha256
+  sha256sum ${SHIM_FULLPATH_BINARY} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}.efi.sha256
+  sha256sum ${GRUB_FULLPATH_BINARY} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}.efi.sha256
+  sha256sum ${SHIM_FULLPATH_SOURCE_CODE_TAR_GZ} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-shim${nefiplatform}-sourcecode.tar.gz.sha256
+  sha256sum ${GRUB_FULLPATH_SOURCE_CODE_TAR_GZ} > ${SG2D_SECUREBOOT_SHA256SUMS_DIR}/${nvendor}-grub${nefiplatform}-sourcecode.tar.gz.sha256
 }
 
 function download_secureboot_efis () {
