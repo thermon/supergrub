@@ -72,7 +72,7 @@ wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_
 wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.debian.tar.xz' || DOWNLOAD_RETURN_STATUS=1
 wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.dsc' || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'hhttp://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06.orig.tar.xz' || DOWNLOAD_RETURN_STATUS=1
+wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06.orig.tar.xz' || DOWNLOAD_RETURN_STATUS=1
 
 # Signed GRUB Source code final copy
 cd ${DOWNLOAD_TMP_DIR}
