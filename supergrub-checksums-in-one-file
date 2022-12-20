@@ -32,9 +32,9 @@ function checksums_to_one_file () {
   local OLD_BUILD_ALLZIPFILE_DIR="$(pwd)"
   cd "${SG2D_RELEASE_DIR}"
 
-  find -type f -iname '*.md5' -print0 | sort -z | xargs -0 cat > MD5SUMS
-  find -type f -iname '*.sha1' -print0 | sort -z | xargs -0 cat > SHA1SUMS
-  find -type f -iname '*.sha256' -print0 | sort -z | xargs -0 cat > SHA256SUMS
+  for nfile in $(find -type f -iname '*.md5'); do nfileshort=${nfile//.md5/} ; md5sum ${nfileshort} ; done > MD5SUMS
+  for nfile in $(find -type f -iname '*.sha1'); do nfileshort=${nfile//.sha1/} ; sha1sum ${nfileshort} ; done > SHA1SUMS
+  for nfile in $(find -type f -iname '*.sha256'); do nfileshort=${nfile//.sha256/} ; sha256sum ${nfileshort} ; done > SHA256SUMS
 
   cd "${OLD_BUILD_ALLZIPFILE_DIR}"
 
