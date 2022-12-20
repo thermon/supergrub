@@ -30,8 +30,6 @@ SG2D_DIR="${SGD2_SOURCE_DIR}"
 function checksums_to_one_file () {
 
   local OLD_BUILD_ALLZIPFILE_DIR="$(pwd)"
-  local ZIP_FILENAME="${SUPER_GRUB2_DISK_FILE_PREFIX}\
-_${sgrub_version}.zip"
   cd "${SG2D_RELEASE_DIR}"
 
   find -type f -iname '*.md5' -print0 | sort -z | xargs -0 cat > MD5SUMS
