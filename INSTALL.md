@@ -1,223 +1,48 @@
-This file contains instructions for building Super GRUB2 Disk.
-
-Updated instructions will be found at: http://www.supergrubdisk.org/wiki/SuperGRUB2Disk#Development
+This file contains instructions for building Super Grub2 Disk.
 
 For more advanced instructions you can check: DEVELOPMENT file.
 
-Requirements
-================
+# Requirements
 
-Super GRUB2 Disk tends to depend heavily on the latest features of GRUB2, so using it with older versions of GRUB2 is very likely to fail. Currently Super GRUB2 Disk requires GRUB 2.02 (as opposed to GRUB 1.99, which is GRUB2, but is not GRUB 2.0). Newer versions of GRUB2 than 2.02 will probably work with this version of Super GRUB2 Disk's scripts, but I can't make any guarantees about the future.
+Super Grub2 Disk tends to depend heavily on the latest features of GRUB2, so using it with older versions of GRUB2 is very likely to fail. Currently Super Grub2 Disk requires GRUB 2.02 (as opposed to GRUB 1.99, which is GRUB2, but is not GRUB 2.0). Newer versions of GRUB2 than 2.02 will probably work with this version of Super Grub2 Disk's scripts, but I can't make any guarantees about the future.
 
 Also needed:
 
-GNU xorriso (it's a dependency of the grub-mkrescue utility which is part of GRUB2).
+- GNU xorriso (it's a dependency of the grub-mkrescue utility which is part of GRUB2).
+- Unifont (which is also already a soft dependency of GRUB2).
+- mtools (Till it's fixed in Debian. Check Debian bug number: 774910 ).
 
-Unifont (which is also already a soft dependency of GRUB2).
+In practice in 2022 you can get all of these requirements met in Debian Bullseye you need to run:
 
-mtools (Till it's fixed in Debian. Check Debian bug number: 774910 ).
+```
+apt-get update
+apt-get install sudo \
+                xorriso \
+                git \
+                gettext \
+                unifont \
+                mtools \
+                zip \
+                rsync \
+                udev \
+                python3 \
+                wget \
+                zstd
 
-Chroot
-======
-
-Although not strictly need you are encouraged to use a chroot for both Grub2 and Super Grub2 Disk build. We will use a Debian Buster chroot.
-
-Please check: Super Grub2 Disk Buster Chroot in order to learn how to setup your Super Grub2 Disk Buster chroot.
-
-Super Grub2 Disk Buster Chroot (Optional)
-==========================================
-Introduction
-
-First of all you need to know that this is simply a Debian Buster Chroot. It's a amd64 chroot.
-
-The base OS that we are using is another Debian Buster. If you are not using a Debian based OS like Ubuntu you might need to use cdebootstrap instead of debootstrap.
-
-Chroot in this example is going to be installed in:
-
-/mnt/ssd/sgd_chroot_buster_amd64
-
-Please adapt to your needs.
-First setup
-
-So we cd to the parent directory of the directoy where our chroot will be created. And we invoke debootstrap
-
-cd /mnt/ssd/
-mkdir sgd_chroot_buster_amd64
-debootstrap --arch amd64 buster sgd_chroot_buster_amd64 http://http.debian.net/debian/
-
-Then we need to prepare our fstab to take care of mounting some auxiliar folders for the chroot so that it works ok. You can opt to mount them manually if you are not fancing of fstab doing it automatically. Please type all the command as root user
-
-cat << EOF | sudo tee -a /etc/fstab
-/proc   /mnt/ssd/sgd_chroot_buster_amd64/proc none bind,private 0 0
-/dev    /mnt/ssd/sgd_chroot_buster_amd64/dev none bind,private 0 0
-/sys    /mnt/ssd/sgd_chroot_buster_amd64/sys none bind,private 0 0
-/dev/pts        /mnt/ssd/sgd_chroot_buster_amd64/dev/pts none bind,private 0 0
-/dev/shm /mnt/ssd/sgd_chroot_buster_amd64/dev/shm none bind,private 0 0
-EOF
-
-I personally also add the home directory because I found it easier to work with from my main system. Be aware that you can delete all your files if you don't umount it before deleting the whole chroot.
-
-cat << EOF | sudo tee -a /etc/fstab
-/home /mnt/ssd/sgd_chroot_buster_amd64/home ext4 bind 0 0
-EOF
-
-Then you need to mount all these mounts with:
-
-mount -a
-
-Custom your Buster Chroot
-
-In order to enter into the Chroot you need to do:
-
-chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
-
-Once inside the chroot:
-
-  I add my usual user (which happens to be 1000 UID so that's ok with home files)
-
-adduser myuser
-
-  I setup a password for it.
-
-passwd myuser
-
-  I make sure that resolv.conf has a working nameserver
-
-nano /etc/resolv.conf
-
-  I install sudo package
-
-apt-get install sudo
-
-  I setup sudo so that my normal user has sudo permissions
-
-sudoedit /etc/sudoers
-myuser  ALL=(ALL:ALL) ALL
-
-  I modify the chroot name so that I am aware of it
-
-nano /etc/debian_chroot
-I write: SG2D_CHROOT inside it
-
-  Take rid of perl warning messages:
-
-apt-get install debconf
-apt-get install locales
-nano /etc/locale.gen
-Uncomment # en_US.UTF-8 UTF-8 line and save
-locale-gen
-
-
-If I am inside the chroot and I want to work as my new normal user I can run:
-
-su - myuser
-
-
-Super Grub2 Disk Buster Chroot Build
-====================================
-
-As explained in Super Grub2 Disk Buster Chroot you need to enter in the chroot thanks to:
-
-chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
-
-Alternatively you might decide not to do it.
-
-We probably need to install git package
-
-apt-get install git
-
-And other packages:
-
-apt-get install gettext unifont xorriso mtools zip rsync
-
-Additional packages (needed only if you want to run grub-build-004-make-check ): TODO.
-
-You also need to configure src entries on your sources.list file and then run:
+update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 apt-get -y build-dep grub2
+```
 
-Now we are going to work as a normal user
+The suggested build method is based on Docker so you do not need to install any of these requirements into your own system.
+You would only need to install those requirements if you use an alternative build method.
 
-su - myuser
+# Docker - Automatic build
 
-so that we can work from our development directory.
-
-mkdir -p ~/gnu/sgd/supergrub2_upstream
-cd  ~/gnu/sgd/supergrub2_upstream
-
-Now we are going to get Super Grub2 Disk source code.
-
-git clone https://github.com/supergrub/supergrub.git
-
-Although a final user can use their own grub thanks to supergrub-build-config file we recommend you to build grub yourself thanks to super grub disk build script.
-
-First of all we make sure we are in super grub disk directory.
-cd supergrub2
-
-Then we will fetch, build grub and install grub in a custom directory (this will not affect your system or chroot grub installation).
-
-./grub-build-001-prepare-build
-./grub-build-002-clean-and-update
-./grub-build-003-build-all
-./grub-build-004-make-check (optional)
-./grub-build-005-install-all
-
-* Finally we can just build the hybrid version for SG2D:
-
-./supergrub-mkrescue
-
-If everything went well and you did not miss any of the former steps you will get inside releases directory, among others, these files:
-
-super_grub2_disk_hybrid_2.00s1-beta6.iso
-super_grub2_disk_hybrid_2.00s1-beta6.iso.md5
-super_grub2_disk_hybrid_2.00s1-beta6.iso.sha1
-super_grub2_disk_hybrid_2.00s1-beta6.iso.sha256
-
-which their filename might vary depending on the current Super Grub2 Disk version.
-
-* Or we can build all the SG2D releases thanks to:
-
-./supergrub-meta-mkrescue
-
-In this case the files will be found at releases/ directory.
-
-* Super Grub2 Disk release team usual procedure:
-
-./grub-build-001-prepare-build
-./grub-build-002-clean-and-update
-./grub-build-003-build-all
-./grub-build-005-install-all
-./supergrub-official-release
-git tag -a newversion -m "newversion"
-
-and
-
-./supergrub-release-changes 2.02s7
-where 2.02s7 is the previous version (git tag) to the current one you are releasing.
-
-Useful files for helping with the html release piece of news will be found at:
-news-releases
-directory.
-
-Alternative Super Grub2 Disk Build
-====================================
-
-This alternative build let's you use your system own grub installation instead of Super Grub2 Disk one.
-
-Just use the same instructions as: "Super Grub2 Disk Buster Chroot Build" section however:
-
-* Do not run grub-build-* commands
-* Rename supergrub-build-config.example file to supergrub-build-config .
-* Edit supergrub-build-config to suit your grub installation if needed.
-* Just use supergrub-mkrescue command which might build an x86, amd64_efi, hybrid (or another platform) depending your installed system grub.
-* Do not use supergrub-meta-mkrescue because it does not work with your sytem grub.
-
-DOCKER - Automatic build
-========================
-
-0. You need to have docker installed and your user needs to be able to create docker instances.
+## Docker - Requirements
+You need to have docker installed and your user needs to be able to create docker instances.
 These instructions are for Ubuntu 22.04 but they should work similar in other GNU/Linux distributions.
 
-https://linuxconfig.org/how-to-install-docker-on-ubuntu-22-04
+[https://linuxconfig.org/how-to-install-docker-on-ubuntu-22-04](https://linuxconfig.org/how-to-install-docker-on-ubuntu-22-04)
 
 ```
 sudo apt update
@@ -231,18 +56,249 @@ sudo usermod -aG docker yourlinuxusername
 
 Reboot so that changes are taken into account.
 
-1. Just use the automatic builder
+## How to build thanks to Docker
 
+Just use the automatic builder and update `PREVIOUS_VERSION=2.04s1` if needed.
+
+```
 docker build --tag supergrub-automatic-builder . -f automatic-builder.Dockerfile
+```
 
+```
 docker run -it --privileged --env PREVIOUS_VERSION=2.04s1 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-automatic-builder:latest
+```
 
-DOCKER - Release build
-======================
+## Docker - Release build
 
-When a 'Bump version commit has been done' we can:
+When a 'Bump version commit' has been done we can:
+
+```
 git tag -a newversion -m "newversion"
-git push origin master
+```
 
+Then we just use the automatic builder where we have to update `PREVIOUS_VERSION=2.04s1` to previous Super Grub2 Disk release tag.
+
+```
 docker build --tag supergrub-release-builder . -f automatic-builder.Dockerfile
+```
+
+```
 docker run -it --privileged --env PREVIOUS_VERSION=2.04s1 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-release-builder:latest
+```
+
+## Docker - Release files
+
+What to expect once you have had a succesful build:
+```
+```
+
+
+# Chroot Build Method
+
+This was the old way of building Super Grub2 Disk without messing with your regular GNU/Linux distro.
+These instructions are kept here as an historical documentation or for those that do not want to use Docker.
+Be warned that you might need to update them to reflect whatever it's done inside of Docker, e.g. using a more recent Debian release.
+
+You were encouraged to use a chroot for both Grub2 and Super Grub2 Disk build. We will use a Debian Buster chroot.
+
+Please check: Super Grub2 Disk Buster Chroot in order to learn how to setup your Super Grub2 Disk Buster chroot.
+
+## Super Grub2 Disk Buster Chroot Setup (Optional)
+
+### Introduction
+
+First of all you need to know that this is simply a Debian Buster Chroot. It's a amd64 chroot.
+
+The base OS that we are using is another Debian Buster. If you are not using a Debian based OS like Ubuntu you might need to use cdebootstrap instead of debootstrap.
+
+Chroot in this example is going to be installed in: `/mnt/ssd/sgd_chroot_buster_amd64` .
+
+Please adapt to your needs.
+### First setup
+
+So we cd to the parent directory of the directoy where our chroot will be created. And we invoke debootstrap
+
+```
+cd /mnt/ssd/
+mkdir sgd_chroot_buster_amd64
+debootstrap --arch amd64 buster sgd_chroot_buster_amd64 http://http.debian.net/debian/
+```
+
+Then we need to prepare our fstab to take care of mounting some auxiliar folders for the chroot so that it works ok. You can opt to mount them manually if you are not fancing of fstab doing it automatically. Please type all the command as root user
+
+```
+cat << EOF | sudo tee -a /etc/fstab
+/proc   /mnt/ssd/sgd_chroot_buster_amd64/proc none bind,private 0 0
+/dev    /mnt/ssd/sgd_chroot_buster_amd64/dev none bind,private 0 0
+/sys    /mnt/ssd/sgd_chroot_buster_amd64/sys none bind,private 0 0
+/dev/pts        /mnt/ssd/sgd_chroot_buster_amd64/dev/pts none bind,private 0 0
+/dev/shm /mnt/ssd/sgd_chroot_buster_amd64/dev/shm none bind,private 0 0
+EOF
+```
+
+I personally also add the home directory because I found it easier to work with from my main system. Be aware that you can delete all your files if you don't umount it before deleting the whole chroot.
+
+```
+cat << EOF | sudo tee -a /etc/fstab
+/home /mnt/ssd/sgd_chroot_buster_amd64/home ext4 bind 0 0
+EOF
+```
+
+Then you need to mount all these mounts with:
+```
+mount -a
+```
+### Custom your Buster Chroot
+
+In order to enter into the Chroot you need to do:
+
+```
+chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
+```
+
+Once inside the chroot:
+
+  I add my usual user (which happens to be 1000 UID so that's ok with home files)
+```
+adduser myuser
+```
+  I setup a password for it.
+```
+passwd myuser
+```
+  I make sure that resolv.conf has a working nameserver
+```
+nano /etc/resolv.conf
+```
+  I install sudo package
+```
+apt-get install sudo
+```
+  I setup sudo so that my normal user has sudo permissions
+```
+sudoedit /etc/sudoers
+myuser  ALL=(ALL:ALL) ALL
+```
+  I modify the chroot name so that I am aware of it
+```
+nano /etc/debian_chroot
+```
+I write: SG2D_CHROOT inside it
+
+  Take rid of perl warning messages:
+```
+apt-get install debconf
+apt-get install locales
+nano /etc/locale.gen
+Uncomment # en_US.UTF-8 UTF-8 line and save
+locale-gen
+```
+
+If I am inside the chroot and I want to work as my new normal user I can run:
+```
+su - myuser
+```
+
+## Super Grub2 Disk Buster Chroot Build
+
+As explained in Super Grub2 Disk Buster Chroot you need to enter in the chroot thanks to:
+```
+chroot /mnt/ssd/sgd_chroot_buster_amd64/ /bin/bash
+```
+Alternatively you might decide not to do it.
+
+We probably need to install git package
+```
+apt-get install git
+```
+And other packages:
+```
+apt-get install gettext unifont xorriso mtools zip rsync
+```
+Additional packages (needed only if you want to run grub-build-004-make-check ): TODO.
+
+You also need to configure src entries on your sources.list file and then run:
+```
+apt-get -y build-dep grub2
+```
+
+Now we are going to work as a normal user
+
+```
+su - myuser
+```
+
+so that we can work from our development directory.
+
+```
+mkdir -p ~/gnu/sgd/supergrub2_upstream
+cd  ~/gnu/sgd/supergrub2_upstream
+```
+
+Now we are going to get Super Grub2 Disk source code.
+```
+git clone https://github.com/supergrub/supergrub.git
+```
+Although a final user can use their own grub thanks to `supergrub-build-config` file we recommend you to build grub yourself thanks to super grub disk build script.
+
+First of all we make sure we are in super grub disk directory.
+```
+cd supergrub2
+```
+Then we will fetch, build grub and install grub in a custom directory (this will not affect your system or chroot grub installation).
+```
+./grub-build-001-prepare-build
+./grub-build-002-clean-and-update
+./grub-build-003-build-all
+./grub-build-004-make-check (optional)
+./grub-build-005-install-all
+```
+Finally we can just build the hybrid version for SG2D:
+```
+./supergrub-mkrescue
+```
+If everything went well and you did not miss any of the former steps you will get inside releases directory, among others, these files:
+```
+super_grub2_disk_hybrid_2.00s1-beta6.iso
+super_grub2_disk_hybrid_2.00s1-beta6.iso.md5
+super_grub2_disk_hybrid_2.00s1-beta6.iso.sha1
+super_grub2_disk_hybrid_2.00s1-beta6.iso.sha256
+```
+which their filename might vary depending on the current Super Grub2 Disk version.
+
+Or we can build all the SG2D releases thanks to:
+```
+./supergrub-meta-mkrescue
+```
+In this case the files will be found at `releases/` directory.
+
+## Super Grub2 Disk release team usual procedure
+
+```
+./grub-build-001-prepare-build
+./grub-build-002-clean-and-update
+./grub-build-003-build-all
+./grub-build-005-install-all
+./supergrub-official-release
+git tag -a newversion -m "newversion"
+```
+and
+```
+./supergrub-release-changes 2.02s7
+```
+
+where 2.02s7 is the previous version (git tag) to the current one you are releasing.
+
+Useful files for helping with the html release piece of news will be found at `news-releases` directory.
+
+# Alternative Super Grub2 Disk Build
+
+This non recommended alternative build let's you use your system own grub installation instead of Super Grub2 Disk one.
+
+Just use the same instructions as: "[Super Grub2 Disk Buster Chroot Build](#Super Grub2 Disk Buster Chroot Build)" section however:
+
+- Do not run `grub-build-*` commands
+- Rename `supergrub-build-config.example` file to `supergrub-build-config` .
+- Edit `supergrub-build-config` to suit your grub installation if needed.
+- Just use `supergrub-mkrescue` command which might build an `x86`, `amd64_efi`, `hybrid` (or another platform) depending your installed system grub.
+- Do not use `supergrub-meta-mkrescue` because it does not work with your system grub.
