@@ -1,5 +1,6 @@
 This file contains some advice for developing Super GRUB2 Disk daily.
 
+Once you have developed Super Grub2 Disk please check INSTALL file on how to make a proper public release.
 
 How to update Grub installation
 ================================
@@ -121,6 +122,3 @@ Attach to a running container:
 docker exec -it 644ca2ffdfe5 bash
 
 This is useful when you want the container to keep building and at the same time you want to keep a look at the logs.
-
-DOCKER - Release build
-======================
