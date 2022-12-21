@@ -76,14 +76,20 @@ When a 'Bump version commit' has been done we can:
 git tag -a newversion -m "newversion"
 ```
 
-Then we just use the automatic builder where we have to update `PREVIOUS_VERSION=2.04s1` to previous Super Grub2 Disk release tag.
+E.g.
+```
+git tag -a 2.06s2-beta1 -m "2.06s2-beta1"
+```
+
+
+Then we just use the automatic builder where we have to update `PREVIOUS_VERSION=2.06s1-beta2` to previous Super Grub2 Disk release tag.
 
 ```
 docker build --tag supergrub-release-builder . -f automatic-builder.Dockerfile
 ```
 
 ```
-docker run -it --privileged --env PREVIOUS_VERSION=2.04s1 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-release-builder:latest
+docker run -it --privileged --env PREVIOUS_VERSION=2.06s1-beta2 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-release-builder:latest
 ```
 
 ## Docker - Release files
@@ -243,7 +249,7 @@ Although a final user can use their own grub thanks to `supergrub-build-config` 
 
 First of all we make sure we are in super grub disk directory.
 ```
-cd supergrub2
+cd supergrub
 ```
 Then we will fetch, build grub and install grub in a custom directory (this will not affect your system or chroot grub installation).
 ```
