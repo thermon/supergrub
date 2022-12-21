@@ -234,4 +234,5 @@ Reboot so that changes are taken into account.
 1. Just use the automatic builder
 
 docker build --tag supergrub-automatic-builder . -f automatic-builder.Dockerfile
-docker run -it --privileged --env PREVIOUS_VERSION=2.04s1 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw supergrub-automatic-builder:latest
+
+docker run -it --privileged --env PREVIOUS_VERSION=2.04s1 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-automatic-builder:latest
