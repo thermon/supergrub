@@ -15,7 +15,5 @@ menus/language.cfg
 sg2d_grub_builds
 sg2d_grub_installations
 tmp_grub2_clone_dir
-releases
-news-releases
 secureboot-binaries
 secureboot.d/sha256sums
