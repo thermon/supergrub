@@ -1,6 +1,6 @@
 This file contains some advice for developing Super Grub2 Disk daily.
 
-Once you have developed Super Grub2 Disk please check INSTALL file on how to make a proper public release.
+Once you have developed Super Grub2 Disk please check [INSTALL.md](INSTALL.md) file on how to make a proper public release.
 
 # How does Super Grub2 Disk versioning work?
 
@@ -32,7 +32,7 @@ E.g.
 git commit -m 'Bump version to 2.06s2-beta1.'
 ```
 
-Then continue with [INSTALL.md - Docker - Release build instructions](INSTALL.md#Docker - Release build).
+Then continue with [INSTALL.md - Docker - Release build instructions](INSTALL.md#docker---release-build).
 
 When you make a public announcement make sure to reflect the exact commit or tag you are using to build grub so that grub experts can understand what features to expect from our grub build.
 
@@ -40,7 +40,7 @@ When you make a public announcement make sure to reflect the exact commit or tag
 
 ## Docker - Requirements
 
-Please check [INSTALL.md - Docker - Requirements](INSTALL.md#Docker - Requirements).
+Please check [INSTALL.md - Docker - Requirements](INSTALL.md#docker---requirements).
 
 ## Debian minimal installation
 

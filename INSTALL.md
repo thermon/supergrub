@@ -1,6 +1,6 @@
 This file contains instructions for building Super Grub2 Disk.
 
-For more advanced instructions you can check: DEVELOPMENT file.
+For more advanced instructions you can check: [DEVELOPMENT.md](DEVELOPMENT.md) file.
 
 # Requirements
 
