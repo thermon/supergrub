@@ -1,5 +1,8 @@
 FROM debian:11.3
 
+ARG SGD_BUILDER_UID
+ARG SGD_BUILDER_GID
+
 ENV TZ=Etc/UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -28,10 +31,11 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 RUN apt-get -y build-dep grub2
 
 RUN echo "sgdbuilder ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sgdbuilder-sudo
-RUN useradd -u 1004 sgdbuilder
-ADD --chown=1004:1004 . /supergrub2-repo
+RUN groupadd -g ${SGD_BUILDER_GID} sgdbuilder
+RUN useradd -u ${SGD_BUILDER_UID} sgdbuilder -g sgdbuilder
+ADD --chown=${SGD_BUILDER_UID}:${SGD_BUILDER_GID} . /supergrub2-repo
 RUN mkdir /supergrub2-build
-RUN chown 1004:1004 /supergrub2-build
+RUN chown ${SGD_BUILDER_UID}:${SGD_BUILDER_GID} /supergrub2-build
 
 USER sgdbuilder
 RUN git clone /supergrub2-repo /supergrub2-build

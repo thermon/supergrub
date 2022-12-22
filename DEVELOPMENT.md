@@ -45,15 +45,31 @@ Please check [INSTALL.md - Docker - Requirements](INSTALL.md#docker---requiremen
 ## Debian minimal installation
 
 We first create a Debian 11 minimal installation so that we can install required packages.
+
 ```
-docker build --tag supergrub-manual-builder . -f manual-builder.Dockerfile
+docker build \
+  --build-arg SGD_BUILDER_UID=$(id -u) \
+  --build-arg SGD_BUILDER_GID=$(id -g) \
+  --tag supergrub-manual-builder . \
+  -f manual-builder.Dockerfile
 ```
 ## Some developing
 
 Develop whatever you want inside of the docker
 
 ```
-docker run -it --privileged -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-manual-builder:latest
+docker run \
+  -it \
+  --privileged \
+  --env SGD_BUILDER_UID=$(id -u) \
+  --env SGD_BUILDER_GID=$(id -g) \
+  -v /dev:/dev \
+  -v $(pwd):/supergrub2-repo:ro \
+  -v $(pwd)/releases:/supergrub2-build/releases:rw \
+  -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw \
+  -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw \
+  -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw \
+  supergrub-manual-builder:latest
 ```
 
 ## Save your current work
@@ -83,7 +99,18 @@ sha256:bf28c6efaa1595dfde6571a7e257c80c03fa3276fcb698d827f67541e6cbc504
 ## Some more developing
 
 ```
-docker run -it --privileged -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-manual-builder:latest
+docker run \
+  -it \
+  --privileged \
+  --env SGD_BUILDER_UID=$(id -u) \
+  --env SGD_BUILDER_GID=$(id -g) \
+  -v /dev:/dev \
+  -v $(pwd):/supergrub2-repo:ro \
+  -v $(pwd)/releases:/supergrub2-build/releases:rw \
+  -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw \
+  -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw \
+  -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw \
+  supergrub-manual-builder:latest
 ```
 
 **Do not run** `docker build` again because you will lose your changes.

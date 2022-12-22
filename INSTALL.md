@@ -36,6 +36,8 @@ apt-get -y build-dep grub2
 The suggested build method is based on Docker so you do not need to install any of these requirements into your own system.
 You would only need to install those requirements if you use an alternative build method.
 
+Also make sure to run the suggested commands inside a bash shell.
+
 # Docker - Automatic build
 
 ## Docker - Requirements
@@ -61,11 +63,27 @@ Reboot so that changes are taken into account.
 Just use the automatic builder and update `PREVIOUS_VERSION=2.04s1` if needed.
 
 ```
-docker build --tag supergrub-automatic-builder . -f automatic-builder.Dockerfile
+docker build \
+  --build-arg SGD_BUILDER_UID=$(id -u) \
+  --build-arg SGD_BUILDER_GID=$(id -g) \
+  --tag supergrub-automatic-builder . \
+  -f automatic-builder.Dockerfile
 ```
 
 ```
-docker run -it --privileged --env PREVIOUS_VERSION=2.04s1 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-automatic-builder:latest
+docker run \
+  -it \
+  --privileged \
+  --env PREVIOUS_VERSION=2.04s1 \
+  --env SGD_BUILDER_UID=$(id -u) \
+  --env SGD_BUILDER_GID=$(id -g) \
+  -v /dev:/dev \
+  -v $(pwd):/supergrub2-repo:ro \
+  -v $(pwd)/releases:/supergrub2-build/releases:rw \
+  -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw \
+  -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw \
+  -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw \
+  supergrub-automatic-builder:latest
 ```
 
 ## Docker - Release build
@@ -85,11 +103,27 @@ git tag -a 2.06s2-beta1 -m "2.06s2-beta1"
 Then we just use the automatic builder where we have to update `PREVIOUS_VERSION=2.06s1-beta2` to previous Super Grub2 Disk release tag.
 
 ```
-docker build --tag supergrub-release-builder . -f automatic-builder.Dockerfile
+docker build \
+  --build-arg SGD_BUILDER_UID=$(id -u) \
+  --build-arg SGD_BUILDER_GID=$(id -g) \
+  --tag supergrub-release-builder . \
+  -f automatic-builder.Dockerfile
 ```
 
 ```
-docker run -it --privileged --env PREVIOUS_VERSION=2.06s1-beta2 -v /dev:/dev -v $(pwd):/supergrub2-repo:ro -v $(pwd)/releases:/supergrub2-build/releases:rw -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw supergrub-release-builder:latest
+docker run \
+  -it \
+  --privileged \
+  --env PREVIOUS_VERSION=2.06s1-beta2 \
+  --env SGD_BUILDER_UID=$(id -u) \
+  --env SGD_BUILDER_GID=$(id -g) \
+  -v /dev:/dev \
+  -v $(pwd):/supergrub2-repo:ro \
+  -v $(pwd)/releases:/supergrub2-build/releases:rw \
+  -v $(pwd)/news-releases:/supergrub2-build/news-releases:rw \
+  -v $(pwd)/secureboot-binaries:/supergrub2-build/secureboot-binaries:rw \
+  -v $(pwd)/secureboot.d/sha256sums:/supergrub2-build/secureboot.d/sha256sums:rw \
+  supergrub-release-builder:latest
 ```
 
 ## Docker - Release files
