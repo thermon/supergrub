@@ -128,8 +128,78 @@ docker run \
 
 ## Docker - Release files
 
-What to expect once you have had a succesful build:
+What release files to expect once you have had a succesful build:
 ```
+releases/2.06s2-beta1/SHA1SUMS
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1.zip.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1.zip
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1.zip.sha1
+releases/2.06s2-beta1/SHA256SUMS
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1.zip.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-STANDALONE.EFI.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-STANDALONE.EFI.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-STANDALONE.EFI
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_pc-CD.iso
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-CD.iso
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-2.06s2-beta1-multiarch-USB.img.zip.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-CD.iso
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-STANDALONE.EFI
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-CD.iso.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_pc-CD.iso.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-CD.iso.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-STANDALONE.EFI.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-CD.iso.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-STANDALONE.EFI.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-2.06s2-beta1-multiarch-USB.img.zip.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-2.06s2-beta1-multiarch-USB.img.zip
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-CD.iso.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-CD.iso.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-ubuntu-sourcecode.tar.gz
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-ubuntu-sourcecode.tar.gz.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/super_grub2_disk_2.06s2-beta1_source_code.tar.gz
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimia32-debian-sourcecode.tar.gz.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/super_grub2_disk_2.06s2-beta1_source_code.tar.gz.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubia32-debian-sourcecode.tar.gz.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimia32-debian-sourcecode.tar.gz.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-debian-sourcecode.tar.gz
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-ubuntu-sourcecode.tar.gz.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-debian-sourcecode.tar.gz.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-ubuntu-sourcecode.tar.gz.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubia32-debian-sourcecode.tar.gz
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-ubuntu-sourcecode.tar.gz.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubia32-debian-sourcecode.tar.gz.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-debian-sourcecode.tar.gz
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-debian-sourcecode.tar.gz.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-debian-sourcecode.tar.gz.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-ubuntu-sourcecode.tar.gz
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimia32-debian-sourcecode.tar.gz
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubia32-debian-sourcecode.tar.gz.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-debian-sourcecode.tar.gz.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/super_grub2_disk_2.06s2-beta1_source_code.tar.gz.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-debian-sourcecode.tar.gz.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimia32-debian-sourcecode.tar.gz.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-debian-sourcecode.tar.gz.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/grubx64-ubuntu-sourcecode.tar.gz.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/shimx64-ubuntu-sourcecode.tar.gz.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/source_code/super_grub2_disk_2.06s2-beta1_source_code.tar.gz.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-CD.iso.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-STANDALONE.EFI.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_pc-CD.iso.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-CD.iso.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-2.06s2-beta1-multiarch-USB.img.zip.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-USB.img.zip.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_pc-CD.iso.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-STANDALONE.EFI.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-USB.img.zip
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-CD.iso.md5
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-USB.img.zip.sha256
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-multiarch-USB.img.zip.sha1
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-i386_efi-CD.iso
+releases/2.06s2-beta1/super_grub2_disk_2.06s2-beta1/supergrub2-classic-2.06s2-beta1-x86_64_efi-CD.iso.md5
+releases/2.06s2-beta1/MD5SUMS
+news-releases/downloads.2.06s2-beta1.html
+news-releases/changes.2.06s2-beta1.html
+
 ```
 
 
