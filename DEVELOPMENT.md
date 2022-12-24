@@ -134,6 +134,95 @@ This is useful when you want the container to keep building and at the same time
 
 # Additional documentation
 
+## How to test Super Grub2 Disk image in a SecureBoot Virtual machine
+
+### Requirements
+
+Debian 10 (Also works in Ubuntu 22.04)
+
+```
+apt install ovmf qemu-system-x86
+```
+
+```
+mkdir ~/secureboot-sgd-vm
+cd ~/secureboot-sgd-vm
+```
+
+We are going to create `start-x64-sgd-usb-secureboot-vm` script.
+
+```
+cat > start-x64-sgd-usb-secureboot-vm <<'EOF'
+#!/bin/bash
+
+set -Eeuxo pipefail
+
+MACHINE_NAME="test"
+QEMU_MAIN_IMG="bigdisk.img"
+QEMU_IMG="/home/rescatuxs/gnu/sgd/git/supergrub2/supergrub2-2.06s2-beta1-multiarch-USB.img"
+SSH_PORT="5555"
+OVMF_CODE="/usr/share/OVMF/OVMF_CODE_4M.ms.fd"
+OVMF_VARS_ORIG="/usr/share/OVMF/OVMF_VARS_4M.ms.fd"
+OVMF_VARS="$(basename "${OVMF_VARS_ORIG}")"
+
+if [ ! -e "${QEMU_MAIN_IMG}" ]; then
+        qemu-img create -f qcow2 "${QEMU_MAIN_IMG}" 8G
+fi
+
+if [ ! -e "${OVMF_VARS}" ]; then
+        cp "${OVMF_VARS_ORIG}" "${OVMF_VARS}"
+fi
+
+qemu-system-x86_64 \
+        -enable-kvm \
+        -cpu host -smp cores=4,threads=1 -m 4096 \
+        -object rng-random,filename=/dev/urandom,id=rng0 \
+        -device virtio-rng-pci,rng=rng0 \
+        -name "${MACHINE_NAME}" \
+        -drive file="${QEMU_MAIN_IMG}",format=qcow2 \
+        -drive file="${QEMU_IMG}",format=raw \
+        -net nic,model=virtio -net user,hostfwd=tcp::${SSH_PORT}-:22 \
+        -vga virtio \
+        -machine q35,smm=on \
+        -global driver=cfi.pflash01,property=secure,value=on \
+        -drive if=pflash,format=raw,unit=0,file="${OVMF_CODE}",readonly=on \
+        -drive if=pflash,format=raw,unit=1,file="${OVMF_VARS}" \
+        $@
+EOF
+```
+
+```
+chmod +x start-x64-sgd-usb-secureboot-vm
+```
+
+Then you can replace `QEMU_IMG` with the full path to the SecureBoot enabled Super Grub2 Disk (the non classic one).
+
+### How to test
+
+```
+./start-x64-sgd-usb-secureboot-vm -boot menu=on
+```
+
+Press `ESC` when Tianocore logo appears.
+on boot and then:
+- Boot Manager
+- UEFI QEMU HARD DISK QM00003
+
+### How to install OSes in your VM
+
+```
+./start-x64-sgd-usb-secureboot-vm -boot menu=on -cdrom "ubuntu-22.04.1-live-server-amd64.iso"
+```
+
+Press `ESC` when Tianocore logo appears.
+on boot and then:
+- Boot Manager
+- UEFI QEMU DVD-ROM QM00005
+
+### Additional information
+
+[Debian Wiki - SecureBoot/VirtualMachine](https://wiki.debian.org/SecureBoot/VirtualMachine)
+
 ## How to update Grub installation
 
 Modify `grub-build-config` file so that `GRUB2_COMMIT` reflects the commit or tag that you want to use in order to base your Super Grub2 Disk release.
