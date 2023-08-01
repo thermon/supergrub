@@ -115,6 +115,12 @@ docker run \
 
 **Do not run** `docker build` again because you will lose your changes.
 
+## How to update Secure Boot Binaries
+
+- Delete associated sha256 files at `secureboot.d/sha256sums/` .
+- Delete binaries to be updated at `secureboot-binaries/` (This step is probably optional.)
+- Update download scripts at: `secureboot.d/x64/`, `secureboot.d/ia32/` and so on.
+
 ## Usual git stuff inside Docker image
 
 Use a local-only branch for docker development minimal changes
