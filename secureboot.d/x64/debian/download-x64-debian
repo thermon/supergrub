@@ -10,6 +10,24 @@
 # SHIM_FULLPATH_SOURCE_CODE_TAR_GZ
 # GRUB_FULLPATH_SOURCE_CODE_TAR_GZ
 
+SHIM_SIGNED_DEB_URL='https://snapshot.debian.org/archive/debian/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39+15.7-1_amd64.deb'
+SHIM_SIGNED_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39.tar.xz'
+SHIM_SIGNED_DSC_URL='https://snapshot.debian.org/archive/debian/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39.dsc'
+SHIM_SIGNED_DEB=$(basename "${SHIM_SIGNED_DEB_URL}")
+
+GRUB_EFI_AMD64_SIGNED_DEB_URL='https://snapshot.debian.org/archive/debian/archive/debian/20230523T145755Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1+2.06+13_amd64.deb'
+GRUB_EFI_AMD64_SIGNED_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/archive/debian/20230523T145755Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1+2.06+13.tar.xz'
+GRUB_EFI_AMD64_SIGNED_DSC_URL='https://snapshot.debian.org/archive/debian/archive/debian/20230523T145755Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1+2.06+13.dsc'
+GRUB_EFI_AMD64_SIGNED_DEB=$(basename "${GRUB_EFI_AMD64_SIGNED_DEB_URL}")
+
+SHIM_DEBIAN_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7-1.debian.tar.xz'
+SHIM_DSC_URL='https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7-1.dsc'
+SHIM_ORIG_TAR_BZ2_URL='https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7.orig.tar.bz2'
+
+GRUB2_DEBIAN_TAR_XZ_URL='https://snapshot.debian.org/archive/debian-debug/20230516T083800Z/pool/main/g/grub2/grub2_2.06-13.debian.tar.xz'
+GRUB2_DSC_URL='https://snapshot.debian.org/archive/debian-debug/20230516T083800Z/pool/main/g/grub2/grub2_2.06-13.dsc'
+GRUB2_ORIG_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20211128T160803Z/pool/main/g/grub2/grub2_2.06.orig.tar.xz'
+
 DOWNLOAD_RETURN_STATUS=0
 
 # Definitions
@@ -26,8 +44,8 @@ fi
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'shim-download'
 cd 'shim-download'
-wget -q 'https://snapshot.debian.org/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39%2B15.7-1_amd64.deb' || DOWNLOAD_RETURN_STATUS=1
-dpkg-deb -x shim-signed_1.39+15.7-1_amd64.deb ./
+wget -q "${SHIM_SIGNED_DEB_URL}" || DOWNLOAD_RETURN_STATUS=1
+dpkg-deb -x ${SHIM_SIGNED_DEB} ./
 
 # Signed SHIM Binary final copy
 cp usr/lib/shim/shimx64.efi.signed ${SHIM_FULLPATH_BINARY}
@@ -36,8 +54,8 @@ cp usr/lib/shim/shimx64.efi.signed ${SHIM_FULLPATH_BINARY}
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'grub-download'
 cd 'grub-download'
-wget -q 'https://snapshot.debian.org/archive/debian/20230523T145755Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1%2B2.06%2B13_amd64.deb' || DOWNLOAD_RETURN_STATUS=1
-dpkg-deb -x grub-efi-amd64-signed_1+2.06+13_amd64.deb ./
+wget -q "${GRUB_EFI_AMD64_SIGNED_DEB_URL}" || DOWNLOAD_RETURN_STATUS=1
+dpkg-deb -x ${GRUB_EFI_AMD64_SIGNED_DEB} ./
 
 # Signed GRUB Binary final copy
 cp usr/lib/grub/x86_64-efi-signed/grubx64.efi.signed ${GRUB_FULLPATH_BINARY}
@@ -46,16 +64,16 @@ cp usr/lib/grub/x86_64-efi-signed/grubx64.efi.signed ${GRUB_FULLPATH_BINARY}
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'shim-src-download'
 cd 'shim-src-download'
-wget -q 'https://snapshot.debian.org/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'https://snapshot.debian.org/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_SIGNED_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_SIGNED_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7-1.debian.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7-1.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_DEBIAN_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
 #wget -q 'https://snapshot.debian.org/archive/debian/20210712T204518Z/pool/main/s/shim/shim_15.4-7~deb10u1.debian.tar.xz' || DOWNLOAD_RETURN_STATUS=1
 #wget -q 'https://snapshot.debian.org/archive/debian/20210712T204518Z/pool/main/s/shim/shim_15.4-7~deb10u1.dsc' || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7.orig.tar.bz2' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_ORIG_TAR_BZ2_URL}" || DOWNLOAD_RETURN_STATUS=1
 
 # Signed SHIM Source code final copy
 cd ${DOWNLOAD_TMP_DIR}
@@ -67,13 +85,13 @@ cd ${DOWNLOAD_TMP_DIR}
 mkdir 'grub-src-download'
 cd 'grub-src-download'
 
-wget -q 'https://snapshot.debian.org/archive/debian/20230523T145755Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1%2B2.06%2B13.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'https://snapshot.debian.org/archive/debian/20230523T145755Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1%2B2.06%2B13.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB_EFI_AMD64_SIGNED_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB_EFI_AMD64_SIGNED_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'https://snapshot.debian.org/archive/debian-debug/20230516T083800Z/pool/main/g/grub2/grub2_2.06-13.debian.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'https://snapshot.debian.org/archive/debian-debug/20230516T083800Z/pool/main/g/grub2/grub2_2.06-13.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_DEBIAN_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'https://snapshot.debian.org/archive/debian/20211128T160803Z/pool/main/g/grub2/grub2_2.06.orig.tar.xz' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_ORIG_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
 
 # Signed GRUB Source code final copy
 cd ${DOWNLOAD_TMP_DIR}
