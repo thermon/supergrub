@@ -10,22 +10,22 @@
 # SHIM_FULLPATH_SOURCE_CODE_TAR_GZ
 # GRUB_FULLPATH_SOURCE_CODE_TAR_GZ
 
-SHIM_SIGNED_DEB_URL='http://de.archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51+15.4-0ubuntu9_amd64.deb'
-SHIM_SIGNED_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.tar.xz'
-SHIM_SIGNED_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.dsc'
+SHIM_SIGNED_DEB_URL='http://de.archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.3+15.7-0ubuntu1_amd64.deb'
+SHIM_SIGNED_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.3.tar.xz'
+SHIM_SIGNED_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.3.dsc'
 SHIM_SIGNED_DEB=$(basename "${SHIM_SIGNED_DEB_URL}")
 
-GRUB_EFI_AMD64_SIGNED_DEB_URL='http://de.archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub-efi-amd64-signed_1.182~22.04.1+2.06-2ubuntu10_amd64.deb'
-GRUB2_SIGNED_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.182~22.04.1.tar.xz'
-GRUB2_SIGNED_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.182~22.04.1.dsc'
+GRUB_EFI_AMD64_SIGNED_DEB_URL='http://de.archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub-efi-amd64-signed_1.187.6+2.06-2ubuntu14.4_amd64.deb'
+GRUB2_SIGNED_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.187.6.tar.xz'
+GRUB2_SIGNED_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.187.6.dsc'
 GRUB_EFI_AMD64_SIGNED_DEB=$(basename "${GRUB_EFI_AMD64_SIGNED_DEB_URL}")
 
-SHIM_DEBIAN_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4-0ubuntu9.debian.tar.xz'
-SHIM_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4-0ubuntu9.dsc'
-SHIM_ORIG_TAR_BZ2_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4.orig.tar.bz2'
+SHIM_DEBIAN_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.7-0ubuntu1.debian.tar.xz'
+SHIM_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.7-0ubuntu1.dsc'
+SHIM_ORIG_TAR_BZ2_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.7.orig.tar.bz2'
 
-GRUB2_DEBIAN_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.debian.tar.xz'
-GRUB2_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.dsc'
+GRUB2_DEBIAN_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.2.debian.tar.xz'
+GRUB2_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.2.dsc'
 GRUB2_ORIG_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06.orig.tar.xz'
 
 DOWNLOAD_RETURN_STATUS=0
