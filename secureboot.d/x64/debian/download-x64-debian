@@ -70,9 +70,6 @@ wget -q "${SHIM_SIGNED_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 wget -q "${SHIM_DEBIAN_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
 wget -q "${SHIM_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-#wget -q 'https://snapshot.debian.org/archive/debian/20210712T204518Z/pool/main/s/shim/shim_15.4-7~deb10u1.debian.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-#wget -q 'https://snapshot.debian.org/archive/debian/20210712T204518Z/pool/main/s/shim/shim_15.4-7~deb10u1.dsc' || DOWNLOAD_RETURN_STATUS=1
-
 wget -q "${SHIM_ORIG_TAR_BZ2_URL}" || DOWNLOAD_RETURN_STATUS=1
 
 # Signed SHIM Source code final copy
