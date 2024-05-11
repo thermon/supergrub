@@ -10,6 +10,24 @@
 # SHIM_FULLPATH_SOURCE_CODE_TAR_GZ
 # GRUB_FULLPATH_SOURCE_CODE_TAR_GZ
 
+SHIM_SIGNED_DEB_URL='http://de.archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51+15.4-0ubuntu9_amd64.deb'
+SHIM_SIGNED_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.tar.xz'
+SHIM_SIGNED_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.dsc'
+SHIM_SIGNED_DEB=$(basename "${SHIM_SIGNED_DEB_URL}")
+
+GRUB_EFI_AMD64_SIGNED_DEB_URL='http://de.archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub-efi-amd64-signed_1.182~22.04.1+2.06-2ubuntu10_amd64.deb'
+GRUB2_SIGNED_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.182~22.04.1.tar.xz'
+GRUB2_SIGNED_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.182~22.04.1.dsc'
+GRUB_EFI_AMD64_SIGNED_DEB=$(basename "${GRUB_EFI_AMD64_SIGNED_DEB_URL}")
+
+SHIM_DEBIAN_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4-0ubuntu9.debian.tar.xz'
+SHIM_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4-0ubuntu9.dsc'
+SHIM_ORIG_TAR_BZ2_URL='http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4.orig.tar.bz2'
+
+GRUB2_DEBIAN_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.debian.tar.xz'
+GRUB2_DSC_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.dsc'
+GRUB2_ORIG_TAR_XZ_URL='http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06.orig.tar.xz'
+
 DOWNLOAD_RETURN_STATUS=0
 
 # Definitions
@@ -26,8 +44,8 @@ fi
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'shim-download'
 cd 'shim-download'
-wget -q 'http://de.archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51+15.4-0ubuntu9_amd64.deb' || DOWNLOAD_RETURN_STATUS=1
-dpkg-deb -x shim-signed_1.51+15.4-0ubuntu9_amd64.deb ./
+wget -q "${SHIM_SIGNED_DEB_URL}" || DOWNLOAD_RETURN_STATUS=1
+dpkg-deb -x ${SHIM_SIGNED_DEB} ./
 
 # Signed SHIM Binary final copy
 cp usr/lib/shim/shim${SB_EFI_PLATFORM}.efi.signed ${SHIM_FULLPATH_BINARY}
@@ -36,8 +54,8 @@ cp usr/lib/shim/shim${SB_EFI_PLATFORM}.efi.signed ${SHIM_FULLPATH_BINARY}
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'grub-download'
 cd 'grub-download'
-wget -q 'http://de.archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub-efi-amd64-signed_1.182~22.04.1+2.06-2ubuntu10_amd64.deb' || DOWNLOAD_RETURN_STATUS=1
-ar x grub-efi-amd64-signed_1.182~22.04.1+2.06-2ubuntu10_amd64.deb
+wget -q "${GRUB_EFI_AMD64_SIGNED_DEB_URL}" || DOWNLOAD_RETURN_STATUS=1
+ar x ${GRUB_EFI_AMD64_SIGNED_DEB}
 zstd -d data.tar.zst -o data.tar
 tar xf data.tar
 
@@ -48,13 +66,13 @@ cp usr/lib/grub/x86_64-efi-signed/grub${SB_EFI_PLATFORM}.efi.signed ${GRUB_FULLP
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'shim-src-download'
 cd 'shim-src-download'
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/s/shim-signed/shim-signed_1.51.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_SIGNED_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_SIGNED_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4-0ubuntu9.debian.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4-0ubuntu9.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_DEBIAN_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/s/shim/shim_15.4.orig.tar.bz2' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_ORIG_TAR_BZ2_URL}" || DOWNLOAD_RETURN_STATUS=1
 
 # Signed SHIM Source code final copy
 cd ${DOWNLOAD_TMP_DIR}
@@ -66,13 +84,13 @@ cd ${DOWNLOAD_TMP_DIR}
 mkdir 'grub-src-download'
 cd 'grub-src-download'
 
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.182~22.04.1.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2-signed/grub2-signed_1.182~22.04.1.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_SIGNED_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_SIGNED_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.debian.tar.xz' || DOWNLOAD_RETURN_STATUS=1
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06-2ubuntu7.dsc' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_DEBIAN_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
 
-wget -q 'http://archive.ubuntu.com/ubuntu/pool/main/g/grub2/grub2_2.06.orig.tar.xz' || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_ORIG_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
 
 # Signed GRUB Source code final copy
 cd ${DOWNLOAD_TMP_DIR}
