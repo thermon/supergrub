@@ -16,3 +16,4 @@ sg2d_grub_builds
 sg2d_grub_installations
 tmp_grub2_clone_dir
 secureboot.d/sha256sums
+menus/sgd/sgd_locale/*\.mo
