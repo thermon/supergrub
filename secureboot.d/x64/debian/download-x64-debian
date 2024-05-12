@@ -10,22 +10,22 @@
 # SHIM_FULLPATH_SOURCE_CODE_TAR_GZ
 # GRUB_FULLPATH_SOURCE_CODE_TAR_GZ
 
-SHIM_SIGNED_DEB_URL='https://snapshot.debian.org/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39%2B15.7-1_amd64.deb'
+SHIM_SIGNED_DEB_URL='https://snapshot.debian.org/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39+15.7-1_amd64.deb'
 SHIM_SIGNED_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39.tar.xz'
 SHIM_SIGNED_DSC_URL='https://snapshot.debian.org/archive/debian/20230309T024347Z/pool/main/s/shim-signed/shim-signed_1.39.dsc'
 SHIM_SIGNED_DEB=$(basename "${SHIM_SIGNED_DEB_URL}")
 
-GRUB_EFI_AMD64_SIGNED_DEB_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1%2B2.06%2B13%2Bdeb12u1_amd64.deb'
-GRUB_EFI_AMD64_SIGNED_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1%2B2.06%2B13%2Bdeb12u1.tar.xz'
-GRUB_EFI_AMD64_SIGNED_DSC_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1%2B2.06%2B13%2Bdeb12u1.dsc'
+GRUB_EFI_AMD64_SIGNED_DEB_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1+2.06+13+deb12u1_amd64.deb'
+GRUB_EFI_AMD64_SIGNED_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1+2.06+13+deb12u1.tar.xz'
+GRUB_EFI_AMD64_SIGNED_DSC_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub-efi-amd64-signed/grub-efi-amd64-signed_1+2.06+13+deb12u1.dsc'
 GRUB_EFI_AMD64_SIGNED_DEB=$(basename "${GRUB_EFI_AMD64_SIGNED_DEB_URL}")
 
 SHIM_DEBIAN_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7-1.debian.tar.xz'
 SHIM_DSC_URL='https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7-1.dsc'
 SHIM_ORIG_TAR_BZ2_URL='https://snapshot.debian.org/archive/debian/20230201T153118Z/pool/main/s/shim/shim_15.7.orig.tar.bz2'
 
-GRUB2_DEBIAN_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub2/grub2_2.06-13%2Bdeb12u1.debian.tar.xz'
-GRUB2_DSC_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub2/grub2_2.06-13%2Bdeb12u1.dsc'
+GRUB2_DEBIAN_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub2/grub2_2.06-13+deb12u1.debian.tar.xz'
+GRUB2_DSC_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub2/grub2_2.06-13+deb12u1.dsc'
 GRUB2_ORIG_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20211128T160803Z/pool/main/g/grub2/grub2_2.06.orig.tar.xz'
 
 DOWNLOAD_RETURN_STATUS=0
