@@ -30,7 +30,7 @@ cat <<EOF
   Example: $0 -o=myrescatux.img
 
   Usage: $0 [-o=FILENAME] [--grub-install-binary=/path/to/grub-install]
-  Example: $0 -o=myrescatux.img --grub-install-binary=/usr/local/bin/grub-install
+  Example: $0 -o=myrescatux.img --grub-install-binary=/usr/local/sbin/grub-install
 
 EOF
 
@@ -42,7 +42,7 @@ source grub-build-config
 GRUB_INSTALL_BINARY="\
 ${SG2D_GRUB_INSTALLATION_PREFIX}\
 /${SG2D_GRUB_INSTALLATION_HYBRID}\
-/bin/grub-install\
+/sbin/grub-install\
 "
 
 GRUB_MKFONT_BINARY="\
