@@ -42,4 +42,5 @@ RUN chown ${SGD_BUILDER_UID}:${SGD_BUILDER_GID} /supergrub2-build
 USER sgdbuilder
 RUN git clone /supergrub2-repo /supergrub2-build
 WORKDIR /supergrub2-build
+RUN git checkout 2.06s3-dev23
 CMD ./grub-build-001-prepare-build && ./grub-build-002-clean-and-update && ./grub-build-003-build-all && ./grub-build-005-install-all && ./supergrub-official-release && ./supergrub-release-changes $PREVIOUS_VERSION
