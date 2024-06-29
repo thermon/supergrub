@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 
 # Check secureboot.d/how-to-contribute-to-secureboot.d.md on how this script works
 # and how to contribute with other vendors
@@ -28,8 +29,6 @@ GRUB2_DEBIAN_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20231011T085
 GRUB2_DSC_URL='https://snapshot.debian.org/archive/debian/20231011T085836Z/pool/main/g/grub2/grub2_2.06-13+deb12u1.dsc'
 GRUB2_ORIG_TAR_XZ_URL='https://snapshot.debian.org/archive/debian/20211128T160803Z/pool/main/g/grub2/grub2_2.06.orig.tar.xz'
 
-DOWNLOAD_RETURN_STATUS=0
-
 # Definitions
 SB_VENDOR="debian"
 SB_EFI_PLATFORM="x64"
@@ -44,7 +43,7 @@ fi
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'shim-download'
 cd 'shim-download'
-wget -q "${SHIM_SIGNED_DEB_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_SIGNED_DEB_URL}"
 dpkg-deb -x ${SHIM_SIGNED_DEB} ./
 
 # Signed SHIM Binary final copy
@@ -54,7 +53,7 @@ cp usr/lib/shim/shimx64.efi.signed ${SHIM_FULLPATH_BINARY}
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'grub-download'
 cd 'grub-download'
-wget -q "${GRUB_EFI_AMD64_SIGNED_DEB_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB_EFI_AMD64_SIGNED_DEB_URL}"
 dpkg-deb -x ${GRUB_EFI_AMD64_SIGNED_DEB} ./
 
 # Signed GRUB Binary final copy
@@ -64,13 +63,13 @@ cp usr/lib/grub/x86_64-efi-signed/grubx64.efi.signed ${GRUB_FULLPATH_BINARY}
 cd ${DOWNLOAD_TMP_DIR}
 mkdir 'shim-src-download'
 cd 'shim-src-download'
-wget -q "${SHIM_SIGNED_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
-wget -q "${SHIM_SIGNED_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_SIGNED_TAR_XZ_URL}"
+wget -q "${SHIM_SIGNED_DSC_URL}"
 
-wget -q "${SHIM_DEBIAN_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
-wget -q "${SHIM_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_DEBIAN_TAR_XZ_URL}"
+wget -q "${SHIM_DSC_URL}"
 
-wget -q "${SHIM_ORIG_TAR_BZ2_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${SHIM_ORIG_TAR_BZ2_URL}"
 
 # Signed SHIM Source code final copy
 cd ${DOWNLOAD_TMP_DIR}
@@ -82,13 +81,13 @@ cd ${DOWNLOAD_TMP_DIR}
 mkdir 'grub-src-download'
 cd 'grub-src-download'
 
-wget -q "${GRUB_EFI_AMD64_SIGNED_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
-wget -q "${GRUB_EFI_AMD64_SIGNED_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB_EFI_AMD64_SIGNED_TAR_XZ_URL}"
+wget -q "${GRUB_EFI_AMD64_SIGNED_DSC_URL}"
 
-wget -q "${GRUB2_DEBIAN_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
-wget -q "${GRUB2_DSC_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_DEBIAN_TAR_XZ_URL}"
+wget -q "${GRUB2_DSC_URL}"
 
-wget -q "${GRUB2_ORIG_TAR_XZ_URL}" || DOWNLOAD_RETURN_STATUS=1
+wget -q "${GRUB2_ORIG_TAR_XZ_URL}"
 
 # Signed GRUB Source code final copy
 cd ${DOWNLOAD_TMP_DIR}
@@ -100,5 +99,3 @@ rm -rf ${DOWNLOAD_TMP_DIR}
 
 # Make sure to come back to the original directory
 cd ${CURRENT_DIRECTORY}
-
-exit ${DOWNLOAD_RETURN_STATUS}
